@@ -8,6 +8,8 @@ public static class MiniEventManager
     public static UnityEvent OnNutDelivered = new UnityEvent();
 
     public static UnityEvent OnTimeOut = new UnityEvent();
+
+    public static UnityEvent OnThrowNut = new UnityEvent();
  
 
 
@@ -22,7 +24,10 @@ public static class MiniEventManager
         OnTimeOut?.Invoke();
     }
 
-
+    public static void SendThrowNut()
+    {
+        OnThrowNut?.Invoke();
+    }
 
 
 

@@ -69,5 +69,9 @@ public class newCRContr : MonoBehaviour
             }
 
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            MiniEventManager.SendThrowNut();
+        }
     }
 }

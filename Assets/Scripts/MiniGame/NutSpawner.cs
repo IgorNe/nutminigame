@@ -14,7 +14,7 @@ public class NutSpawner : MonoBehaviour
     }
     void Start()
     {
-        Invoke("Spawn", 1);
+        Spawn();
     }
 
     // Update is called once per frame
