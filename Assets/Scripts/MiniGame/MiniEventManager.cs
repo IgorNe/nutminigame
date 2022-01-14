@@ -10,6 +10,17 @@ public static class MiniEventManager
     public static UnityEvent OnTimeOut = new UnityEvent();
 
     public static UnityEvent OnThrowNut = new UnityEvent();
+
+    public static UnityEvent<string> OnBolt = new UnityEvent<string>();
+
+    public static UnityEvent<string, bool> OnBoltRotate = new UnityEvent<string, bool>();
+
+    public static UnityEvent OnGameOver = new UnityEvent();
+
+    public static UnityEvent OnCrossSpace = new UnityEvent();
+
+    public static UnityEvent OnStartRotate = new UnityEvent();
+
  
 
 
@@ -29,7 +40,28 @@ public static class MiniEventManager
         OnThrowNut?.Invoke();
     }
 
+    public static void SendBoltColor(string color)
+    {
+        OnBolt?.Invoke(color);
+    }
 
+    public static void SendBoltColorAfterRotate(string color, bool onRotate)
+    {
+        OnBoltRotate?.Invoke(color, onRotate);
+    }
 
+    public static void SendGameOver()
+    {
+        OnGameOver?.Invoke();
+    }
 
+    public static void SendOnCross()
+    {
+        OnCrossSpace?.Invoke();
+    }
+
+    public static void SendCrossStartRotate()
+    {
+        OnStartRotate?.Invoke();
+    }
 }
