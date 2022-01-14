@@ -4,23 +4,30 @@ using UnityEngine;
 
 public class Part : MonoBehaviour
 {
+    [SerializeField] private float speed = 10;
     private Rigidbody rBody;
+    private bool move;
     // Start is called before the first frame update
 
     private void Awake()
     {
         MiniEventManager.OnTimeOut.AddListener(GravityEnabler);
+        MiniEventManager.OnThrowNut.AddListener(GravityEnabler);
     }
     void Start()
     {
         rBody = gameObject.GetComponent<Rigidbody>();
-        rBody.useGravity = false;
+        rBody.useGravity = move = false;
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (move)
+        {
+            transform.Translate(Vector3.up * (-speed) * Time.deltaTime);
+        }
         
     }
 
@@ -35,6 +42,7 @@ public class Part : MonoBehaviour
 
     void GravityEnabler()
     {
-        rBody.useGravity = true;
+        move = true;
+        //rBody.useGravity = true;
     }
 }
