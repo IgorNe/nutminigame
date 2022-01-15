@@ -3,14 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Cube
-  - Enemy
-  - Jumper
-  - Red
-  - Green
-  - Blue
-  - Yellow
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -18,13 +11,8 @@ TagManager:
   - 
   - Water
   - UI
-<<<<<<< HEAD
   - 
-  - Kross
-=======
-  - Game Objects
   - 
->>>>>>> 47df33c44814887d3bc3e44732ddf378bc159f8a
   - 
   - 
   - 
