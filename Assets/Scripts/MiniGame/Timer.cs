@@ -16,7 +16,7 @@ public class Timer : MonoBehaviour
     private void Awake()
     {
         MiniEventManager.OnNutDelivered.AddListener(ResetTimer);
-        MiniEventManager.OnThrowNut.AddListener(StopTimer);
+
     }
     void Start()
     {
@@ -27,7 +27,7 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timerIsRunning)
+        /*if (timerIsRunning)
         {
             timer -= Time.deltaTime;
             sec = Mathf.FloorToInt(timer);
@@ -40,9 +40,9 @@ public class Timer : MonoBehaviour
             if (timer <= 0)
             {
                 timerIsRunning = false;
-                MiniEventManager.SendTimeOut();
+                MiniEventManager.SendThrowNut();
             }
-        }
+        }*/
 
     }
     private void ResetTimer()

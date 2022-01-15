@@ -17,26 +17,20 @@ public class Part : MonoBehaviour
     private Transform startPos;
     private Collider collide;
     private GameConfig _gameConfig;
-    [SerializeField] private float edgePosition;
+    private float edgePosition =5;
     // Start is called before the first frame update
 
     private void Awake()
     {
-        MiniEventManager.OnTimeOut.AddListener(SetMove);
         MiniEventManager.OnThrowNut.AddListener(SetMove);
-        MiniEventManager.OnBoltRotate.AddListener(SetRotate);
-        MiniEventManager.OnStartRotate.AddListener(SetStartRotate);
     }
     void Start()
     {
-
-        startPos = gameObject.transform;
         newParrentObject = GameObject.Find("Kross");
         collide = gameObject.GetComponent<Collider>();
         rBody = gameObject.GetComponent<Rigidbody>();
         move = onCross = isBlocked = false;
         newParentTransform = newParrentObject.GetComponent<Transform>();
-        blockControlPosition = 5;
     }
 
     // Update is called once per frame
@@ -46,75 +40,33 @@ public class Part : MonoBehaviour
         {
             transform.Translate(Vector3.up * (-speed) * Time.deltaTime);
         }
-        if (transform.position.y < startPos.position.y - 1 && isBlocked && !onRotate)
+        if (transform.position.y < 5 && !isBlocked)
         {
-            
-            MiniEventManager.SendOnCross();
+            //isBlocked = true;
         }
-        if (transform.position.y < edgePosition && !onCross)
-        {
 
-            SetOnCross();
-        }
         
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        MiniEventManager.SendNutDelivered();
-        move = false;
-        AlingmentNut();
-        rBody.constraints = RigidbodyConstraints.FreezeAll;
-        collide.isTrigger = true;
-        gameObject.layer = 7;
-        MiniEventManager.SendBoltColor(boltColor);
-
-        
-
-        //print(other.tag);
-
-        /*if(other.tag == gameObject.tag)
+        if (!onCross)
         {
-            print(other.tag);
-            //MiniEventManager.SendBoltColor(other.tag);
-        }*/
-        /*if (other.tag == "Cube" || other.tag == gameObject.tag)
-        {
-            
-            
-
-            //onCross = true;
-        }*/
-        /*else
-        {
-            
-            Destroy(gameObject);
+            SetOnCross();
+            move = false;
+            collide.isTrigger = true;
+            AlingmentNut();
+            rBody.constraints = RigidbodyConstraints.FreezeAll;
             MiniEventManager.SendNutDelivered();
-            //gameObject.transform.SetParent(parentTransform);
-            //onCross = true;
-
-        }*/
+        }
     }
+
 
     void SetMove()
     {
-        if (!onCross)
-        {
-            move = true;
-            isBlocked = true;
-        }
-        //rBody.useGravity = true;
+        move = true;
     }
 
-    void SetRotate(string color,  bool boltRotate)
-    {
-        onRotate = boltRotate;
-        boltColor = color;
-    }
-    void SetStartRotate()
-    {
-        onRotate = true;
-    }
     void Stop()
     {
         move = false;
@@ -122,16 +74,12 @@ public class Part : MonoBehaviour
 
     void SetOnCross()
     {
-        
         gameObject.transform.SetParent(newParentTransform);
-        onCross = true;
     }
 
     void AlingmentNut()
     {
         var y = Mathf.RoundToInt(transform.position.y);
         transform.position = new Vector3(0, y, 0);
-
-        //rBody. new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
     }
 }
