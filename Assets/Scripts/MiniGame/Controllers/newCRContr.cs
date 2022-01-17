@@ -17,7 +17,7 @@ public class newCRContr : MonoBehaviour
 
     private void Awake()
     {
-        MiniEventManager.OnCrossSpace.AddListener(BlockControl);
+        MiniEventManager.OnThrowNut.AddListener(BlockControl);
         MiniEventManager.OnNutDelivered.AddListener(UnBlockControl);
     }
     void Start()
@@ -38,7 +38,6 @@ public class newCRContr : MonoBehaviour
         {
             oldZdegress = transform.rotation.eulerAngles.z;
             left = true;
-            MiniEventManager.SendCrossStartRotate();
             listPos--;
             if(listPos < 0)
             {
@@ -50,7 +49,6 @@ public class newCRContr : MonoBehaviour
         {
             oldZdegress = transform.rotation.eulerAngles.z;
             right = true;
-            MiniEventManager.SendCrossStartRotate();
             listPos++;
             if(listPos > 3)
             {
@@ -66,7 +64,7 @@ public class newCRContr : MonoBehaviour
             {
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotat[listPos]));
                 left = false;
-                MiniEventManager.SendBoltColorAfterRotate(typeBolts[listPos], left);
+                MiniEventManager.SendBoltColorAfterRotate(typeBolts[listPos]);
             }
             
         }
@@ -79,7 +77,7 @@ public class newCRContr : MonoBehaviour
             {
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotat[listPos]));
                 right = false;
-                MiniEventManager.SendBoltColorAfterRotate(typeBolts[listPos], right);
+                MiniEventManager.SendBoltColorAfterRotate(typeBolts[listPos]);
             }
 
         }
@@ -100,6 +98,6 @@ public class newCRContr : MonoBehaviour
 
     private void SendRotateData()
     {
-        MiniEventManager.SendBoltColorAfterRotate(typeBolts[listPos], left);
+        MiniEventManager.SendBoltColorAfterRotate(typeBolts[listPos]);
     }
 }

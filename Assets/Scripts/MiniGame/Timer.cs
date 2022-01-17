@@ -6,17 +6,16 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
     [SerializeField] private float timeForDelivery;
-    private float timer = 2;
+    private float timer;
     private bool timerIsRunning;
     [SerializeField] private Text timerText;
     private int sec;
     private int  milSec;
-    // Start is called before the first frame update
 
     private void Awake()
     {
         MiniEventManager.OnNutDelivered.AddListener(ResetTimer);
-        MiniEventManager.OnThrowNut.AddListener(StopTimer);
+
     }
     void Start()
     {
@@ -24,7 +23,6 @@ public class Timer : MonoBehaviour
         timerIsRunning = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (timerIsRunning)
@@ -32,7 +30,7 @@ public class Timer : MonoBehaviour
             timer -= Time.deltaTime;
             sec = Mathf.FloorToInt(timer);
             milSec = Mathf.RoundToInt((timer % 1) * 100);
-            if(sec < 0 || milSec < 0)
+            if (sec < 0 || milSec < 0)
             {
                 sec = milSec = 0;
             }
@@ -40,7 +38,7 @@ public class Timer : MonoBehaviour
             if (timer <= 0)
             {
                 timerIsRunning = false;
-                MiniEventManager.SendTimeOut();
+                MiniEventManager.SendThrowNut();
             }
         }
 
