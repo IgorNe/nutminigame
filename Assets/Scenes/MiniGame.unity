@@ -864,6 +864,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nutPrefabs:
   - {fileID: 2811653652324131453, guid: 62ad9fbe39eea324a96e16f30b6ea3c0, type: 3}
+  - {fileID: 5287285449089083626, guid: e4c798a6a30788748996dd8f0ba1bb85, type: 3}
+  - {fileID: 8992162014750701756, guid: a6967199b765b0c489826a6b77102356, type: 3}
+  - {fileID: 7171154698356174741, guid: 050a39e1d324a084bae6f74c5b1949fc, type: 3}
   newParrentObject: {fileID: 2027497247}
   maxObjectsInList: 4
   isSpawned: 0

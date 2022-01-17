@@ -18,7 +18,6 @@ public class Part : MonoBehaviour
     private Collider collide;
     private GameConfig _gameConfig;
     private float edgePosition =5;
-    // Start is called before the first frame update
 
     private void Awake()
     {
@@ -33,7 +32,6 @@ public class Part : MonoBehaviour
         newParentTransform = newParrentObject.GetComponent<Transform>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (move)
@@ -52,6 +50,8 @@ public class Part : MonoBehaviour
     {
         if (!onCross)
         {
+            onCross = true;
+            print("trig");
             SetOnCross();
             move = false;
             collide.isTrigger = true;
@@ -64,7 +64,10 @@ public class Part : MonoBehaviour
 
     void SetMove()
     {
-        move = true;
+        if (!onCross)
+        {
+            move = true;
+        }
     }
 
     void Stop()
@@ -81,5 +84,10 @@ public class Part : MonoBehaviour
     {
         var y = Mathf.RoundToInt(transform.position.y);
         transform.position = new Vector3(0, y, 0);
+    }
+
+    void GetGravity()
+    {
+        rBody.useGravity = true;
     }
 }

@@ -46,20 +46,20 @@ public class NutsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            NutSpawn();
-        }
+        
     }
 
     void NutSpawn()
     {
-        isSpawned = true;
-        int numInList = UnityEngine.Random.Range(0, nutPrefabs.Count);
-        spawnedNut = Instantiate(nutPrefabs[numInList],
-            new Vector3(transform.position.x, transform.position.y, transform.position.z),
-            Quaternion.identity);
-        added = false;
+        if (!isSpawned)
+        {
+            isSpawned = true;
+            int numInList = UnityEngine.Random.Range(0, nutPrefabs.Count);
+            spawnedNut = Instantiate(nutPrefabs[numInList],
+                new Vector3(transform.position.x, transform.position.y, transform.position.z),
+                Quaternion.identity);
+            added = false;
+        }
     }
 
     void AddToColorList()
@@ -98,7 +98,8 @@ public class NutsController : MonoBehaviour
         {
             objects.Add(go);
             SetStartDestroyPosition(objects);
-            NutDelaySpawn();
+            isSpawned = false;
+            NutDelaySpawn();// timer
         }
         else
         {
