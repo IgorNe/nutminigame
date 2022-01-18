@@ -25,7 +25,7 @@ public class Part : MonoBehaviour
     }
     void Start()
     {
-        newParrentObject = GameObject.Find("Kross");
+        newParrentObject = GameObject.Find("Cross");
         collide = gameObject.GetComponent<Collider>();
         rBody = gameObject.GetComponent<Rigidbody>();
         move = onCross = isBlocked = false;

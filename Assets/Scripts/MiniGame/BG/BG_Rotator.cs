@@ -7,7 +7,7 @@ public class BG_Rotator : MonoBehaviour
     [SerializeField] public float degree;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
