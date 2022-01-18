@@ -10,6 +10,7 @@ public static class MiniEventManager
     public static UnityEvent OnThrowNut = new UnityEvent();
     public static UnityEvent OnNutDelivered = new UnityEvent();
     public static UnityEvent OnGameOver = new UnityEvent();
+    public static UnityEvent OnLineDestroyed = new UnityEvent();
 
 
 
@@ -33,6 +34,11 @@ public static class MiniEventManager
     public static void SendGameOver()
     {
         OnGameOver?.Invoke();
+    }
+
+    public static void SendLineDestroyed()
+    {
+        OnLineDestroyed?.Invoke();
     }
 
 

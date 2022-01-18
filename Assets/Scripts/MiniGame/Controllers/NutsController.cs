@@ -128,7 +128,7 @@ public class NutsController : MonoBehaviour
     }
 
 
-    void RemoveNuts(int startDestroyPosition)
+    /*void RemoveNuts(int startDestroyPosition)
     {
         if (boltColor == "Red" && !added)
         {
@@ -173,7 +173,7 @@ public class NutsController : MonoBehaviour
 
         
 
-    }
+    }*/
 
     void SetStartDestroyPosition(List<GameObject> nutsColors)
     {
@@ -187,12 +187,12 @@ public class NutsController : MonoBehaviour
             {
                 if (nutsColors[0].tag == nutsColors[1].tag && nutsColors[1].tag == nutsColors[2].tag)
                 {
-                    for (int i = 2; i > -1; i--)
+                    for (int i = sizeLineDestroy - 1; i > -1; i--)
                     {
                         Destroy(nutsColors[i]);
                         nutsColors.RemoveAt(i);
                     }
-                    //RemoveNuts(0);
+                    MiniEventManager.SendLineDestroyed();
                     //send 0
                 }
             }
@@ -200,10 +200,12 @@ public class NutsController : MonoBehaviour
             if (nutsColors.Count == 4)
             {
                 if (nutsColors[1].tag == nutsColors[2].tag && nutsColors[2].tag == nutsColors[3].tag)
-                {
-                    RemoveNuts(1);
-                    //send 1
-                }
+                    for (int i = sizeLineDestroy - 1; i > -1; i--)
+                    {
+                        Destroy(nutsColors[i + 1]);
+                        nutsColors.RemoveAt(i + 1);
+                    }
+                MiniEventManager.SendLineDestroyed();
             }
                 
             /*if (nutsColors[2].tag == nutsColors[3].tag && nutsColors[3].tag == nutsColors[4].tag)
