@@ -6,11 +6,10 @@ using UnityEngine;
 public class NutsController : MonoBehaviour
 {
     [SerializeField] private List<GameObject> nutPrefabs;
-    [SerializeField] private GameObject newParrentObject;
     [SerializeField] private int maxObjectsInList;
     [SerializeField] private bool isSpawned;
     [SerializeField] private int sizeLineDestroy = 3;
-    private Transform newParentTransform;
+
     private GameObject activeObject;
     private List<GameObject> redList;
     private List<GameObject> blueList;
@@ -39,8 +38,7 @@ public class NutsController : MonoBehaviour
         greenList = new List<GameObject>();
         yellowList = new List<GameObject>();
         NutSpawn();
-        //delay = false;
-        newParentTransform = newParrentObject.GetComponent<Transform>();
+
     }
 
     // Update is called once per frame

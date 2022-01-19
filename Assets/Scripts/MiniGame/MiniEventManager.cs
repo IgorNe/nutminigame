@@ -11,6 +11,7 @@ public static class MiniEventManager
     public static UnityEvent OnNutDelivered = new UnityEvent();
     public static UnityEvent OnGameOver = new UnityEvent();
     public static UnityEvent OnLineDestroyed = new UnityEvent();
+    public static UnityEvent OnStarterTrigged = new UnityEvent();
 
 
 
@@ -39,6 +40,11 @@ public static class MiniEventManager
     public static void SendLineDestroyed()
     {
         OnLineDestroyed?.Invoke();
+    }
+
+    public static void SendStarterTrigged()
+    {
+        OnStarterTrigged?.Invoke();
     }
 
 

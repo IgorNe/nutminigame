@@ -344,6 +344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nutDelivered: {fileID: 8300000, guid: 02e2c124ac2cbc04f9840e6f4810bdd8, type: 3}
   lose: {fileID: 8300000, guid: 35011917ab8bdf840aaf8691d9e8831a, type: 3}
+  windingNut: {fileID: 8300000, guid: a5cc8d6e8318ccd488dec761ca47da0f, type: 3}
 --- !u!1 &375977864 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6593102050383065764, guid: d295bde303088b64a9758275ddd0a888, type: 3}
@@ -1112,11 +1113,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nutPrefabs:
-  - {fileID: 5440865173907703032, guid: a3a86023e0120a94ea59b321e52480d5, type: 3}
+  - {fileID: 1160095295507330232, guid: b6967641c97942749ba0a5a9d06bd144, type: 3}
   - {fileID: 1160095295507330232, guid: 17efa3b712ed0ed4182de417f1ea66e1, type: 3}
   - {fileID: 6667114570758876580, guid: e7925799189228947a77e3e4dc899f2c, type: 3}
   - {fileID: 1645128559699914672, guid: 7ed12c1f3303f684c903b59082360ff2, type: 3}
-  newParrentObject: {fileID: 375977864}
   maxObjectsInList: 4
   isSpawned: 0
   sizeLineDestroy: 3
@@ -1445,6 +1445,50 @@ Transform:
   - {fileID: 375977865}
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1427327510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1427327512}
+  - component: {fileID: 1427327511}
+  m_Layer: 0
+  m_Name: Starter
+  m_TagString: Starter
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1427327511
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427327510}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1427327512
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427327510}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1581186051
 GameObject:

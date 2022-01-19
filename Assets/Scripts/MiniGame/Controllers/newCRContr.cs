@@ -18,7 +18,7 @@ public class newCRContr : MonoBehaviour
 
     private void Awake()
     {
-        MiniEventManager.OnThrowNut.AddListener(BlockControl);
+        MiniEventManager.OnStarterTrigged.AddListener(BlockControl);
         MiniEventManager.OnNutDelivered.AddListener(UnBlockControl);
     }
     void Start()

@@ -5,6 +5,8 @@ using UnityEngine;
 public class Part : MonoBehaviour
 {
     private float speed = 15;
+    [SerializeField] private GameObject particleWind;
+    [SerializeField] private GameObject particleDelivered;
     private GameObject newParrentObject;
     private Transform newParentTransform;
     private Rigidbody rBody;
@@ -12,12 +14,14 @@ public class Part : MonoBehaviour
     private bool move;
     private bool onCross;
     private bool isBlocked;
-    private bool onRotate;
+    private bool rotate;
     private string boltColor;
     private Transform startPos;
     private Collider collide;
     private GameConfig _gameConfig;
     private float edgePosition =5;
+    private GameObject tempWind;
+    private GameObject tempDelivered;
 
     private void Awake()
     {
@@ -37,27 +41,32 @@ public class Part : MonoBehaviour
         if (move)
         {
             transform.Translate(Vector3.up * (-speed) * Time.deltaTime);
-        }
-        if (transform.position.y < 5 && !isBlocked)
-        {
-            //isBlocked = true;
+            if (rotate)
+            {
+                transform.Rotate(0, 15, 0);
+            }
         }
 
-        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!onCross)
+        if (!onCross && other.tag != "Starter")
         {
             onCross = true;
-            print("trig");
             SetOnCross();
             move = false;
             collide.isTrigger = true;
             AlingmentNut();
             rBody.constraints = RigidbodyConstraints.FreezeAll;
             MiniEventManager.SendNutDelivered();
+        }
+        if (!onCross && other.tag == "Starter")
+        {
+            MiniEventManager.SendStarterTrigged();
+            rotate = true;
+            tempWind = Instantiate(particleWind);
+            tempWind.transform.SetParent(gameObject.transform);
         }
     }
 
@@ -77,6 +86,8 @@ public class Part : MonoBehaviour
 
     void SetOnCross()
     {
+        Destroy(tempWind);
+        Instantiate(particleDelivered, gameObject.transform);
         gameObject.transform.SetParent(newParentTransform);
     }
 
