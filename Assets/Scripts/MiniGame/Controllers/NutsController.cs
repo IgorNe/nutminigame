@@ -44,7 +44,10 @@ public class NutsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Start();
+        }
     }
 
     void NutSpawn()
@@ -198,12 +201,31 @@ public class NutsController : MonoBehaviour
             if (nutsColors.Count == 4)
             {
                 if (nutsColors[1].tag == nutsColors[2].tag && nutsColors[2].tag == nutsColors[3].tag)
+                {
                     for (int i = sizeLineDestroy - 1; i > -1; i--)
                     {
                         Destroy(nutsColors[i + 1]);
                         nutsColors.RemoveAt(i + 1);
                     }
-                MiniEventManager.SendLineDestroyed();
+                    MiniEventManager.SendLineDestroyed();
+                }
+            }
+
+            if (nutsColors.Count == 5)
+            {
+                if(nutsColors[2].tag == nutsColors[3].tag && nutsColors[3].tag == nutsColors[4].tag)
+                {
+                    for (int i = sizeLineDestroy - 1; i > -1; i--)
+                    {
+                        Destroy(nutsColors[i + 2]);
+                        nutsColors.RemoveAt(i + 2);
+                    }
+                    MiniEventManager.SendLineDestroyed();
+                }
+                else
+                {
+                    MiniEventManager.SendGameOver();
+                }
             }
                 
             /*if (nutsColors[2].tag == nutsColors[3].tag && nutsColors[3].tag == nutsColors[4].tag)

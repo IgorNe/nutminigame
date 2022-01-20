@@ -15,6 +15,18 @@ public class newCRContr : MonoBehaviour
     public float speed = 5;
     public float correction = 5;
 
+    //swipe data
+    private Vector2 startTouchPosition;
+    private Vector2 currentTouchPosition;
+    private Vector2 endTouchposition;
+
+    [SerializeField] private float swipeRange;
+    [SerializeField] private float tapRange;
+    private bool isStopTouch;
+
+
+    //end swipe data
+
 
     private void Awake()
     {
@@ -23,12 +35,13 @@ public class newCRContr : MonoBehaviour
     }
     void Start()
     {
-        right = left = isContolBlocked = false;
+        right = left = isContolBlocked = isStopTouch = false;
         oldZdegress = 0;
         listPos = 0;
         rotat = new List<float>() { 0, 270, 180, 90 };
         typeBolts = new List<string>() { "Red", "Yellow", "Blue", "Green" };
         Invoke("SendRotateData", 0.2f);
+        
 
 
     }
@@ -37,7 +50,7 @@ public class newCRContr : MonoBehaviour
     {
         if(Input.touchCount > 0 && !left && !right && !isContolBlocked)
         {
-            Swipe();
+            Swiper();
         }
 
 
@@ -112,7 +125,7 @@ public class newCRContr : MonoBehaviour
 
     void Swipe()
     {
-        Vector2 delta = Input.GetTouch(0).deltaPosition;
+        Vector3 delta = Input.GetTouch(0).deltaPosition;
         if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
         {
             if (delta.x > 0)
@@ -165,6 +178,76 @@ public class newCRContr : MonoBehaviour
                 }
                 Debug.Log("d");
                 //down
+            }
+        }
+    }
+
+    void Swiper()
+    {
+        if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            startTouchPosition = Input.GetTouch(0).position;
+        }
+        if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+        {
+            currentTouchPosition = Input.GetTouch(0).position;
+            Vector2 distance = currentTouchPosition - startTouchPosition;
+            if (!isStopTouch)
+            {
+                if (distance.x > swipeRange)
+                {
+                    oldZdegress = transform.rotation.eulerAngles.z;
+                    right = true;
+                    listPos++;
+                    if (listPos > 3)
+                    {
+                        listPos = 0;
+                    }
+                    isStopTouch = true;
+                }
+                else if (distance.x < -swipeRange)
+                {
+                    oldZdegress = transform.rotation.eulerAngles.z;
+                    left = true;
+                    listPos--;
+                    if (listPos < 0)
+                    {
+                        listPos = 3;
+                    }
+                    isStopTouch = true;
+                }
+                else if(distance.y < -swipeRange)
+                {
+                    oldZdegress = transform.rotation.eulerAngles.z;
+                    right = true;
+                    listPos++;
+                    if (listPos > 3)
+                    {
+                        listPos = 0;
+                    }
+                    isStopTouch = true;
+                }
+                else if(distance.y > swipeRange)
+                {
+                    oldZdegress = transform.rotation.eulerAngles.z;
+                    left = true;
+                    listPos--;
+                    if (listPos < 0)
+                    {
+                        listPos = 3;
+                    }
+                    isStopTouch = true;
+                }
+            }
+        }
+        if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        {
+            isStopTouch = false;
+            endTouchposition = Input.GetTouch(0).position;
+            Vector2 distance = endTouchposition - startTouchPosition;
+            if (Mathf.Abs(distance.x) < tapRange && Mathf.Abs(distance.y) < tapRange)
+            {
+                MiniEventManager.SendThrowNut();
             }
         }
     }

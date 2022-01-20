@@ -8,7 +8,6 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject _startPanel;
     [SerializeField] private GameObject _gamePanel;
     [SerializeField] private GameObject _gameOverPanel;
-
     [SerializeField] private GameController _gameController;
 
 #if UNITY_EDITOR
@@ -41,7 +40,6 @@ public class UIController : MonoBehaviour
     }
     public void HideGamePanel()
     {
-        print("gp off");
         _gamePanel.SetActive(false);
     }
     public void ShowGameOverPanel()
@@ -54,20 +52,17 @@ public class UIController : MonoBehaviour
     }
     public void OnExitButtonClicked()
     {
-        print("ex");
         _gameController.Exit();
     }
     public void OnPlayButtonClicked()
     {
-        print("pl");
         _gameController.Play();
     }
-    /*public void OnRestartButtonClicked()
+    public void OnRestartButtonClicked()
     {
-        print("res");
         _gameController.Restart();
     }
-    public void OnOptionsButtonClicked()
+    /*public void OnOptionsButtonClicked()
     {
         print("opt");
         _gameController.Options();
