@@ -178,53 +178,66 @@ public class NutsController : MonoBehaviour
 
     void SetStartDestroyPosition(List<GameObject> nutsColors)
     {
-        if (nutsColors.Count < 3)
+        if (nutsColors[nutsColors.Count - 1].tag == "Gold")
         {
-            return;
+            var size = nutsColors.Count;
+            for (int i = size; i > 0; i--)
+            {
+                Destroy(nutsColors[i-1]);
+                nutsColors.RemoveAt(i-1);
+            }
         }
         else
         {
-            if(nutsColors.Count == 3)
+            if (nutsColors.Count < 3)
             {
-                if (nutsColors[0].tag == nutsColors[1].tag && nutsColors[1].tag == nutsColors[2].tag)
-                {
-                    for (int i = sizeLineDestroy - 1; i > -1; i--)
-                    {
-                        Destroy(nutsColors[i]);
-                        nutsColors.RemoveAt(i);
-                    }
-                    MiniEventManager.SendLineDestroyed();
-                    //send 0
-                }
+                return;
             }
-
-            if (nutsColors.Count == 4)
+            else
             {
-                if (nutsColors[1].tag == nutsColors[2].tag && nutsColors[2].tag == nutsColors[3].tag)
-                {
-                    for (int i = sizeLineDestroy - 1; i > -1; i--)
-                    {
-                        Destroy(nutsColors[i + 1]);
-                        nutsColors.RemoveAt(i + 1);
-                    }
-                    MiniEventManager.SendLineDestroyed();
-                }
-            }
 
-            if (nutsColors.Count == 5)
-            {
-                if(nutsColors[2].tag == nutsColors[3].tag && nutsColors[3].tag == nutsColors[4].tag)
+                if (nutsColors.Count == 3)
                 {
-                    for (int i = sizeLineDestroy - 1; i > -1; i--)
+                    if (nutsColors[0].tag == nutsColors[1].tag && nutsColors[1].tag == nutsColors[2].tag)
                     {
-                        Destroy(nutsColors[i + 2]);
-                        nutsColors.RemoveAt(i + 2);
+                        for (int i = sizeLineDestroy - 1; i > -1; i--)
+                        {
+                            Destroy(nutsColors[i]);
+                            nutsColors.RemoveAt(i);
+                        }
+                        MiniEventManager.SendLineDestroyed();
+                        //send 0
                     }
-                    MiniEventManager.SendLineDestroyed();
                 }
-                else
+
+                if (nutsColors.Count == 4)
                 {
-                    MiniEventManager.SendGameOver();
+                    if (nutsColors[1].tag == nutsColors[2].tag && nutsColors[2].tag == nutsColors[3].tag)
+                    {
+                        for (int i = sizeLineDestroy - 1; i > -1; i--)
+                        {
+                            Destroy(nutsColors[i + 1]);
+                            nutsColors.RemoveAt(i + 1);
+                        }
+                        MiniEventManager.SendLineDestroyed();
+                    }
+                }
+
+                if (nutsColors.Count == 5)
+                {
+                    if (nutsColors[2].tag == nutsColors[3].tag && nutsColors[3].tag == nutsColors[4].tag)
+                    {
+                        for (int i = sizeLineDestroy - 1; i > -1; i--)
+                        {
+                            Destroy(nutsColors[i + 2]);
+                            nutsColors.RemoveAt(i + 2);
+                        }
+                        MiniEventManager.SendLineDestroyed();
+                    }
+                    else
+                    {
+                        MiniEventManager.SendGameOver();
+                    }
                 }
             }
                 

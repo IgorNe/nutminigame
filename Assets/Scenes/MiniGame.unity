@@ -10935,6 +10935,7 @@ MonoBehaviour:
   - {fileID: 3513272104910174151, guid: 8a5bf83f1bc109a4fbbdf01d8f73851a, type: 3}
   - {fileID: 2702975829085046921, guid: f23d8e8c77b6c9e4fb43b871325e0e14, type: 3}
   - {fileID: 3088349653984823439, guid: 3fe6b8f6e4b1e6a4799a0344d71d0bb0, type: 3}
+  - {fileID: 6667114570758876580, guid: e7925799189228947a77e3e4dc899f2c, type: 3}
   maxObjectsInList: 5
   isSpawned: 0
   sizeLineDestroy: 3
