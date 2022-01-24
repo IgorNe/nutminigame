@@ -7,8 +7,7 @@ public class newCRContr : MonoBehaviour
     private bool right;
     private bool left;
     private bool isContolBlocked;
-    private bool isRotate;
-    private float oldZdegress;
+    private bool isGameStarted;
     private List<float> rotat;
     private int listPos;
     private List<string> typeBolts;
@@ -35,12 +34,12 @@ public class newCRContr : MonoBehaviour
     }
     void Start()
     {
-        right = left = isContolBlocked = isStopTouch = false;
-        oldZdegress = 0;
+        right = left = isContolBlocked = isGameStarted = false;
         listPos = 0;
         rotat = new List<float>() { 0, 270, 180, 90 };
         typeBolts = new List<string>() { "Red", "Yellow", "Blue", "Green" };
         Invoke("SendRotateData", 0.2f);
+        Invoke("SetStartGame", 0.1f);
         
 
 
@@ -58,7 +57,7 @@ public class newCRContr : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A) && !left && !right && !isContolBlocked)
         {
-            oldZdegress = transform.rotation.eulerAngles.z;
+            StartCoroutine("RotateLeft");
             left = true;
             listPos--;
             if(listPos < 0)
@@ -69,7 +68,7 @@ public class newCRContr : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.D) && !right && !left && !isContolBlocked)
         {
-            oldZdegress = transform.rotation.eulerAngles.z;
+            StartCoroutine("RotateRight");
             right = true;
             listPos++;
             if(listPos > 3)
@@ -78,31 +77,7 @@ public class newCRContr : MonoBehaviour
             }
 
         }
-        if (left)
-        {
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, transform.rotation.eulerAngles.z + 90 * speed * Time.deltaTime));
-            if (Mathf.RoundToInt(transform.rotation.eulerAngles.z) <= rotat[listPos] + correction &&
-                Mathf.RoundToInt(transform.rotation.eulerAngles.z) >= rotat[listPos] - correction)
-            {
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotat[listPos]));
-                left = false;
-                MiniEventManager.SendBoltColorAfterRotate(typeBolts[listPos]);
-            }
-            
-        }
 
-        if (right)
-        {
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, transform.rotation.eulerAngles.z - 90 * speed * Time.deltaTime));
-            if(Mathf.RoundToInt(transform.rotation.eulerAngles.z) <= rotat[listPos] + correction &&
-                Mathf.RoundToInt(transform.rotation.eulerAngles.z) >= rotat[listPos] - correction)
-            {
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotat[listPos]));
-                right = false;
-                MiniEventManager.SendBoltColorAfterRotate(typeBolts[listPos]);
-            }
-
-        }
         if (Input.GetKeyDown(KeyCode.Space)) //|| Input.GetMouseButtonDown(0))
         {
             MiniEventManager.SendThrowNut();
@@ -123,64 +98,6 @@ public class newCRContr : MonoBehaviour
         MiniEventManager.SendBoltColorAfterRotate(typeBolts[listPos]);
     }
 
-    void Swipe()
-    {
-        Vector3 delta = Input.GetTouch(0).deltaPosition;
-        if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
-        {
-            if (delta.x > 0)
-            {
-                //oldZdegress = transform.rotation.eulerAngles.z;
-                right = true;
-                listPos++;
-                if (listPos > 3)
-                {
-                    listPos = 0;
-                }
-                //right
-                Debug.Log("r");
-            }
-            if(delta.x < 0)
-            {
-                //oldZdegress = transform.rotation.eulerAngles.z;
-                left = true;
-                listPos--;
-                if (listPos < 0)
-                {
-                    listPos = 3;
-                }
-                Debug.Log("l");
-                //left
-            }
-        }
-        else
-        {
-            if (delta.y > 0)
-            {
-                //oldZdegress = transform.rotation.eulerAngles.z;
-                left = true;
-                listPos--;
-                if (listPos < 0)
-                {
-                    listPos = 3;
-                }
-                Debug.Log("u");
-                //up
-            }
-            if ((delta.y < 0))
-            {
-                //oldZdegress = transform.rotation.eulerAngles.z;
-                right = true;
-                listPos++;
-                if (listPos > 3)
-                {
-                    listPos = 0;
-                }
-                Debug.Log("d");
-                //down
-            }
-        }
-    }
 
     void Swiper()
     {
@@ -196,59 +113,82 @@ public class newCRContr : MonoBehaviour
             {
                 if (distance.x > swipeRange)
                 {
-                    oldZdegress = transform.rotation.eulerAngles.z;
+                    StartCoroutine("RotateRight");
                     right = true;
                     listPos++;
                     if (listPos > 3)
                     {
                         listPos = 0;
                     }
-                    isStopTouch = true;
                 }
                 else if (distance.x < -swipeRange)
                 {
-                    oldZdegress = transform.rotation.eulerAngles.z;
+                    StartCoroutine("RotateLeft");
                     left = true;
                     listPos--;
                     if (listPos < 0)
                     {
                         listPos = 3;
                     }
-                    isStopTouch = true;
                 }
                 else if(distance.y < -swipeRange)
                 {
-                    oldZdegress = transform.rotation.eulerAngles.z;
+                    StartCoroutine("RotateRight");
                     right = true;
                     listPos++;
                     if (listPos > 3)
                     {
                         listPos = 0;
                     }
-                    isStopTouch = true;
                 }
                 else if(distance.y > swipeRange)
                 {
-                    oldZdegress = transform.rotation.eulerAngles.z;
+                    StartCoroutine("RotateLeft");
                     left = true;
                     listPos--;
                     if (listPos < 0)
                     {
                         listPos = 3;
                     }
-                    isStopTouch = true;
                 }
             }
         }
         if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
-            isStopTouch = false;
             endTouchposition = Input.GetTouch(0).position;
             Vector2 distance = endTouchposition - startTouchPosition;
-            if (Mathf.Abs(distance.x) < tapRange && Mathf.Abs(distance.y) < tapRange)
+            if (Mathf.Abs(distance.x) < tapRange && Mathf.Abs(distance.y) < tapRange && isGameStarted)
             {
                 MiniEventManager.SendThrowNut();
             }
         }
+    }
+
+    IEnumerator RotateLeft()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, transform.rotation.eulerAngles.z + 9));
+            yield return new WaitForSeconds(0.01f);
+        }
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotat[listPos]));
+        left = false;
+        MiniEventManager.SendBoltColorAfterRotate(typeBolts[listPos]);
+    }
+    IEnumerator RotateRight()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, transform.rotation.eulerAngles.z - 9));
+            yield return new WaitForSeconds(0.01f);
+        }
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotat[listPos]));
+        right = false;
+        MiniEventManager.SendBoltColorAfterRotate(typeBolts[listPos]);
+    }
+
+    void SetStartGame()
+    {
+        isGameStarted = true;
     }
 }
