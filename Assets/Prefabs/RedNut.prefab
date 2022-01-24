@@ -50,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1645128559699914672}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -125,5 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c75e20c47125a94a94461f7246eb511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
   particleWind: {fileID: 66555024560170217, guid: c3af021841099f141bab87b3a9a1adc2, type: 3}
   particleDelivered: {fileID: 5622903445995869190, guid: aa212fec893d13b45a6373186a67a3a4, type: 3}
