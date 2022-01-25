@@ -5262,10 +5262,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc2503f946de4714cbeca11cbb426383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
-  correction: 15
-  swipeRange: 50
-  tapRange: 10
+  swipeRange: 30
+  tapRange: 5
+  ySwipeCorrection: 10
 --- !u!1 &406311473
 GameObject:
   m_ObjectHideFlags: 0

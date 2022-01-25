@@ -11,8 +11,6 @@ public class newCRContr : MonoBehaviour
     private List<float> rotat;
     private int listPos;
     private List<string> typeBolts;
-    public float speed = 5;
-    public float correction = 5;
 
     //swipe data
     private Vector2 startTouchPosition;
@@ -21,6 +19,7 @@ public class newCRContr : MonoBehaviour
 
     [SerializeField] private float swipeRange;
     [SerializeField] private float tapRange;
+    [SerializeField] private float ySwipeCorrection;
     private bool isStopTouch;
 
 
@@ -49,7 +48,7 @@ public class newCRContr : MonoBehaviour
     {
         if(Input.touchCount > 0 && !left && !right && !isContolBlocked)
         {
-            Swiper();
+            Swipe();
         }
 
 
@@ -99,7 +98,7 @@ public class newCRContr : MonoBehaviour
     }
 
 
-    void Swiper()
+    void Swipe()
     {
         if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
@@ -131,7 +130,7 @@ public class newCRContr : MonoBehaviour
                         listPos = 3;
                     }
                 }
-                else if(distance.y < -swipeRange)
+                else if(distance.y < -swipeRange - ySwipeCorrection)
                 {
                     StartCoroutine("RotateRight");
                     right = true;
@@ -141,7 +140,7 @@ public class newCRContr : MonoBehaviour
                         listPos = 0;
                     }
                 }
-                else if(distance.y > swipeRange)
+                else if(distance.y > swipeRange + ySwipeCorrection)
                 {
                     StartCoroutine("RotateLeft");
                     left = true;
@@ -166,10 +165,10 @@ public class newCRContr : MonoBehaviour
 
     IEnumerator RotateLeft()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 4; i++)
         {
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, transform.rotation.eulerAngles.z + 9));
-            yield return new WaitForSeconds(0.01f);
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, transform.rotation.eulerAngles.z + 22));
+            yield return new WaitForSeconds(0.02f);
         }
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotat[listPos]));
         left = false;
@@ -177,10 +176,10 @@ public class newCRContr : MonoBehaviour
     }
     IEnumerator RotateRight()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 4; i++)
         {
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, transform.rotation.eulerAngles.z - 9));
-            yield return new WaitForSeconds(0.01f);
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, transform.rotation.eulerAngles.z - 22));
+            yield return new WaitForSeconds(0.02f);
         }
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotat[listPos]));
         right = false;
