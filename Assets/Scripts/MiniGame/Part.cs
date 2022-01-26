@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Part : MonoBehaviour
 {
-    [SerializeField]private float speed = 10;
+    private float speed;
     [SerializeField] private GameObject particleWind;
     [SerializeField] private GameObject particleDelivered;
     private GameObject newParrentObject;
@@ -29,6 +29,7 @@ public class Part : MonoBehaviour
     }
     void Start()
     {
+        speed = DebugController.nutThrowSpeed;
         newParrentObject = GameObject.Find("Cross");
         collide = gameObject.GetComponent<Collider>();
         rBody = gameObject.GetComponent<Rigidbody>();

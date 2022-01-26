@@ -11,6 +11,7 @@ public class newCRContr : MonoBehaviour
     private List<float> rotat;
     private int listPos;
     private List<string> typeBolts;
+    private int rotateIteration;
 
     //swipe data
     private Vector2 startTouchPosition;
@@ -39,7 +40,7 @@ public class newCRContr : MonoBehaviour
         typeBolts = new List<string>() { "Red", "Yellow", "Blue", "Green" };
         Invoke("SendRotateData", 0.2f);
         Invoke("SetStartGame", 0.1f);
-        
+        rotateIteration = 4;
 
 
     }
@@ -176,7 +177,7 @@ public class newCRContr : MonoBehaviour
     }
     IEnumerator RotateRight()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < rotateIteration; i++)
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, transform.rotation.eulerAngles.z - 22));
             yield return new WaitForSeconds(0.02f);
@@ -189,5 +190,15 @@ public class newCRContr : MonoBehaviour
     void SetStartGame()
     {
         isGameStarted = true;
+    }
+
+    public void SetRotateSpeed(int speed)
+    {
+        rotateIteration = speed;
+    }
+
+    public int GetRotateSpeed()
+    {
+        return rotateIteration;
     }
 }

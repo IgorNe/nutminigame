@@ -8,6 +8,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject _startPanel;
     [SerializeField] private GameObject _gamePanel;
     [SerializeField] private GameObject _gameOverPanel;
+    [SerializeField] private GameObject _debugPanel;
     [SerializeField] private GameController _gameController;
 
 #if UNITY_EDITOR
@@ -16,8 +17,10 @@ public class UIController : MonoBehaviour
         _startPanel = transform.Find("StartPanel").gameObject;
         _gamePanel = transform.Find("GamePanel").gameObject;
         _gameOverPanel = transform.Find("GameOverPanel").gameObject;
+        _debugPanel = transform.Find("DebugPanel").gameObject;
 
-        
+
+
     }
 #endif
     public void Start()
@@ -50,6 +53,16 @@ public class UIController : MonoBehaviour
     {
         _gameOverPanel.SetActive(false);
     }
+
+    public void ShowDebugPanel()
+    {
+        _debugPanel.SetActive(true);
+    }
+    public void HideDebugPanel()
+    {
+        _debugPanel.SetActive(false);
+    }
+
     public void OnExitButtonClicked()
     {
         _gameController.Exit();
@@ -62,11 +75,16 @@ public class UIController : MonoBehaviour
     {
         _gameController.Restart();
     }
-    /*public void OnOptionsButtonClicked()
+    public void OnDebugButtonClicked()
     {
-        print("opt");
-        _gameController.Options();
-    }*/
+        print("debug");
+        _gameController.Debug();
+    }
+
+    public void OnBackButtonClicked()
+    {
+        _gameController.Play();
+    }
 
 
 }

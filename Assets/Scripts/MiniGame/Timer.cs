@@ -52,4 +52,14 @@ public class Timer : MonoBehaviour
     {
         timerIsRunning = false;
     }
+
+    public void SetTimeInterval(float timeInterval)
+    {
+        timeForDelivery = timeInterval;
+    }
+
+    public float GetTimeInterval()
+    {
+        return timeForDelivery;
+    }
 }
