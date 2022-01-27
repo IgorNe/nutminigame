@@ -7,12 +7,18 @@ public class Spawner : MonoBehaviour
     [SerializeField] private List<GameObject> nutPrefabs;
     [SerializeField] private GameObject newParrentObject;
     [SerializeField] private int maxObjectsInList;
+    
     private List<GameObject> redList;
     private List<GameObject> blueList;
     private List<GameObject> greenList;
     private List<GameObject> yellowList;
     private GameObject spawnedNut;
     private bool isSpawned;
+
+
+    [Header("Random settings")]
+    //[Range(1,100)]
+    public int redNutChance;
 
     private void Start()
     {

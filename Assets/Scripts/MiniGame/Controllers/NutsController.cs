@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class NutsController : MonoBehaviour
 {
@@ -16,11 +17,16 @@ public class NutsController : MonoBehaviour
     private List<GameObject> greenList;
     private List<GameObject> yellowList;
     private GameObject spawnedNut;
-    Transform trans;
     private string boltColor;
     private bool added;
     private bool delivered;
+    private int sumChance;
     //private bool delay;
+
+    [Header("Random settings")]
+    [Range(0,100)]
+    public List<int> chanses;
+
 
 
     private void Awake()
@@ -30,7 +36,6 @@ public class NutsController : MonoBehaviour
     }
     void Start()
     {
-
         isSpawned = false;
         added = true;
         redList = new List<GameObject>();
@@ -41,22 +46,45 @@ public class NutsController : MonoBehaviour
 
     }
 
+    private int SumChance()
+    {
+        int sum = 0;
+        for(int i=0; i < chanses.Count; i++)
+        {
+            sum += chanses[i];
+        }
+        return sum;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Start();
-        }
+
     }
+    
+
+    int NutSpawnIndex()
+    {
+        int a = 0;
+        int i = 0;
+        int rand = Random.Range(1, SumChance());
+        while (a < rand)
+        {
+            a += chanses[i];
+            i++;
+        }
+        return i;
+    }
+
+
 
     void NutSpawn()
     {
         if (!isSpawned)
         {
             isSpawned = true;
-            int numInList = UnityEngine.Random.Range(0, nutPrefabs.Count);
-            spawnedNut = Instantiate(nutPrefabs[numInList],
+            int numInList = Random.Range(1, nutPrefabs.Count);
+            spawnedNut = Instantiate(nutPrefabs[NutSpawnIndex()-1],
                 new Vector3(transform.position.x, transform.position.y, transform.position.z),
                 Quaternion.identity);
             added = false;
@@ -129,52 +157,6 @@ public class NutsController : MonoBehaviour
     }
 
 
-    /*void RemoveNuts(int startDestroyPosition)
-    {
-        if (boltColor == "Red" && !added)
-        {
-            for (int i = 0; i < sizeLineDestroy; i++)
-            {
-                var cube = redList[startDestroyPosition];
-                redList.RemoveAt(startDestroyPosition);
-                Destroy(cube);
-
-            }
-        }
-        if (boltColor == "Blue" && !added)
-        {
-            for (int i = 0; i < sizeLineDestroy; i++)
-            {
-                var cube = redList[startDestroyPosition];
-                blueList.RemoveAt(startDestroyPosition);
-                Destroy(cube);
-
-            }
-        }
-        if (boltColor == "Green" && !added)
-        {
-            for (int i = 0; i < sizeLineDestroy; i++)
-            {
-                var cube = redList[startDestroyPosition];
-                greenList.RemoveAt(startDestroyPosition);
-                Destroy(cube);
-
-            }
-        }
-        if (boltColor == "Yellow" && !added)
-        {
-            for (int i = 0; i < sizeLineDestroy; i++)
-            {
-                var cube = redList[startDestroyPosition];
-                yellowList.RemoveAt(startDestroyPosition);
-                Destroy(cube);
-
-            }
-        }
-
-        
-
-    }*/
 
     void SetStartDestroyPosition(List<GameObject> nutsColors)
     {
@@ -241,11 +223,7 @@ public class NutsController : MonoBehaviour
                 }
             }
                 
-            /*if (nutsColors[2].tag == nutsColors[3].tag && nutsColors[3].tag == nutsColors[4].tag)
-            {
-                RemoveNuts(2);
-                //send 2
-            }*/
+
 
         }
             

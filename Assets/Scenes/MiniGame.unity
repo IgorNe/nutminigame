@@ -12395,6 +12395,7 @@ MonoBehaviour:
   maxObjectsInList: 5
   isSpawned: 0
   sizeLineDestroy: 3
+  chanses: 0a0000000a0000000a0000000a00000005000000
 --- !u!1 &1100808511
 GameObject:
   m_ObjectHideFlags: 0
