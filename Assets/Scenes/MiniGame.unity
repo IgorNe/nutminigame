@@ -12355,7 +12355,7 @@ GameObject:
   - component: {fileID: 1048595700}
   m_Layer: 0
   m_Name: Spawner
-  m_TagString: Untagged
+  m_TagString: Gold
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12392,10 +12392,11 @@ MonoBehaviour:
   - {fileID: 2702975829085046921, guid: f23d8e8c77b6c9e4fb43b871325e0e14, type: 3}
   - {fileID: 3088349653984823439, guid: 3fe6b8f6e4b1e6a4799a0344d71d0bb0, type: 3}
   - {fileID: 6667114570758876580, guid: e7925799189228947a77e3e4dc899f2c, type: 3}
+  - {fileID: 8088840199518132792, guid: 8ffc627a9164b214aae978e98067c865, type: 3}
   maxObjectsInList: 5
   isSpawned: 0
   sizeLineDestroy: 3
-  chanses: 0a0000000a0000000a0000000a00000005000000
+  chanses: 050000000500000005000000050000000100000002000000
 --- !u!1 &1100808511
 GameObject:
   m_ObjectHideFlags: 0

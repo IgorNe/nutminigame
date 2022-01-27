@@ -180,7 +180,13 @@ public class NutsController : MonoBehaviour
 
                 if (nutsColors.Count == 3)
                 {
-                    if (nutsColors[0].tag == nutsColors[1].tag && nutsColors[1].tag == nutsColors[2].tag)
+                    if (nutsColors[0].tag == nutsColors[1].tag && nutsColors[1].tag == nutsColors[2].tag ||
+                        nutsColors[0].tag == "Rainbow" && nutsColors[1].tag == nutsColors[2].tag ||
+                        nutsColors[1].tag == "Rainbow" && nutsColors[0].tag == nutsColors[2].tag ||
+                        nutsColors[2].tag == "Rainbow" && nutsColors[0].tag == nutsColors[1].tag ||
+                        nutsColors[0].tag == "Rainbow" && nutsColors[1].tag == "Rainbow" ||
+                        nutsColors[0].tag == "Rainbow" && nutsColors[2].tag == "Rainbow" ||
+                        nutsColors[1].tag == "Rainbow" && nutsColors[2].tag == "Rainbow")
                     {
                         for (int i = sizeLineDestroy - 1; i > -1; i--)
                         {
@@ -194,7 +200,12 @@ public class NutsController : MonoBehaviour
 
                 if (nutsColors.Count == 4)
                 {
-                    if (nutsColors[1].tag == nutsColors[2].tag && nutsColors[2].tag == nutsColors[3].tag)
+                    if (nutsColors[1].tag == nutsColors[2].tag && nutsColors[2].tag == nutsColors[3].tag ||
+                        nutsColors[1].tag == "Rainbow" && nutsColors[2].tag == nutsColors[3].tag ||
+                        nutsColors[2].tag == "Rainbow" && nutsColors[1].tag == nutsColors[3].tag ||
+                        nutsColors[3].tag == "Rainbow" && nutsColors[1].tag == nutsColors[2].tag ||
+                        nutsColors[2].tag == "Rainbow" && nutsColors[3].tag == "Rainbow" ||
+                        nutsColors[1].tag == "Rainbow" && nutsColors[3].tag == "Rainbow")
                     {
                         for (int i = sizeLineDestroy - 1; i > -1; i--)
                         {
@@ -207,7 +218,12 @@ public class NutsController : MonoBehaviour
 
                 if (nutsColors.Count == 5)
                 {
-                    if (nutsColors[2].tag == nutsColors[3].tag && nutsColors[3].tag == nutsColors[4].tag)
+                    if (nutsColors[2].tag == nutsColors[3].tag && nutsColors[3].tag == nutsColors[4].tag ||
+                        nutsColors[2].tag == "Rainbow" && nutsColors[3].tag == nutsColors[4].tag ||
+                        nutsColors[3].tag == "Rainbow" && nutsColors[2].tag == nutsColors[4].tag ||
+                        nutsColors[4].tag == "Rainbow" && nutsColors[2].tag == nutsColors[3].tag ||
+                        nutsColors[2].tag == "Rainbow" && nutsColors[4].tag == "Rainbow" ||
+                        nutsColors[3].tag == "Rainbow" && nutsColors[4].tag == "Rainbow")
                     {
                         for (int i = sizeLineDestroy - 1; i > -1; i--)
                         {

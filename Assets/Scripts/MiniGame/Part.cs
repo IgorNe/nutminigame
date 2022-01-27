@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Part : MonoBehaviour
 {
-    private float speed;
+    private float speed = 10;
     [SerializeField] private GameObject particleWind;
     [SerializeField] private GameObject particleDelivered;
     private GameObject newParrentObject;
