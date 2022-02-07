@@ -1,67 +1,92 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using Random = UnityEngine.Random;
+
+
 
 public class NutsController : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> nutPrefabs;
-    [SerializeField] private int maxObjectsInList;
-    [SerializeField] private bool isSpawned;
-    [SerializeField] private int sizeLineDestroy = 3;
+    [SerializeField] private Settings settings;
+    [SerializeField] private GameObject spinner;
+    private List<GameObject> nutsForSpawn;
+    private List<int> spawnChanses;
 
-    private GameObject activeObject;
-    private List<GameObject> redList;
-    private List<GameObject> blueList;
-    private List<GameObject> greenList;
-    private List<GameObject> yellowList;
-    private GameObject spawnedNut;
-    private string boltColor;
-    private bool added;
-    private bool delivered;
-    private int sumChance;
-    //private bool delay;
+    private List<GameObject> redBolt;
+    private List<GameObject> blueBolt;
+    private List<GameObject> greenBolt;
+    private List<GameObject> yellowBolt;
 
-    [Header("Random settings")]
-    [Range(0,100)]
-    public List<int> chanses;
+    private List<List<GameObject>> colorBolts;
 
-
+    private GameObject currentNut;
+    private float nutSpeed;
+    private bool isBlockedSended;
+    private float blockRotatePosition;
+    private int indexCurrentBolt;
+    private float correctPosition;
 
     private void Awake()
     {
-        MiniEventManager.OnNutDelivered.AddListener(AddToColorList);
-        MiniEventManager.OnBoltRotate.AddListener(ChangeBoltColor);
+        EventManager.OnBoltChanged.AddListener(SetCurrentBolt);
+        EventManager.OnTimeOut.AddListener(StartMoveNut);
     }
-    void Start()
+
+    private void Update()
     {
-        isSpawned = false;
-        added = true;
-        redList = new List<GameObject>();
-        blueList = new List<GameObject>();
-        greenList = new List<GameObject>();
-        yellowList = new List<GameObject>();
-        NutSpawn();
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            ClearSpinner();
+        }
+    }
+
+
+    public void Start()
+    {
+        redBolt = new List<GameObject>();
+        blueBolt = new List<GameObject>();
+        greenBolt = new List<GameObject>();
+        yellowBolt = new List<GameObject>();
+        colorBolts = new List<List<GameObject>>();
+        colorBolts.Add(redBolt);
+        colorBolts.Add(blueBolt);
+        colorBolts.Add(greenBolt);
+        colorBolts.Add(yellowBolt);
+
+        correctPosition = settings.correctPosition;
+        blockRotatePosition = settings.blockRotatePosition;
+        spawnChanses = settings.chanses;
+        nutsForSpawn = settings.nutsForSpawn;
+        nutSpeed = settings.nutSpeed;
+        Invoke("NutSpawn", 1);
 
     }
 
+    public void NutSpawn()
+    {
+        currentNut = Instantiate(nutsForSpawn[NutSpawnIndex()], settings.nutSpawnPoint, Quaternion.identity);
+        EventManager.SendNutSpawned();
+    }
+    void AddNutToList(int boltIndex, GameObject nut)
+    {
+        colorBolts[boltIndex].Add(nut);
+        EventManager.SendNutDelivered();
+        isBlockedSended = false;
+    }
+
+    void RemoveNutFromList(List<GameObject> bolt, int index)
+    {
+        bolt.RemoveAt(index);
+    }
     private int SumChance()
     {
         int sum = 0;
-        for(int i=0; i < chanses.Count; i++)
+        for (int i = 0; i < spawnChanses.Count; i++)
         {
-            sum += chanses[i];
+            sum += spawnChanses[i];
         }
         return sum;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    
 
     int NutSpawnIndex()
     {
@@ -70,182 +95,168 @@ public class NutsController : MonoBehaviour
         int rand = Random.Range(1, SumChance());
         while (a < rand)
         {
-            a += chanses[i];
+            a += spawnChanses[i];
             i++;
         }
-        return i;
+        return i - 1;
     }
 
-
-
-    void NutSpawn()
+    private void SetCurrentBolt(int index)
     {
-        if (!isSpawned)
-        {
-            isSpawned = true;
-            int numInList = Random.Range(1, nutPrefabs.Count);
-            spawnedNut = Instantiate(nutPrefabs[NutSpawnIndex()-1],
-                new Vector3(transform.position.x, transform.position.y, transform.position.z),
-                Quaternion.identity);
-            added = false;
-        }
+        indexCurrentBolt = index;
     }
 
-    void AddToColorList()
+    IEnumerator MoveNut()
     {
-        delivered = true;
-        if(boltColor == "Red" && !added)
+        while (currentNut.transform.position.y > colorBolts[indexCurrentBolt].Count + correctPosition)
         {
-            AddToList(redList, spawnedNut);
-            added = true;
+            currentNut.transform.Translate(Vector3.down * Time.deltaTime * nutSpeed);
+            if (currentNut.transform.position.y < blockRotatePosition && !isBlockedSended)
+            {
+                isBlockedSended = true;
+                EventManager.SendBlockSpinner();
+            }
+            yield return null;
         }
-        if(boltColor == "Blue" && !added)
-        {
-            AddToList(blueList, spawnedNut);
-            added = true;
-        }
-        if (boltColor == "Green" && !added)
-        {
-            AddToList(greenList, spawnedNut);
-            added = true;
-        }
-        if (boltColor == "Yellow" && !added)
-        {
-            AddToList(yellowList, spawnedNut);
-            added = true;
-        }
-        else
+        SetParentObject();
+        AddNutToList(indexCurrentBolt, currentNut);
+        CheckBolt();
+        NutSpawn();
+    }
+
+    private void SetParentObject()
+    {
+        currentNut.transform.SetParent(spinner.transform);
+    }
+
+    private void StartMoveNut()
+    {
+        StartCoroutine(MoveNut());
+    }
+
+    private void CheckBolt()
+    {
+        if (colorBolts[indexCurrentBolt].Count < 3)
         {
             return;
         }
-
-    }
-
-    void AddToList(List<GameObject> objects, GameObject go)
-    {
-        if(objects.Count < maxObjectsInList)
-        {
-            objects.Add(go);
-            SetStartDestroyPosition(objects);
-            isSpawned = false;
-            NutDelaySpawn();// timer
-        }
         else
         {
-            MiniEventManager.SendGameOver();
+            CheckColors();
+        }
+    }
+    private void CheckColors()
+    {
+        List<GameObject> bolt = colorBolts[indexCurrentBolt];
+        if (currentNut.tag == "rust")
+        {
+            return;
+        }
+        if (currentNut.tag == "acid")
+        {
+            //AcidNutMethod
+        }
+        if (currentNut.tag == "rainbow" && bolt[bolt.Count - 2].tag == bolt[bolt.Count - 3].tag ||
+            currentNut.tag == "rainbow" && bolt[bolt.Count - 3].tag == "rainbow" ||
+            currentNut.tag == "rainbow" && bolt[bolt.Count - 2].tag == "rainbow")
+        {
+            RemoveThree(bolt);
+            return;
+        }
+        if (currentNut.tag == bolt[bolt.Count - 2].tag && bolt[bolt.Count - 2].tag == bolt[bolt.Count - 3].tag ||
+            currentNut.tag == bolt[bolt.Count - 2].tag && bolt[bolt.Count - 3].tag == "rainbow" ||
+            currentNut.tag == bolt[bolt.Count - 3].tag && bolt[bolt.Count - 2].tag == "rainbow" ||
+            bolt[bolt.Count - 2].tag == "rainbow" && bolt[bolt.Count - 3].tag == "rainbow")
+        {
+            RemoveThree(bolt);
+            return;
+        }
+    }
+    private void RemoveThree(List<GameObject> bolt)
+    {
+        int a = bolt.Count - 1;
+        for (int i = 0; i < 3; i++)
+        {
+            Destroy(bolt[a]);
+            bolt.RemoveAt(a);
+            a--;
         }
     }
 
-
-    void ChangeBoltColor(string color)
+    private void ClearSpinner()
     {
-        boltColor = color;
-    }
+        List<NutWithPosition> objects = new List<NutWithPosition>();
 
-    void IsSpawnedDisable()
-    {
-        isSpawned = false;
-    }
-
-    void NutDelaySpawn()
-    {
-        Invoke("NutSpawn", 0.2f);
-        /*if (!delay)
+        int b = 0;
+        for (int i = 0; i < colorBolts.Count; i++)
         {
-            Invoke("NutSpawn", 0.2f);
-        }*/
-    }
-
-
-
-    void SetStartDestroyPosition(List<GameObject> nutsColors)
-    {
-        if (nutsColors[nutsColors.Count - 1].tag == "Gold")
-        {
-            var size = nutsColors.Count;
-            for (int i = size; i > 0; i--)
+            for (int j = 0; j < colorBolts[i].Count; j++)
             {
-                Destroy(nutsColors[i-1]);
-                nutsColors.RemoveAt(i-1);
+                NutWithPosition nut = new NutWithPosition(colorBolts[i][j], i, j);
+                objects.Add(nut);
             }
         }
-        else
+        var results = objects.OrderBy(u => u.nut.tag).ToList();
+
+        for (int k = 0; k < results.Count - 2;)
         {
-            if (nutsColors.Count < 3)
+            if (results[k].nut.tag == results[k + 1].nut.tag && results[k + 1].nut.tag == results[k + 2].nut.tag)
             {
-                return;
+                for (int i = 3; i > 0; i--)
+                {
+                    results.RemoveAt(k + i - 1);
+                }
             }
             else
             {
-
-                if (nutsColors.Count == 3)
-                {
-                    if (nutsColors[0].tag == nutsColors[1].tag && nutsColors[1].tag == nutsColors[2].tag ||
-                        nutsColors[0].tag == "Rainbow" && nutsColors[1].tag == nutsColors[2].tag ||
-                        nutsColors[1].tag == "Rainbow" && nutsColors[0].tag == nutsColors[2].tag ||
-                        nutsColors[2].tag == "Rainbow" && nutsColors[0].tag == nutsColors[1].tag ||
-                        nutsColors[0].tag == "Rainbow" && nutsColors[1].tag == "Rainbow" ||
-                        nutsColors[0].tag == "Rainbow" && nutsColors[2].tag == "Rainbow" ||
-                        nutsColors[1].tag == "Rainbow" && nutsColors[2].tag == "Rainbow")
-                    {
-                        for (int i = sizeLineDestroy - 1; i > -1; i--)
-                        {
-                            Destroy(nutsColors[i]);
-                            nutsColors.RemoveAt(i);
-                        }
-                        MiniEventManager.SendLineDestroyed();
-                        //send 0
-                    }
-                }
-
-                if (nutsColors.Count == 4)
-                {
-                    if (nutsColors[1].tag == nutsColors[2].tag && nutsColors[2].tag == nutsColors[3].tag ||
-                        nutsColors[1].tag == "Rainbow" && nutsColors[2].tag == nutsColors[3].tag ||
-                        nutsColors[2].tag == "Rainbow" && nutsColors[1].tag == nutsColors[3].tag ||
-                        nutsColors[3].tag == "Rainbow" && nutsColors[1].tag == nutsColors[2].tag ||
-                        nutsColors[2].tag == "Rainbow" && nutsColors[3].tag == "Rainbow" ||
-                        nutsColors[1].tag == "Rainbow" && nutsColors[3].tag == "Rainbow")
-                    {
-                        for (int i = sizeLineDestroy - 1; i > -1; i--)
-                        {
-                            Destroy(nutsColors[i + 1]);
-                            nutsColors.RemoveAt(i + 1);
-                        }
-                        MiniEventManager.SendLineDestroyed();
-                    }
-                }
-
-                if (nutsColors.Count == 5)
-                {
-                    if (nutsColors[2].tag == nutsColors[3].tag && nutsColors[3].tag == nutsColors[4].tag ||
-                        nutsColors[2].tag == "Rainbow" && nutsColors[3].tag == nutsColors[4].tag ||
-                        nutsColors[3].tag == "Rainbow" && nutsColors[2].tag == nutsColors[4].tag ||
-                        nutsColors[4].tag == "Rainbow" && nutsColors[2].tag == nutsColors[3].tag ||
-                        nutsColors[2].tag == "Rainbow" && nutsColors[4].tag == "Rainbow" ||
-                        nutsColors[3].tag == "Rainbow" && nutsColors[4].tag == "Rainbow")
-                    {
-                        for (int i = sizeLineDestroy - 1; i > -1; i--)
-                        {
-                            Destroy(nutsColors[i + 2]);
-                            nutsColors.RemoveAt(i + 2);
-                        }
-                        MiniEventManager.SendLineDestroyed();
-                    }
-                    else
-                    {
-                        MiniEventManager.SendGameOver();
-                    }
-                }
+                k++;
             }
-                
+        }
 
+
+        for (int i = 0; i < colorBolts.Count; i++)
+        {
+            for (int k = colorBolts[i].Count; k > 0; k--)
+            {
+                Destroy(colorBolts[i][k - 1]);
+                colorBolts[i].RemoveAt(k - 1);
+            }
 
         }
-            
+        var startSpinnerRotation = spinner.transform.eulerAngles.z;
+        var tempCurrentIndex = indexCurrentBolt;
+        for (int i = 0; i < results.Count; i++)
+        {
+            var tempObj = Instantiate(results[i].nut, new Vector3(0, colorBolts[indexCurrentBolt].Count + 1, 0), Quaternion.identity);
+            colorBolts[indexCurrentBolt].Add(tempObj);
+            tempObj.transform.SetParent(spinner.transform);
+            var degr = spinner.transform.eulerAngles.z;
+            spinner.transform.rotation = Quaternion.Euler(new Vector3(0, 0, degr - 90));
 
-        
-        
+
+            if (indexCurrentBolt == 0)
+            {
+                indexCurrentBolt = 3;
+            }
+            else
+            {
+                indexCurrentBolt--;
+            }
+        }
+        spinner.transform.rotation = Quaternion.Euler(new Vector3(0, 0, startSpinnerRotation));
+        indexCurrentBolt = tempCurrentIndex;
     }
+}
+class NutWithPosition
+{
+    public GameObject nut;
+    public int currentBolt;
+    public int currentIndex;
 
+    public NutWithPosition(GameObject nut, int currentBolt, int currentIndex)
+    {
+        this.nut = nut;
+        this.currentBolt = currentBolt;
+        this.currentIndex = currentIndex;
+    }
 }

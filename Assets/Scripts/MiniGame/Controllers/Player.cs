@@ -5,77 +5,110 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public Text outputText;
+    [SerializeField] private Settings settings;
+    private float rotateSpeed;
+    private float rotateTime;
 
-    private Vector2 startTouchPosition;
-    private Vector2 currentPosition;
-    private Vector2 endTouchPosition;
-    private bool stopTouch = false;
+    private List<int> degresList;
+    private int currentListIndex;
+    private bool isBlocked;
 
-    public float swipeRange;
-    public float tapRange;
+    private void Awake()
+    {
+        EventManager.OnNutDelivered.AddListener(UnblockRotate);
+        EventManager.OnBlockSpinner.AddListener(SetBlockRotate);
+    }
+
+    void Start()
+    {
+        rotateSpeed = settings.rotateSpeed;
+        rotateTime = settings.rotateTime;
+        degresList = new List<int>() { 0, 90, 180, 270 };
+        currentListIndex = 0;
+        EventManager.BoltChanged(currentListIndex);
+        isBlocked = false;
+
+    }
 
     // Update is called once per frame
     void Update()
     {
-        Swipe();
+        if (Input.GetKeyDown(KeyCode.A) && !isBlocked)
+        {
+            StartCoroutine(RotateLeft());
+        }
+        if (Input.GetKeyDown(KeyCode.D) && !isBlocked)
+        {
+            StartCoroutine(RotateRight());
+        }
+
     }
 
-    public void Swipe()
+
+    IEnumerator RotateLeft()
     {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        float time = 0;
+        SetCurrentIndex('+');
+        while (time < rotateTime)
         {
-            startTouchPosition = Input.GetTouch(0).position;
+            time += Time.deltaTime;
+            transform.Rotate(0, 0, 1 * rotateSpeed * Time.deltaTime);
+            yield return null;
         }
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, degresList[currentListIndex]));
 
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+    }
+    IEnumerator RotateRight()
+    {
+        float time = 0;
+        SetCurrentIndex('-');
+        while (time < rotateTime)
         {
-            currentPosition = Input.GetTouch(0).position;
-            Vector2 Distance = currentPosition - startTouchPosition;
+            time += Time.deltaTime;
+            transform.Rotate(0, 0, 1 * -rotateSpeed * Time.deltaTime);
+            yield return null;
+        }
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, degresList[currentListIndex]));
 
-            if (!stopTouch)
+    }
+
+
+
+
+    void SetCurrentIndex(char oper)
+    {
+        if (oper == '+')
+        {
+            if (currentListIndex == 3)
             {
-
-                if (Distance.x < -swipeRange)
-                {
-                    outputText.text = "Left";
-                    stopTouch = true;
-                }
-                else if (Distance.x > swipeRange)
-                {
-                    outputText.text = "Right";
-                    stopTouch = true;
-                }
-                else if (Distance.y > swipeRange)
-                {
-                    outputText.text = "Up";
-                    stopTouch = true;
-                }
-                else if (Distance.y < -swipeRange)
-                {
-                    outputText.text = "Down";
-                    stopTouch = true;
-                }
-
+                currentListIndex = 0;
             }
-
-        }
-
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
-        {
-            stopTouch = false;
-
-            endTouchPosition = Input.GetTouch(0).position;
-
-            Vector2 Distance = endTouchPosition - startTouchPosition;
-
-            if (Mathf.Abs(Distance.x) < tapRange && Mathf.Abs(Distance.y) < tapRange)
+            else
             {
-                outputText.text = "Tap";
+                currentListIndex++;
             }
-
         }
+        if (oper == '-')
+        {
+            if (currentListIndex == 0)
+            {
+                currentListIndex = 3;
+            }
+            else
+            {
+                currentListIndex--;
+            }
+        }
+        EventManager.BoltChanged(currentListIndex);
+    }
 
+    void SetBlockRotate()
+    {
+        isBlocked = true;
+    }
 
+    void UnblockRotate()
+    {
+        isBlocked = false;
     }
 }

@@ -18,7 +18,6 @@ public class GameController : MonoBehaviour
         _timeController.SetPauseOn();
         _uIController.HideGamePanel();
         _uIController.ShowStartPanel();
-        _uIController.HideDebugPanel();
     }
 
     // Update is called once per frame
@@ -31,7 +30,6 @@ public class GameController : MonoBehaviour
     {
         print("game contr met play");
         _uIController.HideStartPanel();
-        _uIController.HideDebugPanel();
         _uIController.ShowGamePanel();
         _uIController.HideGameOverPanel();
         _timeController.SetPauseOff();
@@ -44,7 +42,6 @@ public class GameController : MonoBehaviour
         _uIController.HideGamePanel();
         _uIController.ShowStartPanel();
         _uIController.HideGameOverPanel();
-        _uIController.HideDebugPanel();
         _timeController.SetPauseOn();
     }
 
@@ -53,7 +50,6 @@ public class GameController : MonoBehaviour
         _uIController.ShowGameOverPanel();
         _uIController.HideGamePanel();
         _uIController.HideStartPanel();
-        _uIController.HideDebugPanel();
         _timeController.SetPauseOn();
     }
 
@@ -68,6 +64,5 @@ public class GameController : MonoBehaviour
         _uIController.HideGamePanel();
         _uIController.HideStartPanel();
         _uIController.HideGameOverPanel();
-        _uIController.ShowDebugPanel();
     }
 }
