@@ -231,9 +231,10 @@ public class NutsController : MonoBehaviour
         var tempCurrentIndex = indexCurrentBolt;
         for (int i = 0; i < results.Count; i++)
         {
-            var tempObj = Instantiate(results[i].nut, new Vector3(0, colorBolts[indexCurrentBolt].Count + correctPosition + 1, 0), Quaternion.identity);
-            colorBolts[indexCurrentBolt].Add(tempObj);
+            var tempObj = Instantiate(results[i].nut, new Vector3(0, colorBolts[indexCurrentBolt].Count + correctPosition, 0), Quaternion.identity);
+            tempObj.transform.localScale = new Vector3(1, 1, 1);
             tempObj.transform.SetParent(spinner.transform);
+            colorBolts[indexCurrentBolt].Add(tempObj);
             var degr = spinner.transform.eulerAngles.z;
             spinner.transform.rotation = Quaternion.Euler(new Vector3(0, 0, degr - 90));
 
