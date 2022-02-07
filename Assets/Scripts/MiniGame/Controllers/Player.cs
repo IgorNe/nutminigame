@@ -13,6 +13,16 @@ public class Player : MonoBehaviour
     private int currentListIndex;
     private bool isBlocked;
 
+    //swipe data
+    private Vector2 startTouchPosition;
+    private Vector2 currentTouchPosition;
+    private Vector2 endTouchposition;
+
+    [SerializeField] private float swipeRange;
+    [SerializeField] private float tapRange;
+    [SerializeField] private float ySwipeCorrection;
+    private bool isStopTouch;
+
     private void Awake()
     {
         EventManager.OnNutDelivered.AddListener(UnblockRotate);
@@ -35,11 +45,11 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A) && !isBlocked)
         {
-            StartCoroutine(RotateLeft());
+            Left();
         }
         if (Input.GetKeyDown(KeyCode.D) && !isBlocked)
         {
-            StartCoroutine(RotateRight());
+            Right();
         }
 
     }
@@ -110,5 +120,61 @@ public class Player : MonoBehaviour
     void UnblockRotate()
     {
         isBlocked = false;
+    }
+
+    public void Left()
+    {
+        if (!isBlocked)
+        {
+            StartCoroutine(RotateLeft());
+        }
+    }
+
+    public void Right()
+    {
+        if (!isBlocked)
+        {
+            StartCoroutine(RotateRight());
+        }
+    }
+    void Swipe()
+    {
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            startTouchPosition = Input.GetTouch(0).position;
+        }
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+        {
+            currentTouchPosition = Input.GetTouch(0).position;
+            Vector2 distance = currentTouchPosition - startTouchPosition;
+            if (!isStopTouch)
+            {
+                if (distance.x > swipeRange)
+                {
+                    Right();
+                }
+                else if (distance.x < -swipeRange)
+                {
+                    Left();
+                }
+                else if (distance.y < -swipeRange - ySwipeCorrection)
+                {
+                    Right();
+                }
+                else if (distance.y > swipeRange + ySwipeCorrection)
+                {
+                    Left();
+                }
+            }
+        }
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        {
+            endTouchposition = Input.GetTouch(0).position;
+            Vector2 distance = endTouchposition - startTouchPosition;
+            if (Mathf.Abs(distance.x) < tapRange && Mathf.Abs(distance.y) < tapRange)
+            {
+                //MiniEventManager.SendThrowNut();
+            }
+        }
     }
 }

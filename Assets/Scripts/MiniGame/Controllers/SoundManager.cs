@@ -11,9 +11,9 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        MiniEventManager.OnGameOver.AddListener(PlayGameOver);
-        MiniEventManager.OnNutDelivered.AddListener(PlayNutDelivered);
-        MiniEventManager.OnStarterTrigged.AddListener(PlayNutWinding);
+        EventManager.OnGameOver.AddListener(PlayGameOver);
+        EventManager.OnNutDelivered.AddListener(PlayNutDelivered);
+        EventManager.OnBlockSpinner.AddListener(PlayNutWinding);
     }
 
     void Start()

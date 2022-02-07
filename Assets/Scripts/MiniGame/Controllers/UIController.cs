@@ -9,6 +9,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject _gamePanel;
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private GameController _gameController;
+    [SerializeField] private Player player;
 
 #if UNITY_EDITOR
     private void OnValidate()
@@ -16,7 +17,6 @@ public class UIController : MonoBehaviour
         _startPanel = transform.Find("StartPanel").gameObject;
         _gamePanel = transform.Find("GamePanel").gameObject;
         _gameOverPanel = transform.Find("GameOverPanel").gameObject;
-
     }
 #endif
     public void Start()
@@ -73,5 +73,14 @@ public class UIController : MonoBehaviour
         _gameController.Play();
     }
 
+    public void OnLeftButtonClicked()
+    {
+        player.Left();
+    }
+
+    public void OnRightButtonClicked()
+    {
+        player.Right();
+    }
 
 }

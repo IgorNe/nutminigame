@@ -171,6 +171,10 @@ public class NutsController : MonoBehaviour
             RemoveThree(bolt);
             return;
         }
+        if(bolt.Count > 5)
+        {
+            EventManager.SendGameOver();
+        }
     }
     private void RemoveThree(List<GameObject> bolt)
     {
@@ -227,7 +231,7 @@ public class NutsController : MonoBehaviour
         var tempCurrentIndex = indexCurrentBolt;
         for (int i = 0; i < results.Count; i++)
         {
-            var tempObj = Instantiate(results[i].nut, new Vector3(0, colorBolts[indexCurrentBolt].Count + 1, 0), Quaternion.identity);
+            var tempObj = Instantiate(results[i].nut, new Vector3(0, colorBolts[indexCurrentBolt].Count + correctPosition + 1, 0), Quaternion.identity);
             colorBolts[indexCurrentBolt].Add(tempObj);
             tempObj.transform.SetParent(spinner.transform);
             var degr = spinner.transform.eulerAngles.z;

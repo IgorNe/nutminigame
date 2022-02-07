@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        MiniEventManager.OnGameOver.AddListener(GameOver);
+        EventManager.OnGameOver.AddListener(GameOver);
     }
     void Start()
     {

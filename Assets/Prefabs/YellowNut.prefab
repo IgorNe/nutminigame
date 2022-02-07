@@ -11,9 +11,6 @@ GameObject:
   - component: {fileID: 6326864562005587742}
   - component: {fileID: 6945204117804857531}
   - component: {fileID: 5153988315539983473}
-  - component: {fileID: 1851818588838436402}
-  - component: {fileID: 8029674823471342386}
-  - component: {fileID: -1059308166359397361}
   m_Layer: 0
   m_Name: YellowNut
   m_TagString: Gold
@@ -84,47 +81,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1851818588838436402
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6667114570758876580}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.47454935, z: 0.9}
-  m_Center: {x: -0.00000020861626, y: 0.00000023841858, z: 0.000000029802322}
---- !u!54 &8029674823471342386
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6667114570758876580}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &-1059308166359397361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6667114570758876580}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c75e20c47125a94a94461f7246eb511, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  particleWind: {fileID: 66555024560170217, guid: c3af021841099f141bab87b3a9a1adc2, type: 3}
-  particleDelivered: {fileID: 5622903445995869190, guid: aa212fec893d13b45a6373186a67a3a4, type: 3}

@@ -11,6 +11,7 @@ public static class EventManager
     public static UnityEvent OnBlockSpinner = new UnityEvent();
     public static UnityEvent OnNutSpawned = new UnityEvent();
     public static UnityEvent OnTimeOut = new UnityEvent();
+    public static UnityEvent OnGameOver = new UnityEvent();
 
 
     public static void BoltChanged(int index)
@@ -37,5 +38,8 @@ public static class EventManager
     {
         OnTimeOut?.Invoke();
     }
-
+    public static void SendGameOver()
+    {
+        OnGameOver?.Invoke();
+    }
 }
