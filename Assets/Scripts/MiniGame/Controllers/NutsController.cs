@@ -118,6 +118,7 @@ public class NutsController : MonoBehaviour
             }
             yield return null;
         }
+        currentNut.transform.position = new Vector3(0, colorBolts[indexCurrentBolt].Count + correctPosition, 0);
         SetParentObject();
         AddNutToList(indexCurrentBolt, currentNut);
         CheckBolt();
