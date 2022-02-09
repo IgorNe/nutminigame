@@ -5709,32 +5709,11 @@ MonoBehaviour:
   nutDelivered: {fileID: 8300000, guid: 02e2c124ac2cbc04f9840e6f4810bdd8, type: 3}
   lose: {fileID: 8300000, guid: 35011917ab8bdf840aaf8691d9e8831a, type: 3}
   windingNut: {fileID: 8300000, guid: a5cc8d6e8318ccd488dec761ca47da0f, type: 3}
---- !u!1 &375977864 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6593102050383065764, guid: d295bde303088b64a9758275ddd0a888, type: 3}
-  m_PrefabInstance: {fileID: 527796225}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &375977865 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6593102050383065755, guid: d295bde303088b64a9758275ddd0a888, type: 3}
   m_PrefabInstance: {fileID: 527796225}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &375977866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 375977864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d521fbc2e32f6904ebf48701b35dca87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settings: {fileID: 2065252404}
-  swipeRange: 20
-  tapRange: 5
-  ySwipeCorrection: 0
 --- !u!1 &380695598
 GameObject:
   m_ObjectHideFlags: 0
@@ -11541,7 +11520,7 @@ MonoBehaviour:
   _gamePanel: {fileID: 1893949420}
   _gameOverPanel: {fileID: 777820730}
   _gameController: {fileID: 904259799}
-  player: {fileID: 375977866}
+  player: {fileID: 0}
 --- !u!114 &676952889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12992,6 +12971,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1360364461}
+  - component: {fileID: 1360364462}
   m_Layer: 0
   m_Name: Spinner
   m_TagString: Untagged
@@ -13014,6 +12994,22 @@ Transform:
   m_Father: {fileID: 1427324458}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1360364462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360364460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d521fbc2e32f6904ebf48701b35dca87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings: {fileID: 2065252404}
+  swipeRange: 20
+  tapRange: 5
+  ySwipeCorrection: 0
 --- !u!1 &1379890246
 GameObject:
   m_ObjectHideFlags: 0
