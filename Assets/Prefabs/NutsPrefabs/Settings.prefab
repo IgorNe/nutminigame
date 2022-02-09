@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4105065758261561958
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4105065758261561952}
+  - component: {fileID: 4105065758261561953}
+  m_Layer: 0
+  m_Name: Settings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4105065758261561952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4105065758261561958}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4105065758261561953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4105065758261561958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9717c618e9a3e1c429da8db32ea04304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateNutSpeed: 800
+  nutSpeed: 10
+  nutDelay: 1.2
+  nutSpawnPoint: {x: 0, y: 6, z: 0}
+  moveParticle: {fileID: 66555024560170217, guid: c3af021841099f141bab87b3a9a1adc2, type: 3}
+  finishParticle: {fileID: 5622903445995869190, guid: aa212fec893d13b45a6373186a67a3a4, type: 3}
+  destroyParticle: {fileID: 0}
+  blockRotatePosition: 0
+  correctPosition: -5
+  maxNutsOnBolt: 0
+  lineSizeForDelete: 0
+  nutsForSpawn:
+  - {fileID: 8041874584009104524, guid: a944aa6bef8d9904fb532a7fbcceff18, type: 3}
+  - {fileID: 4408911151640311554, guid: 917381f5fd22e8749b7a21c5b7bc44f6, type: 3}
+  - {fileID: 3897634207889399391, guid: cccd40c246fd53842be0c553b1de7fce, type: 3}
+  - {fileID: 6520160818284154905, guid: e56461fd92b826e4c8ef9ef7cb5ea762, type: 3}
+  - {fileID: 4182629455203275510, guid: 24c32920f4e7d0143b4baf35645436ea, type: 3}
+  chanses: 060000000600000006000000060000000e000000
+  rotateSpeed: 400
+  rotateTime: 0.12
