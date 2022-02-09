@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Settings : MonoBehaviour
 {
-
+    [Header("Nuts settings")]
+    public float rotateNutSpeed;
     public float nutSpeed;
     public float nutDelay;
     public Vector3 nutSpawnPoint;
+    [Header("Game settings")]
     public float blockRotatePosition;
     public float correctPosition;
     public int maxNutsOnBolt;

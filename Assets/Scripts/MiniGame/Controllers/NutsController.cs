@@ -21,6 +21,7 @@ public class NutsController : MonoBehaviour
 
     private GameObject currentNut;
     private float nutSpeed;
+    private float rotateNutSpeed;
     private bool isBlockedSended;
     private float blockRotatePosition;
     private int indexCurrentBolt;
@@ -53,6 +54,7 @@ public class NutsController : MonoBehaviour
         colorBolts.Add(greenBolt);
         colorBolts.Add(yellowBolt);
 
+        rotateNutSpeed = settings.rotateNutSpeed;
         correctPosition = settings.correctPosition;
         blockRotatePosition = settings.blockRotatePosition;
         spawnChanses = settings.chanses;
@@ -114,11 +116,13 @@ public class NutsController : MonoBehaviour
             if (currentNut.transform.position.y < blockRotatePosition && !isBlockedSended)
             {
                 isBlockedSended = true;
+                StartCoroutine(RotateNut());
                 EventManager.SendBlockSpinner();
             }
             yield return null;
         }
         currentNut.transform.position = new Vector3(0, colorBolts[indexCurrentBolt].Count + correctPosition, 0);
+        currentNut.transform.rotation = Quaternion.identity;
         SetParentObject();
         AddNutToList(indexCurrentBolt, currentNut);
         CheckBolt();
@@ -251,6 +255,15 @@ public class NutsController : MonoBehaviour
         }
         spinner.transform.rotation = Quaternion.Euler(new Vector3(0, 0, startSpinnerRotation));
         indexCurrentBolt = tempCurrentIndex;
+    }
+
+    IEnumerator RotateNut()
+    {
+        while (isBlockedSended)
+        {
+            currentNut.transform.Rotate(0, 1 * rotateNutSpeed * Time.deltaTime, 0);
+            yield return null;
+        }
     }
 }
 class NutWithPosition

@@ -24958,6 +24958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9717c618e9a3e1c429da8db32ea04304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateNutSpeed: 800
   nutSpeed: 10
   nutDelay: 1.2
   nutSpawnPoint: {x: 0, y: 6, z: 0}
