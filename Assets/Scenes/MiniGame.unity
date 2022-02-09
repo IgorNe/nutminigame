@@ -24962,6 +24962,9 @@ MonoBehaviour:
   nutSpeed: 10
   nutDelay: 1.2
   nutSpawnPoint: {x: 0, y: 6, z: 0}
+  moveParticle: {fileID: 66555024560170217, guid: c3af021841099f141bab87b3a9a1adc2, type: 3}
+  finishParticle: {fileID: 5622903445995869190, guid: aa212fec893d13b45a6373186a67a3a4, type: 3}
+  destroyParticle: {fileID: 0}
   blockRotatePosition: 0
   correctPosition: -5
   maxNutsOnBolt: 0

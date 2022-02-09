@@ -9,6 +9,9 @@ public class Settings : MonoBehaviour
     public float nutSpeed;
     public float nutDelay;
     public Vector3 nutSpawnPoint;
+    public GameObject moveParticle;
+    public GameObject finishParticle;
+    public GameObject destroyParticle;
     [Header("Game settings")]
     public float blockRotatePosition;
     public float correctPosition;

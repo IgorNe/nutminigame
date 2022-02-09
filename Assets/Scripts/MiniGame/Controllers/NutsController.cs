@@ -20,6 +20,9 @@ public class NutsController : MonoBehaviour
     private List<List<GameObject>> colorBolts;
 
     private GameObject currentNut;
+    private GameObject moveParticle;
+    private GameObject finishParticle;
+    private GameObject moveTempParticle;
     private float nutSpeed;
     private float rotateNutSpeed;
     private bool isBlockedSended;
@@ -54,6 +57,8 @@ public class NutsController : MonoBehaviour
         colorBolts.Add(greenBolt);
         colorBolts.Add(yellowBolt);
 
+        finishParticle = settings.finishParticle;
+        moveParticle = settings.moveParticle;
         rotateNutSpeed = settings.rotateNutSpeed;
         correctPosition = settings.correctPosition;
         blockRotatePosition = settings.blockRotatePosition;
@@ -117,12 +122,15 @@ public class NutsController : MonoBehaviour
             {
                 isBlockedSended = true;
                 StartCoroutine(RotateNut());
+                PlayMoveParticle(moveParticle, currentNut);
                 EventManager.SendBlockSpinner();
             }
             yield return null;
         }
         currentNut.transform.position = new Vector3(0, colorBolts[indexCurrentBolt].Count + correctPosition, 0);
         currentNut.transform.rotation = Quaternion.identity;
+        Destroy(moveTempParticle);
+        StartCoroutine(PlayParticle(finishParticle, currentNut, 0.8f));
         SetParentObject();
         AddNutToList(indexCurrentBolt, currentNut);
         CheckBolt();
@@ -264,6 +272,21 @@ public class NutsController : MonoBehaviour
             currentNut.transform.Rotate(0, 1 * rotateNutSpeed * Time.deltaTime, 0);
             yield return null;
         }
+    }
+
+    private void PlayMoveParticle(GameObject particle, GameObject parent)
+    {
+        moveTempParticle = Instantiate(particle, parent.transform.position, Quaternion.identity);
+        moveTempParticle.transform.SetParent(parent.transform);
+    }
+
+    IEnumerator PlayParticle(GameObject particle, GameObject parent, float playTime)
+    {
+        var obj = Instantiate(particle, parent.transform.position, Quaternion.identity);
+        obj.transform.SetParent(parent.transform);
+        yield return new WaitForSeconds(playTime);
+        Destroy(obj);
+
     }
 }
 class NutWithPosition
