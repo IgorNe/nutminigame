@@ -8,10 +8,16 @@ public class Acid : MonoBehaviour
     [SerializeField] private Settings settings;
     [SerializeField] private int rotateSpeed;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        EventManager.OnTimeOut.AddListener(Rotate);
+        EventManager.OnBlockSpinner.AddListener(Smash);
+    }
     void Start()
     {
         delay = settings.nutDelay;
-        StartCoroutine(RotateBottle());
+        
     }
 
     // Update is called once per frame
@@ -29,5 +35,16 @@ public class Acid : MonoBehaviour
             transform.Rotate(new Vector3(0, 0, rotateSpeed * Time.deltaTime));
             yield return null;
         }
+    }
+
+    void Rotate()
+    {
+        StartCoroutine(RotateBottle());
+    }
+
+    void Smash()
+    {
+        EventManager.SendNutDelivered();
+        Destroy(gameObject);
     }
 }

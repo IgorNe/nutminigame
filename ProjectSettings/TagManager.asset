@@ -10,7 +10,10 @@ TagManager:
   - Red
   - Starter
   - Gold
-  - Rainbow
+  - Undefined
+  - acid
+  - rainbow
+  - stone
   layers:
   - Default
   - TransparentFX

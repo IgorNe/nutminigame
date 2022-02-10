@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4159895075377892766}
   m_Layer: 0
   m_Name: Acid
-  m_TagString: Yellow
+  m_TagString: acid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,7 +134,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 73061bbfe0a35be47bbac8c8ed9dbf99, type: 3}
   m_PrefabInstance: {fileID: 1743805926555764392}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3948413499910090896
+--- !u!114 &5976604972926581119
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,9 +143,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1509365108317289465}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27eff27453975174fa6f817e1520e48e, type: 3}
+  m_Script: {fileID: 11500000, guid: e0d0c8c6cd2be534a8932fbfe1761bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeAngle: 40
   settings: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
-  shakeSpeed: 150
+  rotateSpeed: 600

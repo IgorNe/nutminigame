@@ -23,6 +23,7 @@ public class Settings : MonoBehaviour
     [Header("Spinner settings")]
     public int rotateSpeed;
     public float rotateTime;
+    public List<GameObject> forAcid;
 
 }
 

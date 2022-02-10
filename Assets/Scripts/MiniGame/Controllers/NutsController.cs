@@ -18,6 +18,7 @@ public class NutsController : MonoBehaviour
     private List<GameObject> yellowBolt;
 
     private List<List<GameObject>> colorBolts;
+    private List<GameObject> forAcid;
 
     private GameObject currentNut;
     private GameObject moveParticle;
@@ -65,6 +66,7 @@ public class NutsController : MonoBehaviour
         spawnChanses = settings.chanses;
         nutsForSpawn = settings.nutsForSpawn;
         nutSpeed = settings.nutSpeed;
+        forAcid = settings.forAcid;
         Invoke("NutSpawn", 1);
 
     }
@@ -149,7 +151,7 @@ public class NutsController : MonoBehaviour
 
     private void CheckBolt()
     {
-        if (colorBolts[indexCurrentBolt].Count < 3)
+        if (colorBolts[indexCurrentBolt].Count < 3 && currentNut.tag != "acid")
         {
             return;
         }
@@ -161,13 +163,26 @@ public class NutsController : MonoBehaviour
     private void CheckColors()
     {
         List<GameObject> bolt = colorBolts[indexCurrentBolt];
-        if (currentNut.tag == "rust")
+        if (currentNut.tag == "stone")
         {
             return;
         }
         if (currentNut.tag == "acid")
         {
-            //AcidNutMethod
+            bolt.Remove(bolt.Last());
+            if(bolt.Count > 0 && bolt.Last().tag == "stone")
+            {
+                Destroy(bolt.Last());
+                bolt.Remove(bolt.Last());
+                var nut = Instantiate(forAcid[indexCurrentBolt], new Vector3(0, bolt.Count + correctPosition, 0), Quaternion.identity);
+                nut.transform.SetParent(spinner.transform);
+                bolt.Add(nut);
+                currentNut = nut;
+            }
+            if(bolt.Count < 3)
+            {
+                return;
+            }
         }
         if (currentNut.tag == "rainbow" && bolt[bolt.Count - 2].tag == bolt[bolt.Count - 3].tag ||
             currentNut.tag == "rainbow" && bolt[bolt.Count - 3].tag == "rainbow" ||
@@ -245,7 +260,7 @@ public class NutsController : MonoBehaviour
         for (int i = 0; i < results.Count; i++)
         {
             var tempObj = Instantiate(results[i].nut, new Vector3(0, colorBolts[indexCurrentBolt].Count + correctPosition, 0), Quaternion.identity);
-            tempObj.transform.localScale = new Vector3(1, 1, 1);
+            //tempObj.transform.localScale = new Vector3(1, 1, 1);
             tempObj.transform.SetParent(spinner.transform);
             colorBolts[indexCurrentBolt].Add(tempObj);
             var degr = spinner.transform.eulerAngles.z;

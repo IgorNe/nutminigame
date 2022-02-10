@@ -9,29 +9,40 @@ public class ShakeBottle : MonoBehaviour
     [SerializeField] private int shakeAngle;
     [SerializeField] private Settings settings;
     [SerializeField] private int shakeSpeed;
+    [SerializeField] private float startAngle;
+    [SerializeField] private float finishAngle;
+    private bool restart;
     // Start is called before the first frame update
     void Start()
     {
+        restart = false;
         StartCoroutine(Shake());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Mathf.Abs(transform.rotation.eulerAngles.z) > shakeAngle)
+        if (restart)
         {
-            shakeSpeed = (-shakeSpeed);
+            StartCoroutine(Shake());
         }
     }
 
     IEnumerator Shake()
     {
-        int i = 0;
-        while (i < 500)
+
+        while (transform.rotation.eulerAngles.z < finishAngle)
         {
-            i++;
             transform.Rotate(new Vector3(0, 0, shakeSpeed * Time.deltaTime));
             yield return null;
         }
+        shakeSpeed = (-shakeSpeed);
+        while (transform.rotation.eulerAngles.z > startAngle)
+        {
+            transform.Rotate(new Vector3(0, 0, shakeSpeed * Time.deltaTime));
+            yield return null;
+        }
+        restart = true;
     }
+
 }
