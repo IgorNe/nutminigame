@@ -25,6 +25,7 @@ public class NutsController : MonoBehaviour
     private GameObject finishParticle;
     private GameObject moveTempParticle;
     private GameObject destroyParticle;
+    private GameObject stoneNut;
     private float nutSpeed;
     private float rotateNutSpeed;
     private bool isBlockedSended;
@@ -63,6 +64,7 @@ public class NutsController : MonoBehaviour
         moveParticle = settings.moveParticle;
         destroyParticle = settings.destroyParticle;
         rotateNutSpeed = settings.rotateNutSpeed;
+        stoneNut = settings.stoneNut;
         correctPosition = settings.correctPosition;
         blockRotatePosition = settings.blockRotatePosition;
         spawnChanses = settings.chanses;
@@ -216,6 +218,36 @@ public class NutsController : MonoBehaviour
             bolt.RemoveAt(a);
             a--;
         }
+        if(currentNut.tag != forAcid[indexCurrentBolt].tag)
+        {
+            SetStone();
+        }
+    }
+
+    private void SetStone()
+    {
+        var rand = Random.Range(1, 3);
+        var startSpinnerRotation = spinner.transform.eulerAngles.z;
+        var tempCurrentIndex = indexCurrentBolt;
+        for (int i = 0; i < rand; i++)
+        {
+            spinner.transform.rotation = Quaternion.Euler(new Vector3(0, 0, spinner.transform.rotation.eulerAngles.z - 90));
+            if (indexCurrentBolt == 0)
+            {
+                indexCurrentBolt = 3;
+            }
+            else
+            {
+                indexCurrentBolt--;
+            }
+        }
+
+        var stone = Instantiate(stoneNut, new Vector3(0, colorBolts[indexCurrentBolt].Count + correctPosition, 0), Quaternion.identity);
+        stone.transform.SetParent(spinner.transform);
+        colorBolts[indexCurrentBolt].Add(stone);
+        spinner.transform.rotation = Quaternion.Euler(new Vector3(0, 0, startSpinnerRotation));
+        indexCurrentBolt = tempCurrentIndex;
+
     }
 
     private void ClearSpinner()

@@ -21,6 +21,7 @@ public class Settings : MonoBehaviour
     [Range(0, 100)]
     public List<int> chanses;
     [Header("Spinner settings")]
+    public GameObject stoneNut;
     public int rotateSpeed;
     public float rotateTime;
     public List<GameObject> forAcid;

@@ -20394,12 +20394,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: stoneNut
+      value: 
+      objectReference: {fileID: 5268629107343789985, guid: ad52fd4785b096346be1bd2a27ffcdd3, type: 3}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: destroyParticle
       value: 
       objectReference: {fileID: 9096832842412329427, guid: a5831e4b13b0960408a38258f4b413da, type: 3}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: chanses.Array.size
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: forAcid.Array.size
@@ -20423,11 +20427,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: chanses.Array.data[4]
-      value: 14
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: chanses.Array.data[5]
-      value: 8
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: chanses.Array.data[6]
@@ -20451,7 +20455,7 @@ PrefabInstance:
       objectReference: {fileID: 6520160818284154905, guid: e56461fd92b826e4c8ef9ef7cb5ea762, type: 3}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: nutsForSpawn.Array.size
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: nutsForSpawn.Array.data[1]
@@ -20460,7 +20464,7 @@ PrefabInstance:
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: nutsForSpawn.Array.data[5]
       value: 
-      objectReference: {fileID: 5268629107343789985, guid: ad52fd4785b096346be1bd2a27ffcdd3, type: 3}
+      objectReference: {fileID: 5484629786779867851, guid: 33e505b49729f414f809de07e9c70824, type: 3}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: nutsForSpawn.Array.data[6]
       value: 
