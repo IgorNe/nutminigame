@@ -24,6 +24,7 @@ public class NutsController : MonoBehaviour
     private GameObject moveParticle;
     private GameObject finishParticle;
     private GameObject moveTempParticle;
+    private GameObject destroyParticle;
     private float nutSpeed;
     private float rotateNutSpeed;
     private bool isBlockedSended;
@@ -60,6 +61,7 @@ public class NutsController : MonoBehaviour
 
         finishParticle = settings.finishParticle;
         moveParticle = settings.moveParticle;
+        destroyParticle = settings.destroyParticle;
         rotateNutSpeed = settings.rotateNutSpeed;
         correctPosition = settings.correctPosition;
         blockRotatePosition = settings.blockRotatePosition;
@@ -210,6 +212,7 @@ public class NutsController : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             Destroy(bolt[a]);
+            StartCoroutine(PlayParticle(destroyParticle, bolt[a], 2f));
             bolt.RemoveAt(a);
             a--;
         }
@@ -298,11 +301,11 @@ public class NutsController : MonoBehaviour
     IEnumerator PlayParticle(GameObject particle, GameObject parent, float playTime)
     {
         var obj = Instantiate(particle, parent.transform.position, Quaternion.identity);
-        obj.transform.SetParent(parent.transform);
         yield return new WaitForSeconds(playTime);
         Destroy(obj);
 
     }
+
 }
 class NutWithPosition
 {
