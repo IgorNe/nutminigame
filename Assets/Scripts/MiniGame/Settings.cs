@@ -12,6 +12,7 @@ public class Settings : MonoBehaviour
     public GameObject moveParticle;
     public GameObject finishParticle;
     public GameObject destroyParticle;
+    public GameObject acidParticle;
     [Header("Game settings")]
     public float blockRotatePosition;
     public float correctPosition;
@@ -25,6 +26,9 @@ public class Settings : MonoBehaviour
     public int rotateSpeed;
     public float rotateTime;
     public List<GameObject> forAcid;
+    [Header("UI settings")]
+    public ManaController mana;
+    public JewelsController jewelsController;
 
 }
 

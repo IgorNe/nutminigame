@@ -9,6 +9,7 @@ public class NutsController : MonoBehaviour
 {
     [SerializeField] private Settings settings;
     [SerializeField] private GameObject spinner;
+    private ManaController mana;
     private List<GameObject> nutsForSpawn;
     private List<int> spawnChanses;
 
@@ -25,7 +26,9 @@ public class NutsController : MonoBehaviour
     private GameObject finishParticle;
     private GameObject moveTempParticle;
     private GameObject destroyParticle;
+    private GameObject acidParticle;
     private GameObject stoneNut;
+    private JewelsController jewelsController;
     private float nutSpeed;
     private float rotateNutSpeed;
     private bool isBlockedSended;
@@ -60,6 +63,9 @@ public class NutsController : MonoBehaviour
         colorBolts.Add(greenBolt);
         colorBolts.Add(yellowBolt);
 
+        jewelsController = settings.jewelsController;
+        mana = settings.mana;
+        acidParticle = settings.acidParticle;
         finishParticle = settings.finishParticle;
         moveParticle = settings.moveParticle;
         destroyParticle = settings.destroyParticle;
@@ -128,7 +134,14 @@ public class NutsController : MonoBehaviour
             {
                 isBlockedSended = true;
                 StartCoroutine(RotateNut());
-                PlayMoveParticle(moveParticle, currentNut);
+                if(currentNut.tag != "acid")
+                {
+                    PlayMoveParticle(moveParticle, currentNut);
+                }
+                else
+                {
+                    Instantiate(acidParticle, new Vector3(0, -3, -2), Quaternion.identity);
+                }
                 EventManager.SendBlockSpinner();
             }
             yield return null;
@@ -210,6 +223,28 @@ public class NutsController : MonoBehaviour
     }
     private void RemoveThree(List<GameObject> bolt)
     {
+        var boltTag = forAcid[indexCurrentBolt].tag;
+        if (bolt[bolt.Count-1].tag == boltTag || bolt[bolt.Count - 2].tag == boltTag || bolt[bolt.Count - 3].tag == boltTag)
+        {
+            mana.AddMana(10);
+        }
+        else
+        {
+            SetStone();
+        }
+        string jewelTag;
+        for (int i = 3; i > 0; i--)
+        {
+            if(bolt[bolt.Count - i].tag == "Rainbow")
+            {
+                continue;
+            }
+            else
+            {
+                jewelTag = bolt[bolt.Count - i].tag;
+                jewelsController.AddJewels(jewelTag, 1);
+            }
+        }
         int a = bolt.Count - 1;
         for (int i = 0; i < 3; i++)
         {
@@ -218,11 +253,10 @@ public class NutsController : MonoBehaviour
             bolt.RemoveAt(a);
             a--;
         }
-        if(currentNut.tag != forAcid[indexCurrentBolt].tag)
-        {
-            SetStone();
-        }
+        
+
     }
+
 
     private void SetStone()
     {
