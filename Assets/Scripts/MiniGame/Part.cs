@@ -48,6 +48,7 @@ public class Part : MonoBehaviour
             }
         }
 
+
     }
 
     private void OnTriggerEnter(Collider other)
