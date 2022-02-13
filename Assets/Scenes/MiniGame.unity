@@ -21157,7 +21157,7 @@ PrefabInstance:
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: destroyParticle
       value: 
-      objectReference: {fileID: 9096832842412329427, guid: a5831e4b13b0960408a38258f4b413da, type: 3}
+      objectReference: {fileID: 6247559050476134733, guid: e64c71d5880796d419d2fb11c3c22d55, type: 3}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: jewelsController
       value: 
