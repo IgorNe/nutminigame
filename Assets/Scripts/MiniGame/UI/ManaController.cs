@@ -4,24 +4,30 @@ using System.Collections;
 
 public class ManaController : MonoBehaviour
 {
+	[SerializeField] private float minValue = 0;
+	[SerializeField] private float maxValue = 100;
+	[SerializeField] private GameObject manaBar;
+	[SerializeField] private float maxYPos;
+	[SerializeField] private float minYPos;
+	[SerializeField] private GameObject firstButton;
+	[SerializeField] private GameObject secondButton;
+	[SerializeField] private int activateFist;
+	[SerializeField] private int activateSecond;
 
-	public float maxValue = 100;
-	public Color color = Color.red;
-	public int height = 4;
-	public Slider slider;
-	public bool isRight;
-
+	private float currentYPos;
+	private RectTransform manaRTransform;
 	private static float current;
 
-	void Start()
+
+    private void Awake()
+    {
+		EventManager.OnTrueBoltColor.AddListener(AddMana);
+    }
+    void Start()
 	{
-		slider.fillRect.GetComponent<Image>().color = color;
-
-		slider.maxValue = maxValue;
-		slider.minValue = 0;
-		current = 0;
-
+		manaRTransform = manaBar.GetComponent<RectTransform>();
 		UpdateUI();
+		currentYPos = minYPos;
 	}
 
 	public static float currentValue
@@ -31,33 +37,64 @@ public class ManaController : MonoBehaviour
 
 	void Update()
 	{
-		if (current < 0) current = 0;
-		if (current > maxValue) current = maxValue;
-		slider.value = current;
+        if (current < minValue) current = minValue;
+        if (current > maxValue) current = maxValue;
+        //slider.value = current;
         if (Input.GetKeyDown(KeyCode.M))
         {
 			AddMana(50);
-        }
+			UpdateUI();
+		}
 	}
 
 	void UpdateUI()
 	{
-		RectTransform rect = slider.GetComponent<RectTransform>();
-
-		int rectDeltaY = Screen.height / height;
-		float rectPosY = 0;
-
-
-		rectPosY = rect.position.y + (rectDeltaY - rect.sizeDelta.y) / 2;
-		slider.direction = Slider.Direction.BottomToTop;
-
-
-		rect.sizeDelta = new Vector2(rect.sizeDelta.x, rectDeltaY);
-		rect.position = new Vector3(rect.position.x, rectPosY, rect.position.z);
+		Calc();
+		ActivateButton();
+		manaBar.transform.localPosition = new Vector3(manaBar.transform.localPosition.x, currentYPos, 0);
 	}
 
-	public void AddMana(float adjust)
+
+	public void AddMana(int adjust)
 	{
 		current += adjust;
+		UpdateUI();
+	}
+
+	void Calc()
+    {
+		currentYPos =minYPos + Mathf.Abs((maxYPos - minYPos) / (maxValue / current + 0.1f));
+    }
+
+	private void ActivateButton()
+    {
+		if(current > activateFist)
+        {
+			firstButton.SetActive(true);
+        }
+		if(current > activateSecond)
+        {
+			secondButton.SetActive(true);
+        }
+		if(current < activateFist)
+        {
+			firstButton.SetActive(false);
+		}
+		if (current < activateSecond)
+		{
+			secondButton.SetActive(false);
+		}
+	}
+
+	public void OnFirstButtonClicked()
+    {
+		EventManager.SendClearBolt();
+		AddMana(-activateFist);
+    }
+
+	public void OnSecondButtonClicked()
+	{
+		EventManager.SendClearSpinner();
+		AddMana(-activateSecond);
 	}
 }

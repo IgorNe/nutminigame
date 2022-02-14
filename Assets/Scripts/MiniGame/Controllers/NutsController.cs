@@ -9,7 +9,6 @@ public class NutsController : MonoBehaviour
 {
     [SerializeField] private Settings settings;
     [SerializeField] private GameObject spinner;
-    private ManaController mana;
     private List<GameObject> nutsForSpawn;
     private List<int> spawnChanses;
 
@@ -35,11 +34,14 @@ public class NutsController : MonoBehaviour
     private float blockRotatePosition;
     private int indexCurrentBolt;
     private float correctPosition;
+    private int manaPoints;
 
     private void Awake()
     {
         EventManager.OnBoltChanged.AddListener(SetCurrentBolt);
         EventManager.OnTimeOut.AddListener(StartMoveNut);
+        EventManager.OnClearBoltButtonClicked.AddListener(ClearBolt);
+        EventManager.OnClearSpinnerButtonClicked.AddListener(ClearSpinner);
     }
 
     private void Update()
@@ -47,6 +49,10 @@ public class NutsController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             ClearSpinner();
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            ClearBolt();
         }
     }
 
@@ -63,8 +69,8 @@ public class NutsController : MonoBehaviour
         colorBolts.Add(greenBolt);
         colorBolts.Add(yellowBolt);
 
+        manaPoints = settings.manaPoints;
         jewelsController = settings.jewelsController;
-        mana = settings.mana;
         acidParticle = settings.acidParticle;
         finishParticle = settings.finishParticle;
         moveParticle = settings.moveParticle;
@@ -226,7 +232,7 @@ public class NutsController : MonoBehaviour
         var boltTag = forAcid[indexCurrentBolt].tag;
         if (bolt[bolt.Count-1].tag == boltTag || bolt[bolt.Count - 2].tag == boltTag || bolt[bolt.Count - 3].tag == boltTag)
         {
-            mana.AddMana(10);
+            EventManager.SendTrueBoltColor(manaPoints);
         }
         else
         {
@@ -257,6 +263,17 @@ public class NutsController : MonoBehaviour
 
     }
 
+
+    private void ClearBolt()
+    {
+        int nutNumOfBolt = colorBolts[indexCurrentBolt].Count;
+        for (int i = nutNumOfBolt - 1; i > -1 ; i--)
+        {
+            Destroy(colorBolts[indexCurrentBolt][i]);
+            StartCoroutine(PlayParticle(destroyParticle, colorBolts[indexCurrentBolt][i], 2f));
+            colorBolts[indexCurrentBolt].RemoveAt(i);
+        }
+    }
 
     private void SetStone()
     {

@@ -27,8 +27,8 @@ public class Settings : MonoBehaviour
     public float rotateTime;
     public List<GameObject> forAcid;
     [Header("UI settings")]
-    public ManaController mana;
     public JewelsController jewelsController;
+    public int manaPoints;
 
 }
 

@@ -12,7 +12,9 @@ public static class EventManager
     public static UnityEvent OnNutSpawned = new UnityEvent();
     public static UnityEvent OnTimeOut = new UnityEvent();
     public static UnityEvent OnGameOver = new UnityEvent();
-
+    public static UnityEvent<int> OnTrueBoltColor = new UnityEvent<int>();
+    public static UnityEvent OnClearBoltButtonClicked = new UnityEvent();
+    public static UnityEvent OnClearSpinnerButtonClicked = new UnityEvent();
 
     public static void BoltChanged(int index)
     {
@@ -41,5 +43,20 @@ public static class EventManager
     public static void SendGameOver()
     {
         OnGameOver?.Invoke();
+    }
+
+    public static void SendTrueBoltColor(int points)
+    {
+        OnTrueBoltColor?.Invoke(points);
+    }
+
+    public static void SendClearBolt()
+    {
+        OnClearBoltButtonClicked?.Invoke();
+    }
+
+    public static void SendClearSpinner()
+    {
+        OnClearSpinnerButtonClicked?.Invoke();
     }
 }
