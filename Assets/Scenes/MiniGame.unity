@@ -21027,6 +21027,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: nutSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: stoneNut
       value: 
       objectReference: {fileID: 5268629107343789985, guid: ad52fd4785b096346be1bd2a27ffcdd3, type: 3}
@@ -21056,27 +21060,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: chanses.Array.data[0]
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: chanses.Array.data[1]
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: chanses.Array.data[2]
-      value: 28
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: chanses.Array.data[3]
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: chanses.Array.data[4]
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: chanses.Array.data[5]
-      value: 15
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: chanses.Array.data[6]
