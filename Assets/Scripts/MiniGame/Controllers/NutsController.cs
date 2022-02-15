@@ -35,6 +35,7 @@ public class NutsController : MonoBehaviour
     private int indexCurrentBolt;
     private float correctPosition;
     private int manaPoints;
+    private GameObject tempParticle;
 
     private void Awake()
     {
@@ -146,7 +147,8 @@ public class NutsController : MonoBehaviour
                 }
                 else
                 {
-                    Instantiate(acidParticle, new Vector3(0, -3, -2), Quaternion.identity);
+                    var acidPart = Instantiate(acidParticle, new Vector3(0, -3, -2), Quaternion.identity);
+                    DeleteAfterPlay(acidPart, 1.2f);
                 }
                 EventManager.SendBlockSpinner();
             }
@@ -155,7 +157,8 @@ public class NutsController : MonoBehaviour
         currentNut.transform.position = new Vector3(0, colorBolts[indexCurrentBolt].Count + correctPosition, 0);
         currentNut.transform.rotation = Quaternion.identity;
         Destroy(moveTempParticle);
-        StartCoroutine(PlayParticle(finishParticle, currentNut, 0.8f));
+        var finParticle = Instantiate(finishParticle, new Vector3(0, currentNut.transform.position.y, -2), Quaternion.identity);
+        DeleteAfterPlay(finParticle, 0.5f);
         SetParentObject();
         AddNutToList(indexCurrentBolt, currentNut);
         CheckBolt();
@@ -255,7 +258,7 @@ public class NutsController : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             Destroy(bolt[a]);
-            StartCoroutine(PlayParticle(destroyParticle, bolt[a], 2f));
+            StartCoroutine(PlayParticle(destroyParticle, bolt[a], 1f));
             bolt.RemoveAt(a);
             a--;
         }
@@ -387,6 +390,17 @@ public class NutsController : MonoBehaviour
         yield return new WaitForSeconds(playTime);
         Destroy(obj);
 
+    }
+
+    void DeleteAfterPlay(GameObject particle, float delay)
+    {
+        tempParticle = particle;
+        Invoke("Delete", delay);
+    }
+
+    void Delete()
+    {
+        Destroy(tempParticle);
     }
 
 }
