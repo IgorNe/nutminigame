@@ -26,6 +26,7 @@ public class NutsController : MonoBehaviour
     private GameObject moveTempParticle;
     private GameObject destroyParticle;
     private GameObject acidParticle;
+    private GameObject rainbowParticle;
     private GameObject stoneNut;
     private JewelsController jewelsController;
     private float nutSpeed;
@@ -77,6 +78,7 @@ public class NutsController : MonoBehaviour
         moveParticle = settings.moveParticle;
         destroyParticle = settings.destroyParticle;
         rotateNutSpeed = settings.rotateNutSpeed;
+        rainbowParticle = settings.rainbowParticle;
         stoneNut = settings.stoneNut;
         correctPosition = settings.correctPosition;
         blockRotatePosition = settings.blockRotatePosition;
@@ -140,15 +142,11 @@ public class NutsController : MonoBehaviour
             if (currentNut.transform.position.y < blockRotatePosition && !isBlockedSended)
             {
                 isBlockedSended = true;
-                StartCoroutine(RotateNut());
+                
                 if(currentNut.tag != "acid")
                 {
+                    StartCoroutine(RotateNut());
                     PlayMoveParticle(moveParticle, currentNut);
-                }
-                else
-                {
-                    var acidPart = Instantiate(acidParticle, new Vector3(0, -3, -2), Quaternion.identity);
-                    DeleteAfterPlay(acidPart, 1.2f);
                 }
                 EventManager.SendBlockSpinner();
             }
@@ -157,8 +155,16 @@ public class NutsController : MonoBehaviour
         currentNut.transform.position = new Vector3(0, colorBolts[indexCurrentBolt].Count + correctPosition, 0);
         currentNut.transform.rotation = Quaternion.identity;
         Destroy(moveTempParticle);
-        var finParticle = Instantiate(finishParticle, new Vector3(0, currentNut.transform.position.y, -2), Quaternion.identity);
-        DeleteAfterPlay(finParticle, 0.5f);
+        if (currentNut.tag != "acid")
+        {
+            var finParticle = Instantiate(finishParticle, new Vector3(0, currentNut.transform.position.y, -2), Quaternion.identity);
+            DeleteAfterPlay(finParticle, 0.5f);
+        }
+        else
+        {
+            var acidPart = Instantiate(acidParticle, new Vector3(0, currentNut.transform.position.y, -2), Quaternion.identity);
+            DeleteAfterPlay(acidPart, 1.2f);
+        }
         SetParentObject();
         AddNutToList(indexCurrentBolt, currentNut);
         CheckBolt();
@@ -195,6 +201,7 @@ public class NutsController : MonoBehaviour
         }
         if (currentNut.tag == "acid")
         {
+            Destroy(currentNut);
             bolt.Remove(bolt.Last());
             if(bolt.Count > 0 && bolt.Last().tag == "stone")
             {
@@ -258,7 +265,14 @@ public class NutsController : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             Destroy(bolt[a]);
-            StartCoroutine(PlayParticle(destroyParticle, bolt[a], 1f));
+            if(bolt[a].tag == "rainbow")
+            {
+                StartCoroutine(PlayParticle(rainbowParticle, bolt[a], 1f));
+            }
+            else
+            {
+                StartCoroutine(PlayParticle(destroyParticle, bolt[a], 1f));
+            }
             bolt.RemoveAt(a);
             a--;
         }

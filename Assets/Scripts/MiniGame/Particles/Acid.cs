@@ -45,6 +45,6 @@ public class Acid : MonoBehaviour
     void Smash()
     {
         EventManager.SendNutDelivered();
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }

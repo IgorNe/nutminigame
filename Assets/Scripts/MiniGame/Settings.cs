@@ -13,6 +13,7 @@ public class Settings : MonoBehaviour
     public GameObject finishParticle;
     public GameObject destroyParticle;
     public GameObject acidParticle;
+    public GameObject rainbowParticle;
     [Header("Game settings")]
     public float blockRotatePosition;
     public float correctPosition;

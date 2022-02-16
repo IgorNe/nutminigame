@@ -39,12 +39,6 @@ public class ManaController : MonoBehaviour
 	{
         if (current < minValue) current = minValue;
         if (current > maxValue) current = maxValue;
-        //slider.value = current;
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-			AddMana(50);
-			UpdateUI();
-		}
 	}
 
 	void UpdateUI()
@@ -55,7 +49,7 @@ public class ManaController : MonoBehaviour
 	}
 
 
-	public void AddMana(int adjust)
+	private void AddMana(int adjust)
 	{
 		current += adjust;
 		UpdateUI();
