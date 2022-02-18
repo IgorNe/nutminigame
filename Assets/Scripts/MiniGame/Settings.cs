@@ -32,8 +32,6 @@ public class Settings : MonoBehaviour
     public int manaPoints;
     [Header("Jewels settings")]
     public float moveTime;
-    public Transform firstMidPoint;
-    public Transform secondMidPoint;
     public GameObject redJewel;
     public GameObject blueJewel;
     public GameObject greenJewel;

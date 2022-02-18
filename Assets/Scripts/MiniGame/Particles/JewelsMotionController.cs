@@ -15,9 +15,8 @@ public class JewelsMotionController : MonoBehaviour
     [SerializeField] private Transform blueEndPoint;
     [SerializeField] private Transform greenEndPoint;
     [SerializeField] private Transform yellowEndPoint;
-
-    [SerializeField] private Transform firstMidPoint;
-    [SerializeField] private Transform secondMidPoint;
+    [SerializeField] private List<Transform> firstMidPoint;
+    [SerializeField] private List<Transform> secondMidPoint;
 
     private float moveTime;
 
@@ -76,12 +75,17 @@ public class JewelsMotionController : MonoBehaviour
 
     private IEnumerator MoveJewel(GameObject jewel)
     {
+        var fPoint = firstMidPoint[Random.Range(0, firstMidPoint.Count - 1)];
+        var sPoint = secondMidPoint[Random.Range(0, secondMidPoint.Count - 1)];
         var startPosition = jewel.transform.position;
         float time = 0;
         yield return new WaitForSeconds(Random.Range(0.05f, 0.3f));
         while(time < moveTime)
         {
-            jewel.transform.position = Bezier.GetPoint(startPosition, firstMidPoint.position, secondMidPoint.position, currentEndPoint.position, time/moveTime);
+            jewel.transform.position = Bezier.GetPoint(startPosition,
+                fPoint.position,
+                sPoint.position,
+                currentEndPoint.position, time/moveTime);
             time += Time.deltaTime;
             yield return null;
         }

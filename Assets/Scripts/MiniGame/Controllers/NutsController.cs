@@ -243,6 +243,7 @@ public class NutsController : MonoBehaviour
         if (bolt[bolt.Count-1].tag == boltTag || bolt[bolt.Count - 2].tag == boltTag || bolt[bolt.Count - 3].tag == boltTag)
         {
             EventManager.SendTrueBoltColor(manaPoints);
+            EventManager.SendAddMana();
         }
         else
         {
