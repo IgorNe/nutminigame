@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
+    [SerializeField] private GameObject _splashPanel;
     [SerializeField] private GameObject _startPanel;
     [SerializeField] private GameObject _gamePanel;
     [SerializeField] private GameObject _gameOverPanel;
@@ -13,10 +14,12 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject _settingsPanel;
     [SerializeField] private GameController _gameController;
     [SerializeField] private Player player;
+    private bool isGameOver = false;
 
 #if UNITY_EDITOR
     private void OnValidate()
     {
+        _splashPanel = transform.Find("SplashScreenPanel").gameObject;
         _startPanel = transform.Find("StartPanel").gameObject;
         _gamePanel = transform.Find("GamePanel").gameObject;
         _gameOverPanel = transform.Find("GameOverPanel").gameObject;
@@ -25,11 +28,16 @@ public class UIController : MonoBehaviour
         _settingsPanel = transform.Find("Settings").gameObject;
     }
 #endif
-    public void Start()
+
+
+    public void ShowSplashPanel()
     {
-
+        _splashPanel.SetActive(true);
     }
-
+    public void HideSplashPanel()
+    {
+        _splashPanel.SetActive(false);
+    }
     public void ShowStartPanel()
     {
         _startPanel.SetActive(true);
@@ -84,7 +92,24 @@ public class UIController : MonoBehaviour
     }
     public void OnPlayButtonClicked()
     {
-        _gameController.Play();
+        if(!isGameOver)
+        {
+            _gameController.Play();
+        }
+        else
+        {
+            _gameController.Restart();
+            _gameController.StartMenu();
+            isGameOver = false;
+        }
+    }
+    public void OnSettingsButtonClicked()
+    {
+        _gameController.Settings();
+    }
+    public void OnPlaySplashButtonClicked()
+    {
+        _gameController.StartMenu();
     }
     public void OnRestartButtonClicked()
     {
@@ -98,7 +123,7 @@ public class UIController : MonoBehaviour
 
     public void OnBackButtonClicked()
     {
-        _gameController.Play();
+        _gameController.StartMenu();
     }
 
     public void OnLeftButtonClicked()
@@ -118,5 +143,8 @@ public class UIController : MonoBehaviour
     {
         _gameController.CloseStore();
     }
-
+    public void SetGameOver()
+    {
+        isGameOver = true;
+    }
 }

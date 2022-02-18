@@ -15,20 +15,28 @@ public class GameController : MonoBehaviour
     }
     void Start()
     {
-        _timeController.SetPauseOn();
+        SplashScreen();
+    }
+    public void StartMenu()
+    {
+        _uIController.HideSettingsPanel();
         _uIController.HideGamePanel();
+        _uIController.HideSplashPanel();
         _uIController.ShowStartPanel();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void SplashScreen()
     {
-        
+        _timeController.SetPauseOn();
+        _uIController.HideGamePanel();
+        _uIController.HideSettingsPanel();
+        _uIController.HideStartPanel();
+        _uIController.ShowSplashPanel();
     }
 
     public void Play()
     {
-        print("game contr met play");
         _uIController.HideStartPanel();
         _uIController.ShowGamePanel();
         _uIController.HideGameOverPanel();
@@ -38,7 +46,6 @@ public class GameController : MonoBehaviour
 
     public void Exit()
     {
-        print("game contr met exit");
         _uIController.HideGamePanel();
         _uIController.ShowStartPanel();
         _uIController.HideGameOverPanel();
@@ -51,6 +58,7 @@ public class GameController : MonoBehaviour
         _uIController.HideGamePanel();
         _uIController.HideStartPanel();
         _timeController.SetPauseOn();
+        _uIController.SetGameOver();
     }
 
     public void Restart()
@@ -76,8 +84,9 @@ public class GameController : MonoBehaviour
         _uIController.HideStorePanel();
     }
 
-    private void Settings()
+    public void Settings()
     {
-
+        _uIController.HideStartPanel();
+        _uIController.ShowSettingsPanel();
     }
 }
