@@ -65,4 +65,14 @@ public class GameController : MonoBehaviour
         _uIController.HideStartPanel();
         _uIController.HideGameOverPanel();
     }
+
+    public void OpenStore()
+    {
+        _timeController.SetPauseOn();
+        _uIController.ShowStorePanel();
+    }
+    public void CloseStore()
+    {
+        _uIController.HideStorePanel();
+    }
 }

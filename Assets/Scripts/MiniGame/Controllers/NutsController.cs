@@ -251,7 +251,7 @@ public class NutsController : MonoBehaviour
         string jewelTag;
         for (int i = 3; i > 0; i--)
         {
-            if(bolt[bolt.Count - i].tag == "Rainbow")
+            if(bolt[bolt.Count - i].tag == "rainbow")
             {
                 continue;
             }
@@ -259,6 +259,7 @@ public class NutsController : MonoBehaviour
             {
                 jewelTag = bolt[bolt.Count - i].tag;
                 jewelsController.AddJewels(jewelTag, 1);
+                EventManager.SendNutDestroy(jewelTag, bolt[bolt.Count - i].transform.position);
             }
         }
         int a = bolt.Count - 1;

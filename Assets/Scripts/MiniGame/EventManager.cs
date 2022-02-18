@@ -15,6 +15,7 @@ public static class EventManager
     public static UnityEvent<int> OnTrueBoltColor = new UnityEvent<int>();
     public static UnityEvent OnClearBoltButtonClicked = new UnityEvent();
     public static UnityEvent OnClearSpinnerButtonClicked = new UnityEvent();
+    public static UnityEvent<string, Vector3> OnNutDestroy = new UnityEvent<string, Vector3>();
 
     public static void BoltChanged(int index)
     {
@@ -58,5 +59,10 @@ public static class EventManager
     public static void SendClearSpinner()
     {
         OnClearSpinnerButtonClicked?.Invoke();
+    }
+
+    public static void SendNutDestroy(string color, Vector3 nutPosition)
+    {
+        OnNutDestroy?.Invoke(color, nutPosition);
     }
 }

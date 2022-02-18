@@ -30,6 +30,14 @@ public class Settings : MonoBehaviour
     [Header("UI settings")]
     public JewelsController jewelsController;
     public int manaPoints;
+    [Header("Jewels settings")]
+    public float moveTime;
+    public Transform firstMidPoint;
+    public Transform secondMidPoint;
+    public GameObject redJewel;
+    public GameObject blueJewel;
+    public GameObject greenJewel;
+    public GameObject yellowJewel;
 
 }
 
