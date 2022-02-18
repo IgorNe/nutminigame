@@ -75,4 +75,9 @@ public class GameController : MonoBehaviour
     {
         _uIController.HideStorePanel();
     }
+
+    private void Settings()
+    {
+
+    }
 }
