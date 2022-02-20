@@ -7,7 +7,9 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] private UIController _uIController;
     [SerializeField] private TimeController _timeController;
-    // Start is called before the first frame update
+    [SerializeField] private GameObject _level;
+
+    GameObject level;
 
     private void Awake()
     {
@@ -15,7 +17,9 @@ public class GameController : MonoBehaviour
     }
     void Start()
     {
+        level = Instantiate(_level, transform.position, Quaternion.identity);
         SplashScreen();
+        
     }
     public void StartMenu()
     {
@@ -63,7 +67,9 @@ public class GameController : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("MiniGame");
+        Destroy(level);
+        level = Instantiate(_level, transform.position, Quaternion.identity);
+        Play();
     }
 
     public void Debug()

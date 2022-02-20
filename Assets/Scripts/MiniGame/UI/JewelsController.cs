@@ -5,13 +5,12 @@ using UnityEngine.UI;
 
 public class JewelsController : MonoBehaviour
 {
-    [SerializeField] private Settings settings;
     [SerializeField] private Text redJewelsText;
     [SerializeField] private Text greenJewelsText;
     [SerializeField] private Text blueJewelsText;
     [SerializeField] private Text yellowJewelsText;
 
-    private float delayTime;
+    [SerializeField]private float delayTime;
 
     private int redValue;
     private int greenValue;
@@ -26,16 +25,14 @@ public class JewelsController : MonoBehaviour
     void Start()
     {
         redValue = greenValue = blueValue = yellowValue = 0;
-        delayTime = settings.moveTime;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-
+        EventManager.OnJewelsAdd.AddListener(AddJewels);
     }
 
-    public void AddJewels(string boltColor, int numOfJewels)
+    void AddJewels(string boltColor, int numOfJewels)
     {
         StartCoroutine(DelayAddJewel(boltColor, numOfJewels));
     }

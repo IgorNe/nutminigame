@@ -13,7 +13,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject _storePanel;
     [SerializeField] private GameObject _settingsPanel;
     [SerializeField] private GameController _gameController;
-    [SerializeField] private Player player;
+    //[SerializeField] private Player player;
     private bool isGameOver = false;
 
 #if UNITY_EDITOR
@@ -99,7 +99,6 @@ public class UIController : MonoBehaviour
         else
         {
             _gameController.Restart();
-            _gameController.StartMenu();
             isGameOver = false;
         }
     }
@@ -113,6 +112,7 @@ public class UIController : MonoBehaviour
     }
     public void OnRestartButtonClicked()
     {
+        isGameOver = false;
         _gameController.Restart();
     }
     public void OnDebugButtonClicked()
@@ -128,12 +128,12 @@ public class UIController : MonoBehaviour
 
     public void OnLeftButtonClicked()
     {
-        player.Left();
+        //player.Left();
     }
 
     public void OnRightButtonClicked()
     {
-        player.Right();
+        //player.Right();
     }
     public void OnStoreButtonClicked()
     {

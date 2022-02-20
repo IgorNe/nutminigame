@@ -28,7 +28,6 @@ public class NutsController : MonoBehaviour
     private GameObject acidParticle;
     private GameObject rainbowParticle;
     private GameObject stoneNut;
-    private JewelsController jewelsController;
     private float nutSpeed;
     private float rotateNutSpeed;
     private bool isBlockedSended;
@@ -37,6 +36,7 @@ public class NutsController : MonoBehaviour
     private float correctPosition;
     private int manaPoints;
     private GameObject tempParticle;
+    private bool isGameOver;
 
     private void Awake()
     {
@@ -71,8 +71,8 @@ public class NutsController : MonoBehaviour
         colorBolts.Add(greenBolt);
         colorBolts.Add(yellowBolt);
 
+        isGameOver = false;
         manaPoints = settings.manaPoints;
-        jewelsController = settings.jewelsController;
         acidParticle = settings.acidParticle;
         finishParticle = settings.finishParticle;
         moveParticle = settings.moveParticle;
@@ -92,8 +92,12 @@ public class NutsController : MonoBehaviour
 
     public void NutSpawn()
     {
-        currentNut = Instantiate(nutsForSpawn[NutSpawnIndex()], settings.nutSpawnPoint, Quaternion.identity);
-        EventManager.SendNutSpawned();
+        if (!isGameOver)
+        {
+            currentNut = Instantiate(nutsForSpawn[NutSpawnIndex()], settings.nutSpawnPoint, Quaternion.identity);
+            EventManager.SendNutSpawned();
+        }
+        
     }
     void AddNutToList(int boltIndex, GameObject nut)
     {
@@ -234,6 +238,7 @@ public class NutsController : MonoBehaviour
         }
         if(bolt.Count > 5)
         {
+            isGameOver = true;
             EventManager.SendGameOver();
         }
     }
@@ -259,7 +264,7 @@ public class NutsController : MonoBehaviour
             else
             {
                 jewelTag = bolt[bolt.Count - i].tag;
-                jewelsController.AddJewels(jewelTag, 1);
+                EventManager.SendAddJewel(jewelTag, 1);
                 EventManager.SendNutDestroy(jewelTag, bolt[bolt.Count - i].transform.position);
             }
         }

@@ -44,12 +44,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateNutSpeed: 800
-  nutSpeed: 10
+  nutSpeed: 12
   nutDelay: 1.2
   nutSpawnPoint: {x: 0, y: 6, z: 0}
   moveParticle: {fileID: 66555024560170217, guid: c3af021841099f141bab87b3a9a1adc2, type: 3}
   finishParticle: {fileID: 5622903445995869190, guid: aa212fec893d13b45a6373186a67a3a4, type: 3}
-  destroyParticle: {fileID: 0}
+  destroyParticle: {fileID: 6247559050476134733, guid: e64c71d5880796d419d2fb11c3c22d55, type: 3}
+  acidParticle: {fileID: 1589960111302524694, guid: 4d128843acce2a145aec900f62f57fd0, type: 3}
+  rainbowParticle: {fileID: 356338757460844757, guid: 67fe0f37bed0ce8499af2dd114da8529, type: 3}
   blockRotatePosition: 0
   correctPosition: -5
   maxNutsOnBolt: 0
@@ -60,6 +62,20 @@ MonoBehaviour:
   - {fileID: 3897634207889399391, guid: cccd40c246fd53842be0c553b1de7fce, type: 3}
   - {fileID: 6520160818284154905, guid: e56461fd92b826e4c8ef9ef7cb5ea762, type: 3}
   - {fileID: 4182629455203275510, guid: 24c32920f4e7d0143b4baf35645436ea, type: 3}
-  chanses: 060000000600000006000000060000000e000000
+  - {fileID: 5484629786779867851, guid: 33e505b49729f414f809de07e9c70824, type: 3}
+  chanses: 140000001400000014000000140000000a00000007000000
+  stoneNut: {fileID: 5268629107343789985, guid: ad52fd4785b096346be1bd2a27ffcdd3, type: 3}
   rotateSpeed: 400
   rotateTime: 0.12
+  forAcid:
+  - {fileID: 3897634207889399391, guid: cccd40c246fd53842be0c553b1de7fce, type: 3}
+  - {fileID: 4408911151640311554, guid: 917381f5fd22e8749b7a21c5b7bc44f6, type: 3}
+  - {fileID: 8041874584009104524, guid: a944aa6bef8d9904fb532a7fbcceff18, type: 3}
+  - {fileID: 6520160818284154905, guid: e56461fd92b826e4c8ef9ef7cb5ea762, type: 3}
+  jewelsController: {fileID: 0}
+  manaPoints: 10
+  moveTime: 1
+  redJewel: {fileID: 6955845629027716108, guid: 7fefde6672e565c4991ffa466402fd84, type: 3}
+  blueJewel: {fileID: 6955845629027716108, guid: fbd40db3a9b9be145ab134e75c81bf6c, type: 3}
+  greenJewel: {fileID: 6955845629027716108, guid: 3443de252e1f7a74993bb073ba96c68b, type: 3}
+  yellowJewel: {fileID: 6955845629027716108, guid: 476ff413e8399004bb8af86b71141a4f, type: 3}

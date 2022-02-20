@@ -6,9 +6,8 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] private Settings settings;
+    [SerializeField] float nutSpawnInterval;
     [SerializeField] private Text timerText;
-    private float nutSpawnInterval;
     private float timer;
 
 
@@ -20,7 +19,7 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nutSpawnInterval = settings.nutDelay;
+        
         Reset();
     }
 
