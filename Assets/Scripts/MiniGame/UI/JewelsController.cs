@@ -21,7 +21,6 @@ public class JewelsController : MonoBehaviour
 
     private int maxValue;
 
-    // Start is called before the first frame update
     void Start()
     {
         redValue = greenValue = blueValue = yellowValue = 0;

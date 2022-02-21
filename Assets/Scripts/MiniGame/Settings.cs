@@ -36,6 +36,8 @@ public class Settings : MonoBehaviour
     public GameObject blueJewel;
     public GameObject greenJewel;
     public GameObject yellowJewel;
+    [Range(0, 100)]
+    public int chanseSetStone;
 
 }
 

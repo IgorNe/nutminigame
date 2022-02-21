@@ -37,6 +37,7 @@ public class NutsController : MonoBehaviour
     private int manaPoints;
     private GameObject tempParticle;
     private bool isGameOver;
+    private int chanseSetStone;
 
     private void Awake()
     {
@@ -86,6 +87,7 @@ public class NutsController : MonoBehaviour
         nutsForSpawn = settings.nutsForSpawn;
         nutSpeed = settings.nutSpeed;
         forAcid = settings.forAcid;
+        chanseSetStone = settings.chanseSetStone;
         Invoke("NutSpawn", 1);
 
     }
@@ -252,8 +254,15 @@ public class NutsController : MonoBehaviour
         }
         else
         {
-            SetStone();
+            var rand = Random.Range(0, 101);
+            {
+                if(rand <= chanseSetStone)
+                {
+                    SetStone();
+                }
+            }
         }
+            
         string jewelTag;
         for (int i = 3; i > 0; i--)
         {
@@ -301,7 +310,7 @@ public class NutsController : MonoBehaviour
 
     private void SetStone()
     {
-        var rand = Random.Range(1, 3);
+        var rand = Random.Range(1, 4);
         var startSpinnerRotation = spinner.transform.eulerAngles.z;
         var tempCurrentIndex = indexCurrentBolt;
         for (int i = 0; i < rand; i++)
@@ -370,7 +379,6 @@ public class NutsController : MonoBehaviour
         for (int i = 0; i < results.Count; i++)
         {
             var tempObj = Instantiate(results[i].nut, new Vector3(0, colorBolts[indexCurrentBolt].Count + correctPosition, 0), Quaternion.identity);
-            //tempObj.transform.localScale = new Vector3(1, 1, 1);
             tempObj.transform.SetParent(spinner.transform);
             colorBolts[indexCurrentBolt].Add(tempObj);
             var degr = spinner.transform.eulerAngles.z;

@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     {
         EventManager.OnNutDelivered.AddListener(UnblockRotate);
         EventManager.OnBlockSpinner.AddListener(SetBlockRotate);
+        EventManager.OnControlButtonClicked.AddListener(ScreenButtonClicked);
     }
 
     void Start()
@@ -40,7 +41,6 @@ public class Player : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.A) && !isBlocked)
@@ -83,7 +83,17 @@ public class Player : MonoBehaviour
     }
 
 
-
+    void ScreenButtonClicked(string button)
+    {
+        if(button == "left")
+        {
+            Left();
+        }
+        if(button == "right")
+        {
+            Right();
+        }
+    }
 
     void SetCurrentIndex(char oper)
     {

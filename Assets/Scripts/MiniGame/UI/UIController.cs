@@ -128,12 +128,12 @@ public class UIController : MonoBehaviour
 
     public void OnLeftButtonClicked()
     {
-        //player.Left();
+        EventManager.SendControlButtonClicked("left");
     }
 
     public void OnRightButtonClicked()
     {
-        //player.Right();
+        EventManager.SendControlButtonClicked("right");
     }
     public void OnStoreButtonClicked()
     {
