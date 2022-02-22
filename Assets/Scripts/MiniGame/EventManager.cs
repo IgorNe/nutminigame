@@ -20,6 +20,7 @@ public static class EventManager
     public static UnityEvent<string, int> OnJewelsAdd = new UnityEvent<string, int>();
     public static UnityEvent<int, int> OnSetStone = new UnityEvent<int, int>();
     public static UnityEvent<string> OnControlButtonClicked = new UnityEvent<string>();
+    public static UnityEvent OnGameStarted = new UnityEvent();
 
     public static void BoltChanged(int index)
     {
@@ -84,5 +85,9 @@ public static class EventManager
     public static void SendControlButtonClicked(string button)
     {
         OnControlButtonClicked?.Invoke(button);
+    }
+    public static void SendGameStarted()
+    {
+        OnGameStarted?.Invoke();
     }
 }

@@ -45,6 +45,7 @@ public class GameController : MonoBehaviour
         _uIController.ShowGamePanel();
         _uIController.HideGameOverPanel();
         _timeController.SetPauseOff();
+        EventManager.SendGameStarted();
 
     }
 
