@@ -765,6 +765,10 @@ PrefabInstance:
       propertyPath: settings
       value: 
       objectReference: {fileID: 8608967797486252827}
+    - target: {fileID: 4673697155448534759, guid: e87be1b85709b5f4fbf14dc7a3b05d31, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d40b3c685080c64c835bd9cb0e5a39a, type: 2}
     - target: {fileID: 4673697155497208764, guid: e87be1b85709b5f4fbf14dc7a3b05d31, type: 3}
       propertyPath: m_Name
       value: GameSpace
