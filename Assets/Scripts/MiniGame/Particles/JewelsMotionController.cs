@@ -17,6 +17,7 @@ public class JewelsMotionController : MonoBehaviour
     [SerializeField] private Transform yellowEndPoint;
     [SerializeField] private List<Transform> firstMidPoint;
     [SerializeField] private List<Transform> secondMidPoint;
+    [SerializeField] private ParticleSystem endPointParticle;
 
     private float moveTime;
 
@@ -90,5 +91,7 @@ public class JewelsMotionController : MonoBehaviour
             yield return null;
         }
         Destroy(jewel);
+        var ps = Instantiate(endPointParticle, currentEndPoint.position, Quaternion.identity);
+        ps.Play();
     }
 }

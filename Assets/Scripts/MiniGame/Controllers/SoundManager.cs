@@ -43,4 +43,10 @@ public class SoundManager : MonoBehaviour
         player.Play();
     }
 
+    public void SetSound(float vol)
+    {
+        player.volume = vol;
+        PlayGameOver();
+    }
+
 }
