@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
+    [SerializeField] private GameObject _loadingPanel;
     [SerializeField] private GameObject _splashPanel;
     [SerializeField] private GameObject _startPanel;
     [SerializeField] private GameObject _gamePanel;
@@ -13,12 +14,14 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject _storePanel;
     [SerializeField] private GameObject _settingsPanel;
     [SerializeField] private GameController _gameController;
+    
     //[SerializeField] private Player player;
     private bool isGameOver = false;
 
 #if UNITY_EDITOR
     private void OnValidate()
     {
+        _loadingPanel = transform.Find("LoadingPanel").gameObject;
         _splashPanel = transform.Find("SplashScreenPanel").gameObject;
         _startPanel = transform.Find("StartPanel").gameObject;
         _gamePanel = transform.Find("GamePanel").gameObject;
@@ -29,6 +32,11 @@ public class UIController : MonoBehaviour
     }
 #endif
 
+
+    public void ShowLoadingPanel()
+    {
+        _loadingPanel.SetActive(true);
+    }
 
     public void ShowSplashPanel()
     {

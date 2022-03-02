@@ -8,28 +8,82 @@ public class GameController : MonoBehaviour
     [SerializeField] private UIController _uIController;
     [SerializeField] private TimeController _timeController;
     [SerializeField] private GameObject _level;
+    [SerializeField] private Animator _splashAnimator;
+    [SerializeField] private Animator _playModeAnimator;
+    [SerializeField] private Animator _settingsAnimator;
+    private bool isSettingOpen;
+    
 
     GameObject level;
 
     private void Awake()
     {
         EventManager.OnGameOver.AddListener(GameOver);
+        EventManager.OnEndLoadingScreen.AddListener(SplashScreen);
     }
     void Start()
     {
+        isSettingOpen = false;
+        LoadScreen();
+    }
+
+
+    private IEnumerator TransitionToStartMenu()
+    {
+        if (isSettingOpen)
+        {
+            
+            _settingsAnimator.SetBool("playAnimation", true); //!!!когда анимация готова будет вписать переменную
+        }
+        else
+        {
+            _splashAnimator.SetBool("playAnimation", true);
+        }
+        yield return new WaitForSeconds(0.5f);
+        OpenStartMenu();
         level = Instantiate(_level, transform.position, Quaternion.identity);
-        SplashScreen();
+    }
+
+    private IEnumerator TransitionToPlayMode()
+    {
+        _playModeAnimator.SetBool("playAnimation", true);
+        yield return new WaitForSeconds(0.5f);
+        PlayMode();
+
+    }
+
+    private IEnumerator TransitionToSetting()
+    {
+        _settingsAnimator.SetBool("playAnimation", true);
+        yield return new WaitForSeconds(0.5f);
+        SettingsMode();
+    }
+    private IEnumerator TransitionCloseSetting()
+    {
+        _settingsAnimator.SetBool("playAnimation", true);
+        yield return new WaitForSeconds(0.5f);
+        SettingsMode();
+
+    }
+
+    public void StartMenu()
+    {
+        StartCoroutine(TransitionToStartMenu());
         
     }
-    public void StartMenu()
+    public void OpenStartMenu()
     {
         _uIController.HideSettingsPanel();
         _uIController.HideGamePanel();
         _uIController.HideSplashPanel();
         _uIController.ShowStartPanel();
+        _timeController.SetPauseOn();
     }
 
-
+    public void LoadScreen()
+    {
+        _uIController.ShowLoadingPanel();
+    }
     public void SplashScreen()
     {
         _timeController.SetPauseOn();
@@ -41,12 +95,16 @@ public class GameController : MonoBehaviour
 
     public void Play()
     {
+        _timeController.SetPauseOff();
+        StartCoroutine(TransitionToPlayMode());
+
+    }
+    public void PlayMode()
+    {
         _uIController.HideStartPanel();
         _uIController.ShowGamePanel();
         _uIController.HideGameOverPanel();
-        _timeController.SetPauseOff();
         EventManager.SendGameStarted();
-
     }
 
     public void Exit()
@@ -93,7 +151,12 @@ public class GameController : MonoBehaviour
 
     public void Settings()
     {
+        StartCoroutine(TransitionToSetting());
+    }
+    public void SettingsMode()
+    {
         _uIController.HideStartPanel();
         _uIController.ShowSettingsPanel();
+        isSettingOpen = true;
     }
 }
