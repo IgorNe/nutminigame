@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject _storePanel;
     [SerializeField] private GameObject _settingsPanel;
     [SerializeField] private GameController _gameController;
+    [SerializeField] private GameObject _backgroundImage;
     
     //[SerializeField] private Player player;
     private bool isGameOver = false;
@@ -29,10 +30,20 @@ public class UIController : MonoBehaviour
         _gameWinPanel = transform.Find("GameWinPanel").gameObject;
         _storePanel = transform.Find("Store").gameObject;
         _settingsPanel = transform.Find("Settings").gameObject;
+        _backgroundImage = transform.Find("BackGroundImage").gameObject;
     }
 #endif
 
 
+
+    public void ShowBackground()
+    {
+        _backgroundImage.SetActive(true);
+    }
+    public void HideBackground()
+    {
+        _backgroundImage.SetActive(false);
+    }
     public void ShowLoadingPanel()
     {
         _loadingPanel.SetActive(true);

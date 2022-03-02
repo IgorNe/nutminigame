@@ -31,6 +31,7 @@ public class LoadProgressBar : MonoBehaviour
             progressBar.value = time / loadingTime;
             yield return null;
         }
+        EventManager.SendEndLoading();
         gameObject.SetActive(false);
     }
 }

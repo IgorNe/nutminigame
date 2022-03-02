@@ -73,6 +73,7 @@ public class GameController : MonoBehaviour
     }
     public void OpenStartMenu()
     {
+        _uIController.ShowBackground();
         _uIController.HideSettingsPanel();
         _uIController.HideGamePanel();
         _uIController.HideSplashPanel();
@@ -86,7 +87,9 @@ public class GameController : MonoBehaviour
     }
     public void SplashScreen()
     {
-        _timeController.SetPauseOn();
+
+        //_timeController.SetPauseOn();
+        _uIController.ShowBackground();
         _uIController.HideGamePanel();
         _uIController.HideSettingsPanel();
         _uIController.HideStartPanel();
@@ -101,6 +104,7 @@ public class GameController : MonoBehaviour
     }
     public void PlayMode()
     {
+        _uIController.HideBackground();
         _uIController.HideStartPanel();
         _uIController.ShowGamePanel();
         _uIController.HideGameOverPanel();
