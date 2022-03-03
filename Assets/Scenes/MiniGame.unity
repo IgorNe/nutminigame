@@ -461,7 +461,7 @@ MonoBehaviour:
   _timeController: {fileID: 904259800}
   _level: {fileID: 4870324476377115595, guid: b162a08d5b1fcbd4b983d87e8a63c30b, type: 3}
   _splashAnimator: {fileID: 5607446170467757936}
-  _playModeAnimator: {fileID: 5607446170467757936}
+  _playModeAnimator: {fileID: 1495265888}
   _settingsAnimator: {fileID: 0}
 --- !u!114 &904259800
 MonoBehaviour:
@@ -697,6 +697,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1495265888 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1495265888, guid: c1009018d4462cd44a1d306c10409eb8, type: 3}
+  m_PrefabInstance: {fileID: 5607446170467757934}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5607446170467757934
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -704,6 +709,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1913790009, guid: c1009018d4462cd44a1d306c10409eb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5607446169995454588, guid: c1009018d4462cd44a1d306c10409eb8, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

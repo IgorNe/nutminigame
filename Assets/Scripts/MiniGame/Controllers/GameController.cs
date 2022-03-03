@@ -41,14 +41,16 @@ public class GameController : MonoBehaviour
         }
         yield return new WaitForSeconds(0.5f);
         OpenStartMenu();
-        level = Instantiate(_level, transform.position, Quaternion.identity);
+        
     }
 
     private IEnumerator TransitionToPlayMode()
     {
-        _playModeAnimator.SetBool("playAnimation", true);
-        yield return new WaitForSeconds(0.5f);
+
+        yield return new WaitForSeconds(0.2f);
         PlayMode();
+        yield return new WaitForSeconds(0.3f);
+        //_uIController.HideBlackoutPanel();
 
     }
 
@@ -102,6 +104,8 @@ public class GameController : MonoBehaviour
 
     public void Play()
     {
+        _uIController.ShowBlackoutPanel();
+        level = Instantiate(_level, transform.position, Quaternion.identity);
         _timeController.SetPauseOff();
         StartCoroutine(TransitionToPlayMode());
 
@@ -167,4 +171,5 @@ public class GameController : MonoBehaviour
         _uIController.ShowSettingsPanel();
         isSettingOpen = true;
     }
+
 }

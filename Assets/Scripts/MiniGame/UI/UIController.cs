@@ -15,7 +15,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject _settingsPanel;
     [SerializeField] private GameController _gameController;
     [SerializeField] private GameObject _backgroundImage;
-    
+    [SerializeField] private GameObject _blackoutPanel;
+
     //[SerializeField] private Player player;
     private bool isGameOver = false;
 
@@ -24,18 +25,26 @@ public class UIController : MonoBehaviour
     {
         _loadingPanel = transform.Find("LoadingPanel").gameObject;
         _splashPanel = transform.Find("SplashScreenPanel").gameObject;
-        _startPanel = transform.Find("StartPanel").gameObject;
+        _startPanel = transform.Find("MainMenu").gameObject;
         _gamePanel = transform.Find("GamePanel").gameObject;
         _gameOverPanel = transform.Find("GameOverPanel").gameObject;
         _gameWinPanel = transform.Find("GameWinPanel").gameObject;
         _storePanel = transform.Find("Store").gameObject;
         _settingsPanel = transform.Find("Settings").gameObject;
         _backgroundImage = transform.Find("BackGroundImage").gameObject;
+        _blackoutPanel = transform.Find("BlackOut").gameObject;
     }
 #endif
 
 
-
+    public void ShowBlackoutPanel()
+    {
+        _blackoutPanel.SetActive(true);
+    }
+    public void HideBlackoutPanel()
+    {
+        _blackoutPanel.SetActive(false);
+    }
     public void ShowBackground()
     {
         _backgroundImage.SetActive(true);
