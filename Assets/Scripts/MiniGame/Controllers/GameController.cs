@@ -83,6 +83,10 @@ public class GameController : MonoBehaviour
 
     public void LoadScreen()
     {
+        _uIController.HideStartPanel();
+        _uIController.HideSettingsPanel();
+        _uIController.HideGamePanel();
+        _uIController.HideSplashPanel();
         _uIController.ShowLoadingPanel();
     }
     public void SplashScreen()

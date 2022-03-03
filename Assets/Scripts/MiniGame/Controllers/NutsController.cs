@@ -223,9 +223,10 @@ public class NutsController : MonoBehaviour
                 return;
             }
         }
-        if (currentNut.tag == "rainbow" && bolt[bolt.Count - 2].tag == bolt[bolt.Count - 3].tag ||
+        if ((currentNut.tag == "rainbow" && bolt[bolt.Count - 2].tag == bolt[bolt.Count - 3].tag ||
             currentNut.tag == "rainbow" && bolt[bolt.Count - 3].tag == "rainbow" ||
-            currentNut.tag == "rainbow" && bolt[bolt.Count - 2].tag == "rainbow")
+            currentNut.tag == "rainbow" && bolt[bolt.Count - 2].tag == "rainbow") &&
+            (bolt[bolt.Count - 2].tag != "stone" || bolt[bolt.Count - 3].tag != "stone"))
         {
             RemoveThree(bolt);
             return;
