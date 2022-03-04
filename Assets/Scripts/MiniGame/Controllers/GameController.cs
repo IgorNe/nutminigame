@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Animator _playModeAnimator;
     [SerializeField] private Animator _settingsAnimator;
     private bool isSettingOpen;
+    private bool isgameOver;
     
 
     GameObject level;
@@ -23,6 +24,7 @@ public class GameController : MonoBehaviour
     }
     void Start()
     {
+        isgameOver = true;
         isSettingOpen = false;
         LoadScreen();
     }
@@ -32,7 +34,6 @@ public class GameController : MonoBehaviour
     {
         if (isSettingOpen)
         {
-            
             _settingsAnimator.SetBool("playAnimation", true); //!!!когда анимация готова будет вписать переменную
         }
         else
@@ -49,8 +50,8 @@ public class GameController : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
         PlayMode();
-        yield return new WaitForSeconds(0.3f);
-        //_uIController.HideBlackoutPanel();
+        yield return new WaitForSeconds(0.8f);
+        _uIController.HideBlackoutPanel();
 
     }
 
@@ -104,8 +105,13 @@ public class GameController : MonoBehaviour
 
     public void Play()
     {
-        _uIController.ShowBlackoutPanel();
-        level = Instantiate(_level, transform.position, Quaternion.identity);
+        if (isgameOver)
+        {
+            _uIController.ShowBlackoutPanel();
+            level = Instantiate(_level, transform.position, Quaternion.identity);
+            isgameOver = false;
+        }
+        
         _timeController.SetPauseOff();
         StartCoroutine(TransitionToPlayMode());
 
@@ -129,6 +135,7 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+        isgameOver = true;
         _uIController.ShowGameOverPanel();
         _uIController.HideGamePanel();
         _uIController.HideStartPanel();
@@ -139,7 +146,6 @@ public class GameController : MonoBehaviour
     public void Restart()
     {
         Destroy(level);
-        level = Instantiate(_level, transform.position, Quaternion.identity);
         Play();
     }
 

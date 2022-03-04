@@ -27,7 +27,7 @@ public class UIController : MonoBehaviour
         _splashPanel = transform.Find("SplashScreenPanel").gameObject;
         _startPanel = transform.Find("MainMenu").gameObject;
         _gamePanel = transform.Find("GamePanel").gameObject;
-        _gameOverPanel = transform.Find("GameOverPanel").gameObject;
+        _gameOverPanel = transform.Find("FailedPanel").gameObject;
         _gameWinPanel = transform.Find("GameWinPanel").gameObject;
         _storePanel = transform.Find("Store").gameObject;
         _settingsPanel = transform.Find("Settings").gameObject;
@@ -140,8 +140,8 @@ public class UIController : MonoBehaviour
     }
     public void OnRestartButtonClicked()
     {
-        isGameOver = false;
         _gameController.Restart();
+        isGameOver = false;
     }
     public void OnDebugButtonClicked()
     {

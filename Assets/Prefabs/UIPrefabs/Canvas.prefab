@@ -3934,7 +3934,7 @@ RectTransform:
   - {fileID: 853947564797985549}
   - {fileID: 206900874}
   m_Father: {fileID: 5607446170864686162}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4009,8 +4009,9 @@ GameObject:
   - component: {fileID: 5607446170764211541}
   - component: {fileID: 5607446170764211539}
   - component: {fileID: 5607446170764211538}
+  - component: {fileID: 943694774}
   m_Layer: 5
-  m_Name: GameOverPanel
+  m_Name: FailedPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4030,7 +4031,7 @@ RectTransform:
   - {fileID: 950387166173238601}
   - {fileID: 3726999667999509664}
   m_Father: {fileID: 5607446170864686162}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4075,6 +4076,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &943694774
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5607446170764211540}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: db162c3bd6de1d94f8a9bdd930b5e3ec, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5607446170774311756
 GameObject:
   m_ObjectHideFlags: 0
@@ -4093,7 +4113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5607446170774311757
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4341,10 +4361,10 @@ RectTransform:
   - {fileID: 5785739261630177510}
   - {fileID: 5607446170774311757}
   - {fileID: 5607446171277971321}
-  - {fileID: 5607446170764211541}
   - {fileID: 5607446171675204102}
   - {fileID: 5607446171799367809}
   - {fileID: 5607446170706238527}
+  - {fileID: 5607446170764211541}
   - {fileID: 5607446171534499037}
   - {fileID: 5607446170259390564}
   - {fileID: 815958094989929392}
@@ -6976,7 +6996,7 @@ RectTransform:
   - {fileID: 5607446171168470519}
   - {fileID: 5607446170882678301}
   m_Father: {fileID: 5607446170864686162}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7599,7 +7619,7 @@ RectTransform:
   - {fileID: 5607446172022106628}
   - {fileID: 5607446170825870531}
   m_Father: {fileID: 5607446170864686162}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
