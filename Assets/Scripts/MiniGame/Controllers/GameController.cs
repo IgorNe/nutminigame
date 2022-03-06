@@ -93,6 +93,7 @@ public class GameController : MonoBehaviour
         _uIController.ShowStartPanel();
         _timeController.SetPauseOn();
         _uIController.HideLevelInfoPanel();
+        _uIController.HidePausePanel();
     }
 
     public void LoadScreen()
@@ -103,6 +104,7 @@ public class GameController : MonoBehaviour
         _uIController.HideSplashPanel();
         _uIController.ShowLoadingPanel();
         _uIController.HideLevelInfoPanel();
+        _uIController.HidePausePanel();
     }
     public void SplashScreen()
     {
@@ -114,6 +116,7 @@ public class GameController : MonoBehaviour
         _uIController.HideStartPanel();
         _uIController.ShowSplashPanel();
         _uIController.HideLevelInfoPanel();
+        _uIController.HidePausePanel();
     }
 
     public void Play()
@@ -137,12 +140,13 @@ public class GameController : MonoBehaviour
         _uIController.HideStartPanel();
         _uIController.ShowGamePanel();
         _uIController.HideGameOverPanel();
+        _uIController.HidePausePanel();
     }
 
-    public void Exit()
+    public void Pause()
     {
         _uIController.HideGamePanel();
-        _uIController.ShowStartPanel();
+        _uIController.ShowPausePanel();
         _uIController.HideGameOverPanel();
         _timeController.SetPauseOn();
     }

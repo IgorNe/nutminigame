@@ -8,6 +8,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject _loadingPanel;
     [SerializeField] private GameObject _splashPanel;
     [SerializeField] private GameObject _startPanel;
+    [SerializeField] private GameObject _pausePanel;
     [SerializeField] private GameObject _gamePanel;
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private GameObject _gameWinPanel;
@@ -35,9 +36,19 @@ public class UIController : MonoBehaviour
         _backgroundImage = transform.Find("BackGroundImage").gameObject;
         _blackoutPanel = transform.Find("BlackOut").gameObject;
         _levelInfoPanel = transform.Find("LevelInfoPanel").gameObject;
+        _pausePanel = transform.Find("PausePanel").gameObject;
     }
 #endif
 
+
+    public void ShowPausePanel()
+    {
+        _pausePanel.SetActive(true);
+    }
+    public void HidePausePanel()
+    {
+        _pausePanel.SetActive(false);
+    }
     public void ShowLevelInfoPanel()
     {
         _levelInfoPanel.SetActive(true);
@@ -123,9 +134,9 @@ public class UIController : MonoBehaviour
     {
         _gameWinPanel.SetActive(false);
     }
-    public void OnExitButtonClicked()
+    public void OnPauseButtonClicked()
     {
-        _gameController.Exit();
+        _gameController.Pause();
     }
     public void OnPlayButtonClicked()
     {
@@ -138,6 +149,10 @@ public class UIController : MonoBehaviour
             _gameController.Restart();
             isGameOver = false;
         }
+    }
+    public void OnResumeButtonClicked()
+    {
+        _gameController.Play();
     }
     public void OnSettingsButtonClicked()
     {
