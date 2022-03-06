@@ -22,6 +22,7 @@ public static class EventManager
     public static UnityEvent<string> OnControlButtonClicked = new UnityEvent<string>();
     public static UnityEvent OnGameStarted = new UnityEvent();
     public static UnityEvent OnEndLoadingScreen = new UnityEvent();
+    public static UnityEvent OnStartLevel = new UnityEvent();
 
     public static void BoltChanged(int index)
     {
@@ -91,9 +92,12 @@ public static class EventManager
     {
         OnGameStarted?.Invoke();
     }
-
     public static void SendEndLoading()
     {
         OnEndLoadingScreen?.Invoke();
+    }
+    public static void SendLevelStarted()
+    {
+        OnStartLevel?.Invoke();
     }
 }

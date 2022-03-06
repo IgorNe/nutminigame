@@ -45,6 +45,7 @@ public class NutsController : MonoBehaviour
         EventManager.OnTimeOut.AddListener(StartMoveNut);
         EventManager.OnClearBoltButtonClicked.AddListener(ClearBolt);
         EventManager.OnClearSpinnerButtonClicked.AddListener(ClearSpinner);
+        EventManager.OnStartLevel.AddListener(NutSpawn);
     }
 
     private void Update()
@@ -88,7 +89,6 @@ public class NutsController : MonoBehaviour
         nutSpeed = settings.nutSpeed;
         forAcid = settings.forAcid;
         chanseSetStone = settings.chanseSetStone;
-        Invoke("NutSpawn", 1);
 
     }
 

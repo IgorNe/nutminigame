@@ -6,12 +6,13 @@ public class MusicManager : MonoBehaviour
 {
     [SerializeField] private AudioClip playModeSong;
     [SerializeField] private AudioClip menuModeSong;
+    [SerializeField] private float musicPlayModeDelay;
 
     private AudioSource player;
 
     private void Awake()
     {
-        EventManager.OnGameStarted.AddListener(PlayModePlay);
+        EventManager.OnGameStarted.AddListener(PlayModePlayWithDelay);
         EventManager.OnGameOver.AddListener(PlayerStop);
 
     }
@@ -32,6 +33,10 @@ public class MusicManager : MonoBehaviour
         player.clip = playModeSong;
         player.Play();
     }
+    void PlayModePlayWithDelay()
+    {
+        Invoke("PlayModePlay", musicPlayModeDelay);
+    }
     void PlayerStop()
     {
         player.Stop();
@@ -41,4 +46,5 @@ public class MusicManager : MonoBehaviour
     {
         player.volume = vol;
     }
+    
 }

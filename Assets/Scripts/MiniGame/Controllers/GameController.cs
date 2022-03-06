@@ -11,8 +11,9 @@ public class GameController : MonoBehaviour
     [SerializeField] private Animator _splashAnimator;
     [SerializeField] private Animator _playModeAnimator;
     [SerializeField] private Animator _settingsAnimator;
+    [SerializeField] private float levelInfoTime;
     private bool isSettingOpen;
-    private bool isgameOver;
+    private bool isGameOver;
     
 
     GameObject level;
@@ -24,7 +25,7 @@ public class GameController : MonoBehaviour
     }
     void Start()
     {
-        isgameOver = true;
+        isGameOver = true;
         isSettingOpen = false;
         LoadScreen();
     }
@@ -52,6 +53,15 @@ public class GameController : MonoBehaviour
         PlayMode();
         yield return new WaitForSeconds(0.8f);
         _uIController.HideBlackoutPanel();
+
+        if (isGameOver)
+        {
+            yield return new WaitForSeconds(levelInfoTime);
+            EventManager.SendLevelStarted();
+            isGameOver = false;
+        }
+        
+        _uIController.HideLevelInfoPanel();
 
     }
 
@@ -82,6 +92,7 @@ public class GameController : MonoBehaviour
         _uIController.HideSplashPanel();
         _uIController.ShowStartPanel();
         _timeController.SetPauseOn();
+        _uIController.HideLevelInfoPanel();
     }
 
     public void LoadScreen()
@@ -91,6 +102,7 @@ public class GameController : MonoBehaviour
         _uIController.HideGamePanel();
         _uIController.HideSplashPanel();
         _uIController.ShowLoadingPanel();
+        _uIController.HideLevelInfoPanel();
     }
     public void SplashScreen()
     {
@@ -101,15 +113,18 @@ public class GameController : MonoBehaviour
         _uIController.HideSettingsPanel();
         _uIController.HideStartPanel();
         _uIController.ShowSplashPanel();
+        _uIController.HideLevelInfoPanel();
     }
 
     public void Play()
     {
-        if (isgameOver)
+        if (isGameOver)
         {
+
+            EventManager.SendGameStarted();
             _uIController.ShowBlackoutPanel();
+            _uIController.ShowLevelInfoPanel();
             level = Instantiate(_level, transform.position, Quaternion.identity);
-            isgameOver = false;
         }
         
         _timeController.SetPauseOff();
@@ -122,7 +137,6 @@ public class GameController : MonoBehaviour
         _uIController.HideStartPanel();
         _uIController.ShowGamePanel();
         _uIController.HideGameOverPanel();
-        EventManager.SendGameStarted();
     }
 
     public void Exit()
@@ -135,12 +149,13 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
-        isgameOver = true;
+        isGameOver = true;
         _uIController.ShowGameOverPanel();
         _uIController.HideGamePanel();
         _uIController.HideStartPanel();
         _timeController.SetPauseOn();
         _uIController.SetGameOver();
+        _uIController.HideLevelInfoPanel();
     }
 
     public void Restart()

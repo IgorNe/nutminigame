@@ -670,7 +670,7 @@ RectTransform:
   - {fileID: 1265420117}
   - {fileID: 1849567953}
   m_Father: {fileID: 5607446170864686162}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1750,7 +1750,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6055601894687327655
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1764,7 +1764,7 @@ RectTransform:
   m_Children:
   - {fileID: 1267621921529769533}
   m_Father: {fileID: 5607446170864686162}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4603,8 +4603,8 @@ RectTransform:
   - {fileID: 5607446171534499037}
   - {fileID: 5607446170259390564}
   - {fileID: 815958094989929392}
-  - {fileID: 1913790010}
   - {fileID: 6055601894687327655}
+  - {fileID: 1913790010}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4697,6 +4697,7 @@ MonoBehaviour:
   _gameController: {fileID: 0}
   _backgroundImage: {fileID: 3059916844445361938}
   _blackoutPanel: {fileID: 1913790009}
+  _levelInfoPanel: {fileID: 4116290750792570167}
 --- !u!1 &5607446170879838410
 GameObject:
   m_ObjectHideFlags: 0

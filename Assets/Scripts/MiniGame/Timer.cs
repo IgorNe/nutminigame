@@ -19,11 +19,9 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         Reset();
     }
 
-    // Update is called once per frame
     void Update()
     {
         timerText.text = $"{Math.Round(timer, 2)}";
@@ -48,7 +46,9 @@ public class Timer : MonoBehaviour
 
     void StartTimer()
     {
+
         StartCoroutine(TimerRun());
-        
+
     }
+
 }
