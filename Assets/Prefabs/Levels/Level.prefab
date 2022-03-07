@@ -749,9 +749,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: redJewel
+      value: 
+      objectReference: {fileID: 6955845629027716108, guid: 7fefde6672e565c4991ffa466402fd84, type: 3}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: blueJewel
+      value: 
+      objectReference: {fileID: 6955845629027716108, guid: e5129267b798ad7458876ce234282c7b, type: 3}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: greenJewel
+      value: 
+      objectReference: {fileID: 6955845629027716108, guid: 94e513050eb886542856613e4e45a9a8, type: 3}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: yellowJewel
+      value: 
+      objectReference: {fileID: 6955845629027716108, guid: af06b51a68acb5645bed09b8db66185b, type: 3}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: chanseSetStone
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: destroyParticle
+      value: 
+      objectReference: {fileID: 7192626157360815818, guid: 8cef3cc1db131b94cace942e1cd95bf8, type: 3}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: rainbowParticle
+      value: 
+      objectReference: {fileID: 3292738797805901998, guid: 0b554d112dba4ea4f96a55696e2de259, type: 3}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: jewelsController
       value: 
