@@ -9,16 +9,21 @@ public class Timer : MonoBehaviour
     [SerializeField] float nutSpawnInterval;
     [SerializeField] private Text timerText;
     private float timer;
+    private bool isGameStarted;
 
 
     private void Awake()
     {
+        EventManager.OnLevelInfoEnded.AddListener(LevelStarted);
         EventManager.OnNutSpawned.AddListener(StartTimer);
+        EventManager.OnGameOver.AddListener(LevelEnded);
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        isGameStarted = false;
         Reset();
     }
 
@@ -46,9 +51,18 @@ public class Timer : MonoBehaviour
 
     void StartTimer()
     {
-
-        StartCoroutine(TimerRun());
-
+        if (isGameStarted)
+        {
+            StartCoroutine(TimerRun());
+        }
+    }
+    void LevelStarted()
+    {
+        isGameStarted = true;
+    }
+    void LevelEnded()
+    {
+        isGameStarted = false;
     }
 
 }

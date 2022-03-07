@@ -46,24 +46,7 @@ public class GameController : MonoBehaviour
         
     }
 
-    private IEnumerator TransitionToPlayMode()
-    {
 
-        yield return new WaitForSeconds(0.2f);
-        PlayMode();
-        yield return new WaitForSeconds(0.8f);
-        _uIController.HideBlackoutPanel();
-
-        if (isGameOver)
-        {
-            yield return new WaitForSeconds(levelInfoTime);
-            EventManager.SendLevelStarted();
-            isGameOver = false;
-        }
-        
-        _uIController.HideLevelInfoPanel();
-
-    }
 
     private IEnumerator TransitionToSetting()
     {
@@ -123,15 +106,36 @@ public class GameController : MonoBehaviour
     {
         if (isGameOver)
         {
-
+            level = Instantiate(_level, transform.position, Quaternion.identity);
             EventManager.SendGameStarted();
             _uIController.ShowBlackoutPanel();
-            _uIController.ShowLevelInfoPanel();
-            level = Instantiate(_level, transform.position, Quaternion.identity);
+
         }
         
         _timeController.SetPauseOff();
         StartCoroutine(TransitionToPlayMode());
+
+    }
+    private IEnumerator TransitionToPlayMode()
+    {
+
+        
+
+        if (isGameOver)
+        {
+            yield return new WaitForSeconds(0.3f);
+            EventManager.SendLevelStarted();
+            _uIController.ShowLevelInfoPanel();
+            PlayMode();
+            yield return new WaitForSeconds(0.8f);
+            _uIController.HideBlackoutPanel();
+            yield return new WaitForSeconds(levelInfoTime);
+            isGameOver = false;
+            EventManager.SendLevelInfoEnded();
+            EventManager.SendNutSpawned();
+            _uIController.HideLevelInfoPanel();
+        }
+        
 
     }
     public void PlayMode()
