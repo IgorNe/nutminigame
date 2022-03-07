@@ -10,7 +10,7 @@ public class NutsController : MonoBehaviour
     [SerializeField] private Settings settings;
     [SerializeField] private GameObject spinner;
     private List<GameObject> nutsForSpawn;
-    private List<int> spawnChanses;
+    private List<int> spawnChances;
 
     private List<GameObject> redBolt;
     private List<GameObject> blueBolt;
@@ -20,6 +20,7 @@ public class NutsController : MonoBehaviour
     private List<List<GameObject>> colorBolts;
     private List<GameObject> forAcid;
 
+    private GameObject acidBottle;
     private GameObject currentNut;
     private GameObject moveParticle;
     private GameObject finishParticle;
@@ -37,7 +38,9 @@ public class NutsController : MonoBehaviour
     private int manaPoints;
     private GameObject tempParticle;
     private bool isGameOver;
-    private int chanseSetStone;
+    private int chanceSetStone;
+    private int acidChance;
+    private bool isStone;
 
     private void Awake()
     {
@@ -72,7 +75,7 @@ public class NutsController : MonoBehaviour
         colorBolts.Add(blueBolt);
         colorBolts.Add(greenBolt);
         colorBolts.Add(yellowBolt);
-
+        isStone = false;
         isGameOver = false;
         manaPoints = settings.manaPoints;
         acidParticle = settings.acidParticle;
@@ -84,20 +87,53 @@ public class NutsController : MonoBehaviour
         stoneNut = settings.stoneNut;
         correctPosition = settings.correctPosition;
         blockRotatePosition = settings.blockRotatePosition;
-        spawnChanses = settings.chanses;
+        spawnChances = settings.chances;
         nutsForSpawn = settings.nutsForSpawn;
         nutSpeed = settings.nutSpeed;
         forAcid = settings.forAcid;
-        chanseSetStone = settings.chanseSetStone;
-
+        chanceSetStone = settings.chanceSetStone;
+        acidChance = settings.acidChance;
+        acidBottle = settings.acidBottle;
     }
 
     public void NutSpawn()
     {
+        for (int i = 0; i < 4; i++)
+        {
+            if(colorBolts[i].Count > 0)
+            {
+                if (colorBolts[i].Last().tag == "stone")
+                {
+                    isStone = true;
+                    continue;
+                }
+            }
+            
+        }
         if (!isGameOver)
         {
-            currentNut = Instantiate(nutsForSpawn[NutSpawnIndex()], settings.nutSpawnPoint, Quaternion.identity);
-            EventManager.SendNutSpawned();
+            if (isStone)
+            {
+                var rand = Random.Range(0, 101);
+                if(rand<= acidChance)
+                {
+                    currentNut = Instantiate(acidBottle, settings.nutSpawnPoint, Quaternion.identity);
+                    EventManager.SendNutSpawned();
+                    isStone = false;
+                }
+                else
+                {
+                    currentNut = Instantiate(nutsForSpawn[NutSpawnIndex()], settings.nutSpawnPoint, Quaternion.identity);
+                    EventManager.SendNutSpawned();
+                    isStone = false;
+                }
+            }
+            else
+            {
+                currentNut = Instantiate(nutsForSpawn[NutSpawnIndex()], settings.nutSpawnPoint, Quaternion.identity);
+                EventManager.SendNutSpawned();
+            }
+            
         }
         
     }
@@ -115,9 +151,9 @@ public class NutsController : MonoBehaviour
     private int SumChance()
     {
         int sum = 0;
-        for (int i = 0; i < spawnChanses.Count; i++)
+        for (int i = 0; i < spawnChances.Count; i++)
         {
-            sum += spawnChanses[i];
+            sum += spawnChances[i];
         }
         return sum;
     }
@@ -129,7 +165,7 @@ public class NutsController : MonoBehaviour
         int rand = Random.Range(1, SumChance());
         while (a < rand)
         {
-            a += spawnChanses[i];
+            a += spawnChances[i];
             i++;
         }
         return i - 1;
@@ -257,7 +293,7 @@ public class NutsController : MonoBehaviour
         {
             var rand = Random.Range(0, 101);
             {
-                if(rand <= chanseSetStone)
+                if(rand <= chanceSetStone)
                 {
                     SetStone();
                 }

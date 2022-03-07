@@ -757,6 +757,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6955845629027716108, guid: e5129267b798ad7458876ce234282c7b, type: 3}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: acidBottle
+      value: 
+      objectReference: {fileID: 4182629455203275510, guid: 24c32920f4e7d0143b4baf35645436ea, type: 3}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: acidChance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: greenJewel
       value: 
       objectReference: {fileID: 6955845629027716108, guid: 94e513050eb886542856613e4e45a9a8, type: 3}
@@ -764,6 +772,10 @@ PrefabInstance:
       propertyPath: yellowJewel
       value: 
       objectReference: {fileID: 6955845629027716108, guid: af06b51a68acb5645bed09b8db66185b, type: 3}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: chanceSetStone
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: chanseSetStone
       value: 50
@@ -780,6 +792,42 @@ PrefabInstance:
       propertyPath: jewelsController
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: chances.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: chances.Array.data[0]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: chances.Array.data[1]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: chances.Array.data[2]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: chances.Array.data[3]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: chances.Array.data[4]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: nutsForSpawn.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: nutsForSpawn.Array.data[4]
+      value: 
+      objectReference: {fileID: 5484629786779867851, guid: 33e505b49729f414f809de07e9c70824, type: 3}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: nutsForSpawn.Array.data[5]
+      value: 
+      objectReference: {fileID: 4182629455203275510, guid: 24c32920f4e7d0143b4baf35645436ea, type: 3}
     - target: {fileID: 4105065758261561958, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: m_Name
       value: Settings

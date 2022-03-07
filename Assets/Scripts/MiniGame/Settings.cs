@@ -21,9 +21,11 @@ public class Settings : MonoBehaviour
     public int lineSizeForDelete;
     public List<GameObject> nutsForSpawn;
     [Range(0, 100)]
-    public List<int> chanses;
+    public List<int> chances;
     [Header("Spinner settings")]
     public GameObject stoneNut;
+    public GameObject acidBottle;
+    public int acidChance;
     public int rotateSpeed;
     public float rotateTime;
     public List<GameObject> forAcid;
@@ -37,7 +39,7 @@ public class Settings : MonoBehaviour
     public GameObject greenJewel;
     public GameObject yellowJewel;
     [Range(0, 100)]
-    public int chanseSetStone;
+    public int chanceSetStone;
 
 }
 
