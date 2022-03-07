@@ -90,6 +90,7 @@ public class JewelsMotionController : MonoBehaviour
             time += Time.deltaTime;
             yield return null;
         }
+        EventManager.SendJewelDelivered(jewel.tag);
         Destroy(jewel);
         var ps = Instantiate(endPointParticle, currentEndPoint.position, Quaternion.identity);
         ps.Play();

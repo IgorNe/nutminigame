@@ -5136,7 +5136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5607446170774311757
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5222,6 +5222,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5607446170825870531}
   - component: {fileID: 5607446170825870528}
+  - component: {fileID: 954473014}
+  - component: {fileID: 954473015}
   m_Layer: 5
   m_Name: LevelTasks
   m_TagString: Untagged
@@ -5269,6 +5271,38 @@ MonoBehaviour:
   blueJewelsText: {fileID: 5607446170422617970}
   yellowJewelsText: {fileID: 702134531909874414}
   delayTime: 1.2
+--- !u!95 &954473014
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5607446170825870530}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a11b0230856faf840be0a3b020b0baae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &954473015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5607446170825870530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d514ae506ec23e4f845918472864e19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tasksAnimator: {fileID: 954473014}
 --- !u!1 &5607446170831447333
 GameObject:
   m_ObjectHideFlags: 0
@@ -8388,7 +8422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5607446171799367809
 RectTransform:
   m_ObjectHideFlags: 0
