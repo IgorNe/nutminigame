@@ -25,6 +25,7 @@ public static class EventManager
     public static UnityEvent OnStartLevel = new UnityEvent();
     public static UnityEvent OnLevelInfoEnded = new UnityEvent();
     public static UnityEvent<string> OnJewelDelivered = new UnityEvent<string>();
+    public static UnityEvent OnNutColorFalse = new UnityEvent();
 
     public static void BoltChanged(int index)
     {
@@ -109,5 +110,10 @@ public static class EventManager
     public static void SendJewelDelivered(string color)
     {
         OnJewelDelivered?.Invoke(color);
+    }
+
+    internal static void SendColorFalse()
+    {
+        OnNutColorFalse?.Invoke();
     }
 }

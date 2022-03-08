@@ -92,7 +92,7 @@ public class NutsController : MonoBehaviour
         nutSpeed = settings.nutSpeed;
         forAcid = settings.forAcid;
         chanceSetStone = settings.chanceSetStone;
-        acidChance = settings.acidChance;
+        acidChance = settings.acidSpawnChance;
         acidBottle = settings.acidBottle;
     }
 
@@ -291,10 +291,12 @@ public class NutsController : MonoBehaviour
         }
         else
         {
+            
             var rand = Random.Range(0, 101);
             {
                 if(rand <= chanceSetStone)
                 {
+                    EventManager.SendColorFalse();
                     SetStone();
                 }
             }

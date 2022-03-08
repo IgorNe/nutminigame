@@ -25,7 +25,7 @@ public class Settings : MonoBehaviour
     [Header("Spinner settings")]
     public GameObject stoneNut;
     public GameObject acidBottle;
-    public int acidChance;
+    public int acidSpawnChance;
     public int rotateSpeed;
     public float rotateTime;
     public List<GameObject> forAcid;
