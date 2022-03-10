@@ -7,6 +7,7 @@ public class Settings : MonoBehaviour
     [Header("Nuts settings")]
     public float rotateNutSpeed;
     public float nutSpeed;
+    public float nutAccelerationSpeed;
     public float nutDelay;
     public Vector3 nutSpawnPoint;
     public GameObject moveParticle;

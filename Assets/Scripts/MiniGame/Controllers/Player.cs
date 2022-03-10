@@ -51,6 +51,10 @@ public class Player : MonoBehaviour
         {
             Right();
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            EventManager.SendThrowNut();
+        }
 
     }
 

@@ -10,6 +10,7 @@ public class Timer : MonoBehaviour
     [SerializeField] private Text timerText;
     private float timer;
     private bool isGameStarted;
+    private bool isNutThrowed;
 
 
     private void Awake()
@@ -17,12 +18,14 @@ public class Timer : MonoBehaviour
         EventManager.OnLevelInfoEnded.AddListener(LevelStarted);
         EventManager.OnNutSpawned.AddListener(StartTimer);
         EventManager.OnGameOver.AddListener(LevelEnded);
+        EventManager.OnThrowNut.AddListener(ThrowNut);
         
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        isNutThrowed = false;
         isGameStarted = false;
         Reset();
     }
@@ -39,14 +42,21 @@ public class Timer : MonoBehaviour
 
     IEnumerator TimerRun()
     {
+        isNutThrowed = false;
         while (timer > 0)
         {
             timer -= Time.deltaTime;
             yield return null;
         }
+        isNutThrowed = true;
+        SendTimeOut();
+    }
+
+    private void SendTimeOut()
+    {
         EventManager.SendTimeOut();
         Reset();
-
+        StopAllCoroutines();
     }
 
     void StartTimer()
@@ -55,6 +65,7 @@ public class Timer : MonoBehaviour
         {
             StartCoroutine(TimerRun());
         }
+        
     }
     void LevelStarted()
     {
@@ -63,6 +74,15 @@ public class Timer : MonoBehaviour
     void LevelEnded()
     {
         isGameStarted = false;
+    }
+
+    void ThrowNut()
+    {
+        if (!isNutThrowed)
+        {
+            SendTimeOut();
+        }
+        isNutThrowed = true;
     }
 
 }

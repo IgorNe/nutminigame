@@ -11,7 +11,7 @@ public class NutsController : MonoBehaviour
     [SerializeField] private GameObject spinner;
     private List<GameObject> nutsForSpawn;
     private List<int> spawnChances;
-
+    private float acceleration;
     private List<GameObject> redBolt;
     private List<GameObject> blueBolt;
     private List<GameObject> greenBolt;
@@ -77,6 +77,7 @@ public class NutsController : MonoBehaviour
         colorBolts.Add(yellowBolt);
         isStone = false;
         isGameOver = false;
+        acceleration = settings.nutAccelerationSpeed;
         manaPoints = settings.manaPoints;
         acidParticle = settings.acidParticle;
         finishParticle = settings.finishParticle;
@@ -178,13 +179,14 @@ public class NutsController : MonoBehaviour
 
     IEnumerator MoveNut()
     {
+        var speed = nutSpeed;
         while (currentNut.transform.position.y > colorBolts[indexCurrentBolt].Count + correctPosition)
         {
-            currentNut.transform.Translate(Vector3.down * Time.deltaTime * nutSpeed);
+            currentNut.transform.Translate(Vector3.down * Time.deltaTime * speed);
             if (currentNut.transform.position.y < blockRotatePosition && !isBlockedSended)
             {
                 isBlockedSended = true;
-                
+                speed = speed * acceleration;
                 if(currentNut.tag != "acid")
                 {
                     StartCoroutine(RotateNut());
