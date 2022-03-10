@@ -27,8 +27,13 @@ public static class EventManager
     public static UnityEvent<string> OnJewelDelivered = new UnityEvent<string>();
     public static UnityEvent OnNutColorFalse = new UnityEvent();
     public static UnityEvent OnThrowNut = new UnityEvent();
+    public static UnityEvent OnLevelWin = new UnityEvent();
 
 
+    public static void SendLevelWin()
+    {
+        OnLevelWin?.Invoke();
+    }
     public static void SendThrowNut()
     {
         OnThrowNut?.Invoke();
@@ -118,7 +123,7 @@ public static class EventManager
         OnJewelDelivered?.Invoke(color);
     }
 
-    internal static void SendColorFalse()
+    public static void SendColorFalse()
     {
         OnNutColorFalse?.Invoke();
     }
