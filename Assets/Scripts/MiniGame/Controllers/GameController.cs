@@ -124,8 +124,10 @@ public class GameController : MonoBehaviour
         {
             yield return new WaitForSeconds(0.3f);
             EventManager.SendLevelStarted();
+            yield return new WaitForSeconds(0.3f);
+            _uIController.HideBackground();
             _uIController.ShowLevelInfoPanel();
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(0.4f);
             _uIController.HideBlackoutPanel();
             yield return new WaitForSeconds(levelInfoTime);
             isGameOver = false;
@@ -138,7 +140,7 @@ public class GameController : MonoBehaviour
     }
     public void PlayMode()
     {
-        _uIController.HideBackground();
+        
         _uIController.ShowGamePanel();
         _uIController.HideGameOverPanel();
         _uIController.HidePausePanel();
@@ -171,6 +173,7 @@ public class GameController : MonoBehaviour
 
     public void Restart()
     {
+        _uIController.HideGameOverPanel();
         Destroy(level);
         Play();
     }
