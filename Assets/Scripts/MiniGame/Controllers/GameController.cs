@@ -111,7 +111,6 @@ public class GameController : MonoBehaviour
             _uIController.ShowBlackoutPanel();
 
         }
-        
         _timeController.SetPauseOff();
         StartCoroutine(TransitionToPlayMode());
 
@@ -119,14 +118,13 @@ public class GameController : MonoBehaviour
     private IEnumerator TransitionToPlayMode()
     {
 
-        
 
+        _uIController.HideStartPanel();
         if (isGameOver)
         {
             yield return new WaitForSeconds(0.3f);
             EventManager.SendLevelStarted();
             _uIController.ShowLevelInfoPanel();
-            PlayMode();
             yield return new WaitForSeconds(0.8f);
             _uIController.HideBlackoutPanel();
             yield return new WaitForSeconds(levelInfoTime);
@@ -135,13 +133,12 @@ public class GameController : MonoBehaviour
             EventManager.SendNutSpawned();
             _uIController.HideLevelInfoPanel();
         }
-        
+        PlayMode();
 
     }
     public void PlayMode()
     {
         _uIController.HideBackground();
-        _uIController.HideStartPanel();
         _uIController.ShowGamePanel();
         _uIController.HideGameOverPanel();
         _uIController.HidePausePanel();
@@ -155,6 +152,12 @@ public class GameController : MonoBehaviour
         _timeController.SetPauseOn();
     }
 
+    public void Resume()
+    {
+        _uIController.HidePausePanel();
+        _uIController.ShowGamePanel();
+        _timeController.SetPauseOff();
+    }
     public void GameOver()
     {
         isGameOver = true;

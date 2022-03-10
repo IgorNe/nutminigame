@@ -30,7 +30,7 @@ public class UIController : MonoBehaviour
         _startPanel = transform.Find("MainMenu").gameObject;
         _gamePanel = transform.Find("GamePanel").gameObject;
         _gameOverPanel = transform.Find("FailedPanel").gameObject;
-        _gameWinPanel = transform.Find("GameWinPanel").gameObject;
+        _gameWinPanel = transform.Find("WinPanel").gameObject;
         _storePanel = transform.Find("Store").gameObject;
         _settingsPanel = transform.Find("Settings").gameObject;
         _backgroundImage = transform.Find("BackGroundImage").gameObject;
@@ -152,7 +152,7 @@ public class UIController : MonoBehaviour
     }
     public void OnResumeButtonClicked()
     {
-        _gameController.Play();
+        _gameController.Resume();
     }
     public void OnSettingsButtonClicked()
     {
