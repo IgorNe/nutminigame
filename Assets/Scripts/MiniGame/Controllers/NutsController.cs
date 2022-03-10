@@ -11,7 +11,7 @@ public class NutsController : MonoBehaviour
     [SerializeField] private GameObject spinner;
     private List<GameObject> nutsForSpawn;
     private List<int> spawnChances;
-    private float acceleration;
+    private float accelerationSpeed;
     private List<GameObject> redBolt;
     private List<GameObject> blueBolt;
     private List<GameObject> greenBolt;
@@ -41,6 +41,7 @@ public class NutsController : MonoBehaviour
     private int chanceSetStone;
     private int acidChance;
     private bool isStone;
+    private bool isNutTrown;
 
     private void Awake()
     {
@@ -49,6 +50,13 @@ public class NutsController : MonoBehaviour
         EventManager.OnClearBoltButtonClicked.AddListener(ClearBolt);
         EventManager.OnClearSpinnerButtonClicked.AddListener(ClearSpinner);
         EventManager.OnStartLevel.AddListener(NutSpawn);
+        EventManager.OnThrowNut.AddListener(StartThrowNut);
+    }
+
+    private void StartThrowNut()
+    {
+        isNutTrown = true;
+        StartCoroutine(MoveNut(accelerationSpeed));
     }
 
     private void Update()
@@ -75,9 +83,9 @@ public class NutsController : MonoBehaviour
         colorBolts.Add(blueBolt);
         colorBolts.Add(greenBolt);
         colorBolts.Add(yellowBolt);
-        isStone = false;
+        isStone = isNutTrown = false;
         isGameOver = false;
-        acceleration = settings.nutAccelerationSpeed;
+        accelerationSpeed = settings.nutAccelerationSpeed;
         manaPoints = settings.manaPoints;
         acidParticle = settings.acidParticle;
         finishParticle = settings.finishParticle;
@@ -177,17 +185,21 @@ public class NutsController : MonoBehaviour
         indexCurrentBolt = index;
     }
 
-    IEnumerator MoveNut()
+    IEnumerator MoveNut(float acceleration)
     {
-        var speed = nutSpeed;
+        var speed = nutSpeed * acceleration;
         while (currentNut.transform.position.y > colorBolts[indexCurrentBolt].Count + correctPosition)
         {
             currentNut.transform.Translate(Vector3.down * Time.deltaTime * speed);
             if (currentNut.transform.position.y < blockRotatePosition && !isBlockedSended)
             {
                 isBlockedSended = true;
-                speed = speed * acceleration;
-                if(currentNut.tag != "acid")
+                if (!isNutTrown)
+                {
+                    speed = speed * accelerationSpeed;
+                }
+                isNutTrown = false;
+                if (currentNut.tag != "acid")
                 {
                     StartCoroutine(RotateNut());
                     PlayMoveParticle(moveParticle, currentNut);
@@ -222,7 +234,7 @@ public class NutsController : MonoBehaviour
 
     private void StartMoveNut()
     {
-        StartCoroutine(MoveNut());
+        StartCoroutine(MoveNut(1));
     }
 
     private void CheckBolt()

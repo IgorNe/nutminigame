@@ -127,6 +127,7 @@ public class GameController : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
             _uIController.HideBackground();
             _uIController.ShowLevelInfoPanel();
+            _uIController.ShowGamePanel();
             yield return new WaitForSeconds(0.4f);
             _uIController.HideBlackoutPanel();
             yield return new WaitForSeconds(levelInfoTime);
@@ -140,7 +141,7 @@ public class GameController : MonoBehaviour
     }
     public void PlayMode()
     {
-        
+        _uIController.ShowGamePanel();
         _uIController.ShowGamePanel();
         _uIController.HideGameOverPanel();
         _uIController.HidePausePanel();

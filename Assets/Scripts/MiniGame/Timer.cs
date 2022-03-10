@@ -48,7 +48,6 @@ public class Timer : MonoBehaviour
             timer -= Time.deltaTime;
             yield return null;
         }
-        isNutThrowed = true;
         SendTimeOut();
     }
 
@@ -78,11 +77,8 @@ public class Timer : MonoBehaviour
 
     void ThrowNut()
     {
-        if (!isNutThrowed)
-        {
-            SendTimeOut();
-        }
-        isNutThrowed = true;
+        Reset();
+        StopAllCoroutines();
     }
 
 }
