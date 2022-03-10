@@ -42,6 +42,7 @@ public class NutsController : MonoBehaviour
     private int acidChance;
     private bool isStone;
     private bool isNutTrown;
+    private bool isNutMove;
 
     private void Awake()
     {
@@ -55,8 +56,12 @@ public class NutsController : MonoBehaviour
 
     private void StartThrowNut()
     {
-        isNutTrown = true;
-        StartCoroutine(MoveNut(accelerationSpeed));
+        if (!isNutMove)
+        {
+            isNutTrown = true;
+            StartCoroutine(MoveNut(accelerationSpeed));
+        }
+        
     }
 
     private void Update()
@@ -83,7 +88,7 @@ public class NutsController : MonoBehaviour
         colorBolts.Add(blueBolt);
         colorBolts.Add(greenBolt);
         colorBolts.Add(yellowBolt);
-        isStone = isNutTrown = false;
+        isStone = isNutTrown = isNutMove = false;
         isGameOver = false;
         accelerationSpeed = settings.nutAccelerationSpeed;
         manaPoints = settings.manaPoints;
@@ -198,7 +203,7 @@ public class NutsController : MonoBehaviour
                 {
                     speed = speed * accelerationSpeed;
                 }
-                isNutTrown = false;
+                isNutTrown = isNutMove = false;
                 if (currentNut.tag != "acid")
                 {
                     StartCoroutine(RotateNut());
@@ -234,7 +239,12 @@ public class NutsController : MonoBehaviour
 
     private void StartMoveNut()
     {
-        StartCoroutine(MoveNut(1));
+        if (!isNutTrown)
+        {
+            isNutMove = true;
+            StartCoroutine(MoveNut(1));
+        }
+        
     }
 
     private void CheckBolt()

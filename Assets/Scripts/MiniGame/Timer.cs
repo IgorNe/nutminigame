@@ -10,7 +10,6 @@ public class Timer : MonoBehaviour
     [SerializeField] private Text timerText;
     private float timer;
     private bool isGameStarted;
-    private bool isNutThrowed;
 
 
     private void Awake()
@@ -25,7 +24,6 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isNutThrowed = false;
         isGameStarted = false;
         Reset();
     }
@@ -42,7 +40,6 @@ public class Timer : MonoBehaviour
 
     IEnumerator TimerRun()
     {
-        isNutThrowed = false;
         while (timer > 0)
         {
             timer -= Time.deltaTime;
