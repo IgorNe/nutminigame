@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    private int currentLevel;
-    [SerializeField] private List<GameLevel> levels;
+    public int currentLevel;
+    [SerializeField] public List<GameLevel> levels;
     private int levelTaskRed;
     private int levelTaskGreen;
     private int levelTaskBlue;
     private int levelTaskYellow;
 
+
+    private void Awake()
+    {
+        EventManager.OnLevelWin.AddListener(UpdateLevelTasks);
+    }
 
     void Start()
     {
@@ -30,9 +35,8 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void LevelWin()
+    private void UpdateLevelTasks()
     {
-        EventManager.SendLevelWin();
         SetNextLevel();
         GetLevelTasks();
     }

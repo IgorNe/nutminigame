@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GameLevel : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> redScrew;
-    [SerializeField] private List<GameObject> greenScrew;
-    [SerializeField] private List<GameObject> blueScrew;
-    [SerializeField] private List<GameObject> yellowScrew;
+    [SerializeField] public List<GameObject> redScrew;
+    [SerializeField] public List<GameObject> greenScrew;
+    [SerializeField] public List<GameObject> blueScrew;
+    [SerializeField] public List<GameObject> yellowScrew;
 
-    [SerializeField] public int redTask { get; }
-    [SerializeField] public int greenTask { get; }
-    [SerializeField] public int blueTask { get; }
-    [SerializeField] public int yellowTask { get; }
+    [SerializeField] public int redTask;
+    [SerializeField] public int greenTask;
+    [SerializeField] public int blueTask;
+    [SerializeField] public int yellowTask;
 }

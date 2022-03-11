@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -18,6 +19,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject _backgroundImage;
     [SerializeField] private GameObject _blackoutPanel;
     [SerializeField] private GameObject _levelInfoPanel;
+    [SerializeField] private LevelManager _levelManager;
+    [SerializeField] private GameObject textLevelInfo;
 
     //[SerializeField] private Player player;
     private bool isGameOver = false;
@@ -37,6 +40,8 @@ public class UIController : MonoBehaviour
         _blackoutPanel = transform.Find("BlackOut").gameObject;
         _levelInfoPanel = transform.Find("LevelInfoPanel").gameObject;
         _pausePanel = transform.Find("PausePanel").gameObject;
+        _levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+
     }
 #endif
 
@@ -51,6 +56,8 @@ public class UIController : MonoBehaviour
     }
     public void ShowLevelInfoPanel()
     {
+        var text = textLevelInfo.GetComponent<TextMeshProUGUI>();
+        text.text = (_levelManager.currentLevel + 1).ToString();
         _levelInfoPanel.SetActive(true);
     }
     public void HideLevelInfoPanel()
@@ -150,6 +157,10 @@ public class UIController : MonoBehaviour
             isGameOver = false;
         }
     }
+    public void OnNextButtonClicked()
+    {
+        _gameController.Play();
+    }
     public void OnResumeButtonClicked()
     {
         _gameController.Resume();
@@ -199,4 +210,5 @@ public class UIController : MonoBehaviour
     {
         isGameOver = true;
     }
+
 }

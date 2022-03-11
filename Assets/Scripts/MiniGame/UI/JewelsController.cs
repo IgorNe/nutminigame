@@ -18,12 +18,19 @@ public class JewelsController : MonoBehaviour
     private int yellowValue;
 
 
-
+    private LevelManager levelManager;
+    private GameLevel level;
     private int maxValue;
 
     void Start()
     {
-        redValue = greenValue = blueValue = yellowValue = 0;
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        level = levelManager.levels[levelManager.currentLevel];
+        ResetJewelsValue();
+        redJewelsText.text = $"{redValue}/{level.redTask}";
+        greenJewelsText.text = $"{greenValue}/{level.greenTask}";
+        blueJewelsText.text = $"{blueValue}/{level.blueTask}";
+        yellowJewelsText.text = $"{yellowValue}/{level.yellowTask}";
     }
 
     private void Awake()
@@ -42,26 +49,37 @@ public class JewelsController : MonoBehaviour
         if (boltColor == "Red")
         {
             redValue += numOfJewels;
-            redJewelsText.text = redValue.ToString();
+            redJewelsText.text = $"{redValue}/{level.redTask}";
         }
         if (boltColor == "Green")
         {
             greenValue += numOfJewels;
-            greenJewelsText.text = greenValue.ToString();
+            greenJewelsText.text = $"{greenValue}/{level.greenTask}";
         }
         if (boltColor == "Blue")
         {
             blueValue += numOfJewels;
-            blueJewelsText.text = blueValue.ToString();
+            blueJewelsText.text = $"{blueValue}/{level.blueTask}";
         }
         if (boltColor == "Yellow")
         {
             yellowValue += numOfJewels;
-            yellowJewelsText.text = yellowValue.ToString();
+            yellowJewelsText.text =  $"{yellowValue}/{level.yellowTask}";
         }
         else
         {
             yield return null;
         }
+        if(redValue >= level.redTask && greenValue >= level.greenTask && blueValue >= level.blueTask && yellowValue >= level.yellowTask)
+        {
+            EventManager.SendLevelWin();
+            ResetJewelsValue();
+        }
+
+    }
+
+    void ResetJewelsValue()
+    {
+        redValue = greenValue = blueValue = yellowValue = 0;
     }
 }

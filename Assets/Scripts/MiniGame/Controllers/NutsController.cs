@@ -43,6 +43,7 @@ public class NutsController : MonoBehaviour
     private bool isStone;
     private bool isNutTrown;
     private bool isNutMove;
+    private LevelManager levelManager;
 
     private void Awake()
     {
@@ -50,7 +51,7 @@ public class NutsController : MonoBehaviour
         EventManager.OnTimeOut.AddListener(StartMoveNut);
         EventManager.OnClearBoltButtonClicked.AddListener(ClearBolt);
         EventManager.OnClearSpinnerButtonClicked.AddListener(ClearSpinner);
-        EventManager.OnStartLevel.AddListener(NutSpawn);
+        EventManager.OnStartLevel.AddListener(LevelStart);
         EventManager.OnThrowNut.AddListener(StartThrowNut);
     }
 
@@ -79,6 +80,7 @@ public class NutsController : MonoBehaviour
 
     public void Start()
     {
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         redBolt = new List<GameObject>();
         blueBolt = new List<GameObject>();
         greenBolt = new List<GameObject>();
@@ -131,20 +133,20 @@ public class NutsController : MonoBehaviour
                 var rand = Random.Range(0, 101);
                 if(rand<= acidChance)
                 {
-                    currentNut = Instantiate(acidBottle, settings.nutSpawnPoint, Quaternion.identity);
+                    currentNut = Instantiate(acidBottle, settings.nutSpawnPoint, Quaternion.identity, gameObject.transform);
                     EventManager.SendNutSpawned();
                     isStone = false;
                 }
                 else
                 {
-                    currentNut = Instantiate(nutsForSpawn[NutSpawnIndex()], settings.nutSpawnPoint, Quaternion.identity);
+                    currentNut = Instantiate(nutsForSpawn[NutSpawnIndex()], settings.nutSpawnPoint, Quaternion.identity, gameObject.transform);
                     EventManager.SendNutSpawned();
                     isStone = false;
                 }
             }
             else
             {
-                currentNut = Instantiate(nutsForSpawn[NutSpawnIndex()], settings.nutSpawnPoint, Quaternion.identity);
+                currentNut = Instantiate(nutsForSpawn[NutSpawnIndex()], settings.nutSpawnPoint, Quaternion.identity, gameObject.transform);
                 EventManager.SendNutSpawned();
             }
             
@@ -157,6 +159,51 @@ public class NutsController : MonoBehaviour
         EventManager.SendNutDelivered();
         isBlockedSended = false;
     }
+
+    void LevelStart()
+    {
+        LoadCurrentLevel();
+        NutSpawn();
+    }
+
+    private void LoadCurrentLevel()
+    {
+        var level = levelManager.levels[levelManager.currentLevel];
+        SetNutsFromLevel(level);
+    }
+
+    private void SetNutsFromLevel(GameLevel level)
+    {
+        var startSpinnerRotation = spinner.transform.eulerAngles.z;
+        SetNutsToBolt(level.redScrew);
+        spinner.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
+        indexCurrentBolt++;
+        SetNutsToBolt(level.greenScrew);
+        spinner.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+        indexCurrentBolt++;
+        SetNutsToBolt(level.blueScrew);
+        spinner.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 270));
+        indexCurrentBolt++;
+        SetNutsToBolt(level.yellowScrew);
+        spinner.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        indexCurrentBolt = 0;
+
+    }
+
+    private void SetNutsToBolt(List<GameObject> listFromLevel)
+    {
+        if(listFromLevel != null)
+        {
+            for (int i = 0; i < listFromLevel.Count; i++)
+            {
+                var tempObj = Instantiate(listFromLevel[i], new Vector3(0, colorBolts[indexCurrentBolt].Count + correctPosition, 0), Quaternion.identity);
+                tempObj.transform.SetParent(spinner.transform);
+                colorBolts[indexCurrentBolt].Add(tempObj);
+            }
+        }
+        
+    }
+
 
     void RemoveNutFromList(List<GameObject> bolt, int index)
     {

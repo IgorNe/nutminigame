@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
     {
         EventManager.OnGameOver.AddListener(GameOver);
         EventManager.OnEndLoadingScreen.AddListener(SplashScreen);
+        EventManager.OnLevelWin.AddListener(WinMenu);
     }
     void Start()
     {
@@ -106,11 +107,16 @@ public class GameController : MonoBehaviour
     {
         if (isGameOver)
         {
+            if (level)
+            {
+                Destroy(level);
+            }
             level = Instantiate(_level, transform.position, Quaternion.identity);
             EventManager.SendGameStarted();
             _uIController.ShowBlackoutPanel();
 
         }
+        _uIController.HideGameWinPanel();
         _timeController.SetPauseOff();
         StartCoroutine(TransitionToPlayMode());
 
@@ -207,5 +213,11 @@ public class GameController : MonoBehaviour
         _uIController.ShowSettingsPanel();
         isSettingOpen = true;
     }
-
+    public void WinMenu()
+    {
+        _uIController.HideGamePanel();
+        _uIController.ShowGameWinPanel();
+        _timeController.SetPauseOn();
+        isGameOver = true;
+    }
 }
