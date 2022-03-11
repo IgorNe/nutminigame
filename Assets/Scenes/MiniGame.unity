@@ -869,8 +869,8 @@ MonoBehaviour:
   - {fileID: 4408911151640311554, guid: 917381f5fd22e8749b7a21c5b7bc44f6, type: 3}
   - {fileID: 4408911151640311554, guid: 917381f5fd22e8749b7a21c5b7bc44f6, type: 3}
   redTask: 0
-  greenTask: 5
-  blueTask: 3
+  greenTask: 10
+  blueTask: 10
   yellowTask: 0
 --- !u!4 &1729611075
 Transform:
@@ -1065,7 +1065,7 @@ PrefabInstance:
     - target: {fileID: 5607446171493316864, guid: c1009018d4462cd44a1d306c10409eb8, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f67020252c9ff3a47af7be0e9ff971aa, type: 3}
+      objectReference: {fileID: 21300000, guid: 2fcf84b9ade1174409caf213c1804327, type: 3}
     - target: {fileID: 5607446171493316866, guid: c1009018d4462cd44a1d306c10409eb8, type: 3}
       propertyPath: m_SizeDelta.x
       value: 60
@@ -1097,7 +1097,7 @@ PrefabInstance:
     - target: {fileID: 5607446172022106626, guid: c1009018d4462cd44a1d306c10409eb8, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f67020252c9ff3a47af7be0e9ff971aa, type: 3}
+      objectReference: {fileID: 21300000, guid: 097306cfbdcf6184f9acbd0ec2b36925, type: 3}
     - target: {fileID: 5607446172022106628, guid: c1009018d4462cd44a1d306c10409eb8, type: 3}
       propertyPath: m_SizeDelta.x
       value: 60
