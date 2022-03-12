@@ -23,7 +23,7 @@ public class ManaMotionController : MonoBehaviour
     }
     private void InstMana()
     {
-        var mana = Instantiate(manaObject, startPosition.position, Quaternion.identity);
+        var mana = Instantiate(manaObject, startPosition.position, Quaternion.identity, gameObject.transform);
         StartCoroutine(MoveMana(mana));
     }
 

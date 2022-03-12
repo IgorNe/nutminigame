@@ -46,7 +46,7 @@ public class JewelsMotionController : MonoBehaviour
     private void InstJewel(string color, Vector3 startPosition)
     {
         SetCurrentJewel(color);
-        var jewel = Instantiate(currentJewel, startPosition, Quaternion.identity);
+        var jewel = Instantiate(currentJewel, startPosition, Quaternion.identity, gameObject.transform);
         StartCoroutine(MoveJewel(jewel));
     }
 
