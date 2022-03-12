@@ -45,36 +45,39 @@ public class JewelsController : MonoBehaviour
 
     IEnumerator DelayAddJewel (string boltColor, int numOfJewels)
     {
-        yield return new WaitForSeconds(delayTime + 0.15f);
         if (boltColor == "Red")
         {
             redValue += numOfJewels;
-            redJewelsText.text = $"{redValue}/{level.redTask}";
+            
         }
         if (boltColor == "Green")
         {
             greenValue += numOfJewels;
-            greenJewelsText.text = $"{greenValue}/{level.greenTask}";
+            
         }
         if (boltColor == "Blue")
         {
             blueValue += numOfJewels;
-            blueJewelsText.text = $"{blueValue}/{level.blueTask}";
+            
         }
         if (boltColor == "Yellow")
         {
             yellowValue += numOfJewels;
-            yellowJewelsText.text =  $"{yellowValue}/{level.yellowTask}";
+            
         }
-        else
-        {
-            yield return null;
-        }
-        if(redValue >= level.redTask && greenValue >= level.greenTask && blueValue >= level.blueTask && yellowValue >= level.yellowTask)
+        if (redValue >= level.redTask && greenValue >= level.greenTask && blueValue >= level.blueTask && yellowValue >= level.yellowTask)
         {
             EventManager.SendLevelWin();
             ResetJewelsValue();
         }
+        yield return new WaitForSeconds(delayTime + 0.15f);
+
+        redJewelsText.text = $"{redValue}/{level.redTask}";
+        greenJewelsText.text = $"{greenValue}/{level.greenTask}";
+        blueJewelsText.text = $"{blueValue}/{level.blueTask}";
+        yellowJewelsText.text = $"{yellowValue}/{level.yellowTask}";
+
+        
 
     }
 

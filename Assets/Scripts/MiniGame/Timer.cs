@@ -62,11 +62,11 @@ public class Timer : MonoBehaviour
         }
         
     }
-    void LevelStarted()
+    public void LevelStarted()
     {
         isGameStarted = true;
     }
-    void LevelEnded()
+    public void LevelEnded()
     {
         isGameStarted = false;
     }

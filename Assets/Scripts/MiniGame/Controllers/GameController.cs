@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Animator _playModeAnimator;
     [SerializeField] private Animator _settingsAnimator;
     [SerializeField] private float levelInfoTime;
-    private bool isSettingOpen;
+    [SerializeField] private Timer timer;
     private bool isGameOver;
     
 
@@ -27,27 +27,8 @@ public class GameController : MonoBehaviour
     void Start()
     {
         isGameOver = true;
-        isSettingOpen = false;
         LoadScreen();
     }
-
-
-    private IEnumerator TransitionToStartMenu()
-    {
-        if (isSettingOpen)
-        {
-            _settingsAnimator.SetBool("playAnimation", true); //!!!когда анимация готова будет вписать переменную
-        }
-        else
-        {
-            _splashAnimator.SetBool("playAnimation", true);
-        }
-        yield return new WaitForSeconds(0.5f);
-        OpenStartMenu();
-        
-    }
-
-
 
     private IEnumerator TransitionToSetting()
     {
@@ -62,13 +43,19 @@ public class GameController : MonoBehaviour
         SettingsMode();
 
     }
-
-    public void StartMenu()
+    private IEnumerator TransitSplashScreenToStartMenu()
     {
-        StartCoroutine(TransitionToStartMenu());
-        
+        _splashAnimator.SetBool("playAnimation", true);
+        yield return new WaitForSeconds(0.6f);
+        StartMenu();
+
     }
     public void OpenStartMenu()
+    {
+        StartCoroutine(TransitSplashScreenToStartMenu());
+        
+    }
+    public void StartMenu()
     {
         _uIController.ShowBackground();
         _uIController.HideSettingsPanel();
@@ -103,7 +90,20 @@ public class GameController : MonoBehaviour
         _uIController.HidePausePanel();
     }
 
-    public void Play()
+    public void StartLevel()
+    {
+        if (level)
+        {
+            Destroy(level);
+        }
+        level = Instantiate(_level, transform.position, Quaternion.identity);
+        EventManager.SendGameStarted();
+        _uIController.ShowBlackoutPanel();
+        _timeController.SetPauseOff();
+        StartCoroutine(TransitionToPlayMode());
+    }
+
+    /*public void Play()
     {
         if (isGameOver)
         {
@@ -120,15 +120,17 @@ public class GameController : MonoBehaviour
         _timeController.SetPauseOff();
         StartCoroutine(TransitionToPlayMode());
 
-    }
+    }*/
     private IEnumerator TransitionToPlayMode()
     {
 
 
-        _uIController.HideStartPanel();
+        
         if (isGameOver)
         {
             yield return new WaitForSeconds(0.3f);
+            _uIController.HideStartPanel();
+            _uIController.HideGameWinPanel();
             EventManager.SendLevelStarted();
             yield return new WaitForSeconds(0.3f);
             _uIController.HideBackground();
@@ -138,7 +140,7 @@ public class GameController : MonoBehaviour
             _uIController.HideBlackoutPanel();
             yield return new WaitForSeconds(levelInfoTime);
             isGameOver = false;
-            EventManager.SendLevelInfoEnded();
+            timer.LevelStarted();
             EventManager.SendNutSpawned();
             _uIController.HideLevelInfoPanel();
         }
@@ -157,7 +159,7 @@ public class GameController : MonoBehaviour
     {
         _uIController.HideGamePanel();
         _uIController.ShowPausePanel();
-        _uIController.HideGameOverPanel();
+        //_uIController.HideGameOverPanel();
         _timeController.SetPauseOn();
     }
 
@@ -182,7 +184,11 @@ public class GameController : MonoBehaviour
     {
         _uIController.HideGameOverPanel();
         Destroy(level);
-        Play();
+        level = Instantiate(_level, transform.position, Quaternion.identity);
+        EventManager.SendGameStarted();
+        _uIController.ShowBlackoutPanel();
+        _uIController.HideGameWinPanel();
+        _timeController.SetPauseOff();
     }
 
     public void Debug()
@@ -211,10 +217,10 @@ public class GameController : MonoBehaviour
     {
         _uIController.HideStartPanel();
         _uIController.ShowSettingsPanel();
-        isSettingOpen = true;
     }
     public void WinMenu()
     {
+        timer.LevelEnded();
         _uIController.HideGamePanel();
         _uIController.ShowGameWinPanel();
         _timeController.SetPauseOn();

@@ -147,19 +147,11 @@ public class UIController : MonoBehaviour
     }
     public void OnPlayButtonClicked()
     {
-        if(!isGameOver)
-        {
-            _gameController.Play();
-        }
-        else
-        {
-            _gameController.Restart();
-            isGameOver = false;
-        }
+        _gameController.StartLevel();
     }
     public void OnNextButtonClicked()
     {
-        _gameController.Play();
+        _gameController.StartLevel();
     }
     public void OnResumeButtonClicked()
     {
@@ -171,7 +163,7 @@ public class UIController : MonoBehaviour
     }
     public void OnPlaySplashButtonClicked()
     {
-        _gameController.StartMenu();
+        _gameController.OpenStartMenu();
     }
     public void OnRestartButtonClicked()
     {
