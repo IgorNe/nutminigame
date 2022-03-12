@@ -60,6 +60,7 @@ public class NutsController : MonoBehaviour
         if (!isNutMove)
         {
             isNutTrown = true;
+            EventManager.SendBlockSpinner();
             StartCoroutine(MoveNut(accelerationSpeed));
         }
         
@@ -248,6 +249,7 @@ public class NutsController : MonoBehaviour
                 isBlockedSended = true;
                 if (!isNutTrown)
                 {
+                    EventManager.SendBlockSpinner();
                     speed = speed * accelerationSpeed;
                 }
                 isNutTrown = isNutMove = false;
@@ -256,7 +258,7 @@ public class NutsController : MonoBehaviour
                     StartCoroutine(RotateNut());
                     PlayMoveParticle(moveParticle, currentNut);
                 }
-                EventManager.SendBlockSpinner();
+                
             }
             yield return null;
         }
@@ -519,13 +521,12 @@ public class NutsController : MonoBehaviour
 
     private void PlayMoveParticle(GameObject particle, GameObject parent)
     {
-        moveTempParticle = Instantiate(particle, parent.transform.position, Quaternion.identity);
-        moveTempParticle.transform.SetParent(parent.transform);
+        moveTempParticle = Instantiate(particle, parent.transform.position, Quaternion.identity, parent.transform);
     }
 
     IEnumerator PlayParticle(GameObject particle, GameObject parent, float playTime)
     {
-        var obj = Instantiate(particle, parent.transform.position, Quaternion.identity);
+        var obj = Instantiate(particle, parent.transform.position, Quaternion.identity, gameObject.transform);
         yield return new WaitForSeconds(playTime);
         Destroy(obj);
 
