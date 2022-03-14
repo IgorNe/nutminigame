@@ -21,8 +21,8 @@ public class Settings : MonoBehaviour
     public int maxNutsOnBolt;
     public int lineSizeForDelete;
     public List<GameObject> nutsForSpawn;
-    [Range(0, 100)]
-    public List<int> chances;
+    /*[Range(0, 100)]
+    public List<int> chances;*/
     [Header("Spinner settings")]
     public GameObject stoneNut;
     public GameObject acidBottle;

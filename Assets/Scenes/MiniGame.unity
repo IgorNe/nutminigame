@@ -825,10 +825,17 @@ MonoBehaviour:
   - {fileID: 8041874584009104524, guid: a944aa6bef8d9904fb532a7fbcceff18, type: 3}
   yellowScrew:
   - {fileID: 6520160818284154905, guid: e56461fd92b826e4c8ef9ef7cb5ea762, type: 3}
-  redTask: 3
+  redTask: 7
   greenTask: 0
   blueTask: 0
   yellowTask: 0
+  redNutSpawnChance: 20
+  greenNutSpawnChance: 0
+  blueNutSpawnChance: 0
+  yellowNutSpawnChance: 0
+  rainbowNutSpawnChance: 0
+  stoneSpawnChance: 100
+  acidSpawnChance: 50
 --- !u!4 &1658102929
 Transform:
   m_ObjectHideFlags: 0
@@ -884,6 +891,13 @@ MonoBehaviour:
   greenTask: 10
   blueTask: 10
   yellowTask: 0
+  redNutSpawnChance: 0
+  greenNutSpawnChance: 20
+  blueNutSpawnChance: 20
+  yellowNutSpawnChance: 0
+  rainbowNutSpawnChance: 10
+  stoneSpawnChance: 0
+  acidSpawnChance: 0
 --- !u!4 &1729611075
 Transform:
   m_ObjectHideFlags: 0

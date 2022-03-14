@@ -104,14 +104,30 @@ public class NutsController : MonoBehaviour
         stoneNut = settings.stoneNut;
         correctPosition = settings.correctPosition;
         blockRotatePosition = settings.blockRotatePosition;
-        spawnChances = settings.chances;
         nutsForSpawn = settings.nutsForSpawn;
         nutSpeed = settings.nutSpeed;
         forAcid = settings.forAcid;
-        chanceSetStone = settings.chanceSetStone;
-        acidChance = settings.acidSpawnChance;
+        chanceSetStone = levelManager.levels[levelManager.currentLevel].stoneSpawnChance;
+        acidChance = levelManager.levels[levelManager.currentLevel].acidSpawnChance;
         acidBottle = settings.acidBottle;
+        spawnChances = new List<int>(GetSpawnChances(levelManager.levels[levelManager.currentLevel]));
+        
+        
     }
+
+
+
+    private List<int> GetSpawnChances(GameLevel level)
+    {
+        List<int> chanses = new List<int>();
+        chanses.Add(level.blueNutSpawnChance);
+        chanses.Add(level.greenNutSpawnChance);
+        chanses.Add(level.redNutSpawnChance);
+        chanses.Add(level.yellowNutSpawnChance);
+        chanses.Add(level.rainbowNutSpawnChance);
+        return chanses;
+    }
+
 
     public void NutSpawn()
     {

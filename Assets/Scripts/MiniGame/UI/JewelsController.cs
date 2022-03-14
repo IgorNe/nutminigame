@@ -26,15 +26,12 @@ public class JewelsController : MonoBehaviour
     {
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         level = levelManager.levels[levelManager.currentLevel];
-        ResetJewelsValue();
-        redJewelsText.text = $"{redValue}/{level.redTask}";
-        greenJewelsText.text = $"{greenValue}/{level.greenTask}";
-        blueJewelsText.text = $"{blueValue}/{level.blueTask}";
-        yellowJewelsText.text = $"{yellowValue}/{level.yellowTask}";
+        UpdateLevelTasks();
     }
 
     private void Awake()
     {
+        EventManager.OnStartLevel.AddListener(UpdateLevelTasks);
         EventManager.OnJewelsAdd.AddListener(AddJewels);
     }
 
@@ -68,7 +65,7 @@ public class JewelsController : MonoBehaviour
         if (redValue >= level.redTask && greenValue >= level.greenTask && blueValue >= level.blueTask && yellowValue >= level.yellowTask)
         {
             EventManager.SendLevelWin();
-            ResetJewelsValue();
+            StopAllCoroutines();
         }
         yield return new WaitForSeconds(delayTime + 0.15f);
 
@@ -79,6 +76,16 @@ public class JewelsController : MonoBehaviour
 
         
 
+    }
+
+    void UpdateLevelTasks()
+    {
+        level = levelManager.levels[levelManager.currentLevel];
+        ResetJewelsValue();
+        redJewelsText.text = $"{redValue}/{level.redTask}";
+        greenJewelsText.text = $"{greenValue}/{level.greenTask}";
+        blueJewelsText.text = $"{blueValue}/{level.blueTask}";
+        yellowJewelsText.text = $"{yellowValue}/{level.yellowTask}";
     }
 
     void ResetJewelsValue()
