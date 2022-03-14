@@ -28,6 +28,7 @@ public static class EventManager
     public static UnityEvent OnNutColorFalse = new UnityEvent();
     public static UnityEvent OnThrowNut = new UnityEvent();
     public static UnityEvent OnLevelWin = new UnityEvent();
+    public static UnityEvent OnMainMenu = new UnityEvent();
 
 
     public static void SendLevelWin()
@@ -126,5 +127,10 @@ public static class EventManager
     public static void SendColorFalse()
     {
         OnNutColorFalse?.Invoke();
+    }
+
+    public static void SendMainMenu()
+    {
+        OnMainMenu?.Invoke();
     }
 }

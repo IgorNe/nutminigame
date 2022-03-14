@@ -645,7 +645,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Volume: 0.304
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -742,7 +742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playModeSong: {fileID: 8300000, guid: bb5c8d6b196cd5f4e97114a1b0086937, type: 3}
-  menuModeSong: {fileID: 0}
+  menuModeSong: {fileID: 8300000, guid: f2bfff629ff0c58479ba063f27c148cf, type: 3}
   musicPlayModeDelay: 2
 --- !u!4 &1340074881
 Transform:

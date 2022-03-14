@@ -79,7 +79,7 @@ public class GameController : MonoBehaviour
     }
     public void SplashScreen()
     {
-
+        EventManager.SendMainMenu();
         //_timeController.SetPauseOn();
         _uIController.ShowBackground();
         _uIController.HideGamePanel();

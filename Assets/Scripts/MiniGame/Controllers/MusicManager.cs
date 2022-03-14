@@ -14,7 +14,7 @@ public class MusicManager : MonoBehaviour
     {
         EventManager.OnGameStarted.AddListener(PlayModePlayWithDelay);
         EventManager.OnGameOver.AddListener(PlayerStop);
-
+        EventManager.OnMainMenu.AddListener(MainMenuMusicPlay);
     }
 
     void Start()
@@ -35,6 +35,7 @@ public class MusicManager : MonoBehaviour
     }
     void PlayModePlayWithDelay()
     {
+        PlayerStop();
         Invoke("PlayModePlay", musicPlayModeDelay);
     }
     void PlayerStop()
@@ -45,6 +46,12 @@ public class MusicManager : MonoBehaviour
     public void SetVolume(float vol)
     {
         player.volume = vol;
+    }
+
+    void MainMenuMusicPlay()
+    {
+        player.clip = menuModeSong;
+        player.Play();
     }
     
 }
