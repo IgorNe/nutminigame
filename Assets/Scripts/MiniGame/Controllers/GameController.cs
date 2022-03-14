@@ -123,27 +123,26 @@ public class GameController : MonoBehaviour
     }*/
     private IEnumerator TransitionToPlayMode()
     {
-
-
-        
-        if (isGameOver)
+        yield return new WaitForSeconds(0.3f);
+        _uIController.HideStartPanel();
+        _uIController.HideGameWinPanel();
+        _uIController.HideGameOverPanel();
+        EventManager.SendLevelStarted();
+        yield return new WaitForSeconds(0.3f);
+        _uIController.HideBackground();
+        _uIController.ShowLevelInfoPanel();
+        _uIController.ShowGamePanel();
+        yield return new WaitForSeconds(0.4f);
+        _uIController.HideBlackoutPanel();
+        yield return new WaitForSeconds(levelInfoTime);
+        isGameOver = false;
+        timer.LevelStarted();
+        EventManager.SendNutSpawned();
+        _uIController.HideLevelInfoPanel();
+        /*if (isGameOver)
         {
-            yield return new WaitForSeconds(0.3f);
-            _uIController.HideStartPanel();
-            _uIController.HideGameWinPanel();
-            EventManager.SendLevelStarted();
-            yield return new WaitForSeconds(0.3f);
-            _uIController.HideBackground();
-            _uIController.ShowLevelInfoPanel();
-            _uIController.ShowGamePanel();
-            yield return new WaitForSeconds(0.4f);
-            _uIController.HideBlackoutPanel();
-            yield return new WaitForSeconds(levelInfoTime);
-            isGameOver = false;
-            timer.LevelStarted();
-            EventManager.SendNutSpawned();
-            _uIController.HideLevelInfoPanel();
-        }
+            
+        }*/
         PlayMode();
 
     }
@@ -187,8 +186,8 @@ public class GameController : MonoBehaviour
         level = Instantiate(_level, transform.position, Quaternion.identity);
         EventManager.SendGameStarted();
         _uIController.ShowBlackoutPanel();
-        _uIController.HideGameWinPanel();
         _timeController.SetPauseOff();
+        StartCoroutine(TransitionToPlayMode());
     }
 
     public void Debug()
