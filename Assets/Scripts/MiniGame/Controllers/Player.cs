@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
         EventManager.OnNutDelivered.AddListener(UnblockRotate);
         EventManager.OnBlockSpinner.AddListener(SetBlockRotate);
         EventManager.OnControlButtonClicked.AddListener(ScreenButtonClicked);
+        EventManager.NutsStack.AddListener(ChangeBolts);
     }
 
     void Start()
@@ -190,5 +191,10 @@ public class Player : MonoBehaviour
                 //MiniEventManager.SendThrowNut();
             }
         }
+    }
+
+    void ChangeBolts()
+    {
+        SetCurrentIndex('+');
     }
 }

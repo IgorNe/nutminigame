@@ -44,6 +44,10 @@ public class NutsController : MonoBehaviour
     private bool isNutTrown;
     private bool isNutMove;
     private LevelManager levelManager;
+    private List<GameObject> redList;
+    private List<GameObject> greenList;
+    private List<GameObject> blueList;
+    private List<GameObject> yellowList;
 
     private void Awake()
     {
@@ -107,6 +111,10 @@ public class NutsController : MonoBehaviour
         nutsForSpawn = settings.nutsForSpawn;
         nutSpeed = settings.nutSpeed;
         forAcid = settings.forAcid;
+        /*List<GameObject> redList = new List<GameObject>();
+        List<GameObject> greenList = new List<GameObject>();
+        List<GameObject> redList = new List<GameObject>();
+        List<GameObject> redList = new List<GameObject>();*/
         chanceSetStone = levelManager.levels[levelManager.currentLevel].stoneSpawnChance;
         acidChance = levelManager.levels[levelManager.currentLevel].acidSpawnChance;
         acidBottle = settings.acidBottle;
@@ -422,9 +430,48 @@ public class NutsController : MonoBehaviour
             a--;
         }
         EventManager.SendNutsStack();
+        ChangeBoltsPositions();
 
     }
 
+    void ChangeBoltsPositions()
+    {
+        var currentSpinnerRotation = spinner.transform.eulerAngles.z;
+        var tempIndexbolt = indexCurrentBolt;
+        
+        redList = new List<GameObject>(colorBolts[0]);
+        greenList = new List<GameObject>(colorBolts[1]);
+        blueList = new List<GameObject>(colorBolts[2]);
+        yellowList = new List<GameObject>(colorBolts[3]);
+
+        indexCurrentBolt = 0;
+
+        spinner.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        ClearBolt();
+        SetNutsToBolt(yellowList);
+        spinner.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
+        indexCurrentBolt++;
+        ClearBolt();
+        SetNutsToBolt(redList);
+        spinner.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+        indexCurrentBolt++;
+        ClearBolt();
+        SetNutsToBolt(greenList);
+        spinner.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 270));
+        indexCurrentBolt++;
+        ClearBolt();
+        SetNutsToBolt(blueList);
+        indexCurrentBolt = tempIndexbolt;
+        if (indexCurrentBolt == 3)
+        {
+            indexCurrentBolt = 0;
+        }
+        else
+        {
+            indexCurrentBolt++;
+        }
+        spinner.transform.rotation = Quaternion.Euler(new Vector3(0, 0, currentSpinnerRotation + 90));
+    }
 
     private void ClearBolt()
     {
