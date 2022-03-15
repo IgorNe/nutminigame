@@ -57,7 +57,7 @@ public class NutsController : MonoBehaviour
 
     private void StartThrowNut()
     {
-        if (!isNutMove)
+        if (!isNutMove && !isNutTrown)
         {
             isNutTrown = true;
             EventManager.SendBlockSpinner();
@@ -268,7 +268,7 @@ public class NutsController : MonoBehaviour
                     EventManager.SendBlockSpinner();
                     speed = speed * accelerationSpeed;
                 }
-                isNutTrown = isNutMove = false;
+                
                 if (currentNut.tag != "acid")
                 {
                     StartCoroutine(RotateNut());
@@ -291,6 +291,7 @@ public class NutsController : MonoBehaviour
             var acidPart = Instantiate(acidParticle, new Vector3(0, currentNut.transform.position.y, -2), Quaternion.identity);
             DeleteAfterPlay(acidPart, 1.2f);
         }
+        isNutTrown = isNutMove = false;
         SetParentObject();
         AddNutToList(indexCurrentBolt, currentNut);
         CheckBolt();
@@ -420,7 +421,7 @@ public class NutsController : MonoBehaviour
             bolt.RemoveAt(a);
             a--;
         }
-        
+        EventManager.SendNutsStack();
 
     }
 

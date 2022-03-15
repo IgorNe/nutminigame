@@ -29,6 +29,7 @@ public static class EventManager
     public static UnityEvent OnThrowNut = new UnityEvent();
     public static UnityEvent OnLevelWin = new UnityEvent();
     public static UnityEvent OnMainMenu = new UnityEvent();
+    public static UnityEvent NutsStack = new UnityEvent();
 
 
     public static void SendLevelWin()
@@ -132,5 +133,10 @@ public static class EventManager
     public static void SendMainMenu()
     {
         OnMainMenu?.Invoke();
+    }
+
+    public static void SendNutsStack()
+    {
+        NutsStack?.Invoke();
     }
 }

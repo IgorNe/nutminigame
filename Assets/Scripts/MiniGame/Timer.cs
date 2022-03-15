@@ -73,8 +73,8 @@ public class Timer : MonoBehaviour
 
     void ThrowNut()
     {
-        Reset();
         StopAllCoroutines();
+        Reset();
     }
 
 }
