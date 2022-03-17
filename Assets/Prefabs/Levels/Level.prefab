@@ -885,9 +885,41 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: forAcid.Array.data[0]
+      value: 
+      objectReference: {fileID: 5271914070454469617, guid: 1326c538247b8e34588e83722fff7e2a, type: 3}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: forAcid.Array.data[1]
+      value: 
+      objectReference: {fileID: 6634589222518527939, guid: a4db77ca69b2c42428c302198d0dc418, type: 3}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: forAcid.Array.data[2]
+      value: 
+      objectReference: {fileID: 4234965980959984318, guid: 526e8b880c6da7849aa2d0212745f59e, type: 3}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: forAcid.Array.data[3]
+      value: 
+      objectReference: {fileID: 2504950826190174247, guid: 5fdc17b0617acc542b8cf86bd2c47645, type: 3}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: nutsForSpawn.Array.size
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: nutsForSpawn.Array.data[0]
+      value: 
+      objectReference: {fileID: 4234965980959984318, guid: 526e8b880c6da7849aa2d0212745f59e, type: 3}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: nutsForSpawn.Array.data[1]
+      value: 
+      objectReference: {fileID: 6634589222518527939, guid: a4db77ca69b2c42428c302198d0dc418, type: 3}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: nutsForSpawn.Array.data[2]
+      value: 
+      objectReference: {fileID: 5271914070454469617, guid: 1326c538247b8e34588e83722fff7e2a, type: 3}
+    - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
+      propertyPath: nutsForSpawn.Array.data[3]
+      value: 
+      objectReference: {fileID: 2504950826190174247, guid: 5fdc17b0617acc542b8cf86bd2c47645, type: 3}
     - target: {fileID: 4105065758261561953, guid: 60c99bb89b61c9246942cdd155bba3ae, type: 3}
       propertyPath: nutsForSpawn.Array.data[4]
       value: 

@@ -462,14 +462,14 @@ public class NutsController : MonoBehaviour
         ClearBolt();
         SetNutsToBolt(blueList);
         indexCurrentBolt = tempIndexbolt;
-        if (indexCurrentBolt == 3)
+        /*if (indexCurrentBolt == 3)
         {
             indexCurrentBolt = 0;
         }
         else
         {
             indexCurrentBolt++;
-        }
+        }*/
         spinner.transform.rotation = Quaternion.Euler(new Vector3(0, 0, currentSpinnerRotation + 90));
     }
 

@@ -819,16 +819,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   redScrew:
-  - {fileID: 3897634207889399391, guid: cccd40c246fd53842be0c553b1de7fce, type: 3}
-  - {fileID: 3897634207889399391, guid: cccd40c246fd53842be0c553b1de7fce, type: 3}
+  - {fileID: 5271914070454469617, guid: 1326c538247b8e34588e83722fff7e2a, type: 3}
+  - {fileID: 5271914070454469617, guid: 1326c538247b8e34588e83722fff7e2a, type: 3}
   greenScrew:
-  - {fileID: 4408911151640311554, guid: 917381f5fd22e8749b7a21c5b7bc44f6, type: 3}
+  - {fileID: 6634589222518527939, guid: a4db77ca69b2c42428c302198d0dc418, type: 3}
   blueScrew:
-  - {fileID: 8041874584009104524, guid: a944aa6bef8d9904fb532a7fbcceff18, type: 3}
+  - {fileID: 4234965980959984318, guid: 526e8b880c6da7849aa2d0212745f59e, type: 3}
   yellowScrew:
-  - {fileID: 6520160818284154905, guid: e56461fd92b826e4c8ef9ef7cb5ea762, type: 3}
-  redTask: 0
-  greenTask: 7
+  - {fileID: 2504950826190174247, guid: 5fdc17b0617acc542b8cf86bd2c47645, type: 3}
+  redTask: 6
+  greenTask: 0
   blueTask: 0
   yellowTask: 0
   redNutSpawnChance: 20
@@ -836,7 +836,7 @@ MonoBehaviour:
   blueNutSpawnChance: 0
   yellowNutSpawnChance: 0
   rainbowNutSpawnChance: 0
-  stoneSpawnChance: 0
+  stoneSpawnChance: 50
   acidSpawnChance: 50
 --- !u!4 &1658102929
 Transform:
@@ -883,12 +883,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   redScrew: []
   greenScrew:
-  - {fileID: 8041874584009104524, guid: a944aa6bef8d9904fb532a7fbcceff18, type: 3}
-  - {fileID: 8041874584009104524, guid: a944aa6bef8d9904fb532a7fbcceff18, type: 3}
+  - {fileID: 4234965980959984318, guid: 526e8b880c6da7849aa2d0212745f59e, type: 3}
+  - {fileID: 4234965980959984318, guid: 526e8b880c6da7849aa2d0212745f59e, type: 3}
   blueScrew: []
   yellowScrew:
-  - {fileID: 4408911151640311554, guid: 917381f5fd22e8749b7a21c5b7bc44f6, type: 3}
-  - {fileID: 4408911151640311554, guid: 917381f5fd22e8749b7a21c5b7bc44f6, type: 3}
+  - {fileID: 6634589222518527939, guid: a4db77ca69b2c42428c302198d0dc418, type: 3}
+  - {fileID: 6634589222518527939, guid: a4db77ca69b2c42428c302198d0dc418, type: 3}
   redTask: 0
   greenTask: 10
   blueTask: 10
@@ -1100,7 +1100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5607446171197353513, guid: c1009018d4462cd44a1d306c10409eb8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5607446171364156878, guid: c1009018d4462cd44a1d306c10409eb8, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1132,7 +1132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5607446171493316866, guid: c1009018d4462cd44a1d306c10409eb8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 93.1
+      value: 93.1001
       objectReference: {fileID: 0}
     - target: {fileID: 5607446171493316869, guid: c1009018d4462cd44a1d306c10409eb8, type: 3}
       propertyPath: m_IsActive
@@ -1140,15 +1140,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5607446171534499036, guid: c1009018d4462cd44a1d306c10409eb8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5607446171799367810, guid: c1009018d4462cd44a1d306c10409eb8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5607446171988498601, guid: c1009018d4462cd44a1d306c10409eb8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5607446172022106626, guid: c1009018d4462cd44a1d306c10409eb8, type: 3}
       propertyPath: m_Type
