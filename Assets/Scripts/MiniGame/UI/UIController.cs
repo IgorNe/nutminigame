@@ -143,32 +143,40 @@ public class UIController : MonoBehaviour
     }
     public void OnPauseButtonClicked()
     {
+        PlayButtonSound();
         _gameController.Pause();
     }
     public void OnPlayButtonClicked()
     {
+        PlayButtonSound();
         _gameController.StartLevel();
     }
     public void OnNextButtonClicked()
     {
+        PlayButtonSound();
         _gameController.StartLevel();
     }
     public void OnResumeButtonClicked()
     {
+        PlayButtonSound();
         _gameController.Resume();
     }
     public void OnSettingsButtonClicked()
     {
+        PlayButtonSound();
         _gameController.Settings();
     }
     public void OnPlaySplashButtonClicked()
     {
+        PlayButtonSound();
         _gameController.OpenStartMenu();
     }
     public void OnRestartButtonClicked()
     {
+        PlayButtonSound();
         _gameController.Restart();
         isGameOver = false;
+        
     }
     public void OnDebugButtonClicked()
     {
@@ -179,6 +187,7 @@ public class UIController : MonoBehaviour
     public void OnBackButtonClicked()
     {
         _gameController.StartMenu();
+        PlayButtonSound();
     }
 
     public void OnLeftButtonClicked()
@@ -193,14 +202,20 @@ public class UIController : MonoBehaviour
     public void OnStoreButtonClicked()
     {
         _gameController.OpenStore();
+        PlayButtonSound();
     }
     public void OnBackButtonInStoreClicked()
     {
         _gameController.CloseStore();
+        PlayButtonSound();
     }
     public void SetGameOver()
     {
         isGameOver = true;
     }
 
+    void PlayButtonSound()
+    {
+        EventManager.SendButtonClicked();
+    }
 }

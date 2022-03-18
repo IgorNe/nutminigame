@@ -315,9 +315,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3802ec9a5fbef404f9ed50ccb85f5dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nutDelivered: {fileID: 8300000, guid: 02e2c124ac2cbc04f9840e6f4810bdd8, type: 3}
-  lose: {fileID: 8300000, guid: 35011917ab8bdf840aaf8691d9e8831a, type: 3}
+  clickButton: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
+  stackNuts: {fileID: 8300000, guid: 10497fe0f761cda4fb536a580395d8ac, type: 3}
+  smashAcid: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
+  setStone: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
+  clearScrew: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
+  clearSpinner: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
+  winSound: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
+  loseSound: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
+  startLevelSound: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
+  destroyStoneNut: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
   windingNut: {fileID: 8300000, guid: a5cc8d6e8318ccd488dec761ca47da0f, type: 3}
+  nutDelivered: {fileID: 8300000, guid: 02e2c124ac2cbc04f9840e6f4810bdd8, type: 3}
+  nutSpawn: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
+  angryMaskSound: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
+  happyMaskSound: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
+  speedUpSound: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
 --- !u!82 &743926229
 AudioSource:
   m_ObjectHideFlags: 0
@@ -827,8 +840,8 @@ MonoBehaviour:
   - {fileID: 4234965980959984318, guid: 526e8b880c6da7849aa2d0212745f59e, type: 3}
   yellowScrew:
   - {fileID: 2504950826190174247, guid: 5fdc17b0617acc542b8cf86bd2c47645, type: 3}
-  redTask: 6
-  greenTask: 0
+  redTask: 0
+  greenTask: 5
   blueTask: 0
   yellowTask: 0
   redNutSpawnChance: 20
@@ -836,7 +849,7 @@ MonoBehaviour:
   blueNutSpawnChance: 0
   yellowNutSpawnChance: 0
   rainbowNutSpawnChance: 0
-  stoneSpawnChance: 50
+  stoneSpawnChance: 100
   acidSpawnChance: 50
 --- !u!4 &1658102929
 Transform:

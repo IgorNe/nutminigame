@@ -30,7 +30,10 @@ public static class EventManager
     public static UnityEvent OnLevelWin = new UnityEvent();
     public static UnityEvent OnMainMenu = new UnityEvent();
     public static UnityEvent NutsStack = new UnityEvent();
-
+    public static UnityEvent ButtonClicked = new UnityEvent();
+    public static UnityEvent AcidSmash = new UnityEvent();
+    public static UnityEvent DestroyStoneNut = new UnityEvent();
+    public static UnityEvent SpeedUp = new UnityEvent();
 
     public static void SendLevelWin()
     {
@@ -138,5 +141,22 @@ public static class EventManager
     public static void SendNutsStack()
     {
         NutsStack?.Invoke();
+    }
+    public static void SendButtonClicked()
+    {
+        ButtonClicked?.Invoke();
+    }
+    public static void SendSmashAcid()
+    {
+        AcidSmash?.Invoke();
+    }
+
+    public static void SendDestroyStoneNut()
+    {
+        DestroyStoneNut?.Invoke();
+    }
+    public static void SendSpeedUp()
+    {
+        SpeedUp?.Invoke();
     }
 }

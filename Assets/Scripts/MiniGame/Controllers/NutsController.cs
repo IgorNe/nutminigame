@@ -181,7 +181,10 @@ public class NutsController : MonoBehaviour
     void AddNutToList(int boltIndex, GameObject nut)
     {
         colorBolts[boltIndex].Add(nut);
-        EventManager.SendNutDelivered();
+        if(currentNut.tag != "acid")
+        {
+            EventManager.SendNutDelivered();
+        }
         isBlockedSended = false;
     }
 
@@ -273,12 +276,12 @@ public class NutsController : MonoBehaviour
                 isBlockedSended = true;
                 if (!isNutTrown)
                 {
-                    EventManager.SendBlockSpinner();
                     speed = speed * accelerationSpeed;
                 }
                 
                 if (currentNut.tag != "acid")
                 {
+                    EventManager.SendBlockSpinner();
                     StartCoroutine(RotateNut());
                     PlayMoveParticle(moveParticle, currentNut);
                 }
@@ -296,6 +299,7 @@ public class NutsController : MonoBehaviour
         }
         else
         {
+            EventManager.SendSmashAcid();
             var acidPart = Instantiate(acidParticle, new Vector3(0, currentNut.transform.position.y, -2), Quaternion.identity);
             DeleteAfterPlay(acidPart, 1.2f);
         }
@@ -343,8 +347,10 @@ public class NutsController : MonoBehaviour
         {
             Destroy(currentNut);
             bolt.Remove(bolt.Last());
+            
             if(bolt.Count > 0 && bolt.Last().tag == "stone")
             {
+                EventManager.SendDestroyStoneNut();
                 Destroy(bolt.Last());
                 bolt.Remove(bolt.Last());
                 var nut = Instantiate(forAcid[indexCurrentBolt], new Vector3(0, bolt.Count + correctPosition, 0), Quaternion.identity);

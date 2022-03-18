@@ -34,6 +34,7 @@ public class TimeController : MonoBehaviour
     {
         currentTimeScale = currentTimeScale + stepGameSpeed;
         SetCurrentTimeScale();
+        EventManager.SendSpeedUp();
     }
     public void SetCurrentTimeScale()
     {
