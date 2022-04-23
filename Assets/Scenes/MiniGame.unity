@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3802ec9a5fbef404f9ed50ccb85f5dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickButton: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
+  clickButton: {fileID: 8300000, guid: 4bc52c8681711d74d89e27584f630375, type: 3}
   stackNuts: {fileID: 8300000, guid: 10497fe0f761cda4fb536a580395d8ac, type: 3}
   smashAcid: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
   setStone: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
@@ -326,7 +326,7 @@ MonoBehaviour:
   startLevelSound: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
   destroyStoneNut: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
   windingNut: {fileID: 8300000, guid: a5cc8d6e8318ccd488dec761ca47da0f, type: 3}
-  nutDelivered: {fileID: 8300000, guid: 02e2c124ac2cbc04f9840e6f4810bdd8, type: 3}
+  nutDelivered: {fileID: 8300000, guid: d98407778cd78b04bb87a71f2f0f535e, type: 3}
   nutSpawn: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
   angryMaskSound: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
   happyMaskSound: {fileID: 8300000, guid: b1e63e28c65166e49aea0f2da8c29e50, type: 3}
@@ -341,7 +341,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 20e74abb0d0b56a4dbd0299d253ba9ef, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
